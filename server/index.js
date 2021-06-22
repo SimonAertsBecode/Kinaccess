@@ -5,14 +5,12 @@ import cors from "cors";
 import {} from "dotenv/config";
 
 // Routes for 
-import mobilityRouter  from "./routes/mobilityAPI.js";
-import proprioceptionRouter from "./routes/proprioAPI.js";
+import * as routes from './routes/index.API.js'
 
 const app = express();
 
 //path url API
-app.use("/mobility", mobilityRouter);
-app.use("/proprioception", proprioceptionRouter);
+app.use("/", routes.mobilityRouter, routes.proprioRouter, routes.reinforcementRouter);
 
 
 // Use json for request

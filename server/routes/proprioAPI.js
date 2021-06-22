@@ -1,14 +1,15 @@
-import { router } from "../controllers/routerFunction/routerLogic.js";
 import * as zoneInstance from "../controllers/objectInstance/zoneInstance.js";
-import { routerLogic } from "../controllers/routerFunction/routerLogic.js";
+import { proprioceptionRouter, router } from "../controllers/routerFunction/routerLogic.js";
 
-routerLogic(zoneInstance.neck.zone, zoneInstance.neck.proprioceptionRender());
-routerLogic(zoneInstance.shoulder.zone, zoneInstance.shoulder.proprioceptionRender());
-routerLogic(zoneInstance.elbow.zone, zoneInstance.elbow.proprioceptionRender()); 
-routerLogic(zoneInstance.wrist.zone, zoneInstance.wrist.proprioceptionRender()); 
-routerLogic(zoneInstance.rachis.zone, zoneInstance.rachis.proprioceptionRender()); 
-routerLogic(zoneInstance.basin.zone, zoneInstance.basin.proprioceptionRender()); 
-routerLogic(zoneInstance.knee.zone, zoneInstance.knee.proprioceptionRender()); 
-routerLogic(zoneInstance.ankle.zone, zoneInstance.ankle.proprioceptionRender());
+proprioceptionRouter(zoneInstance.neck.zone, zoneInstance.neck.proprioceptionRender());
+proprioceptionRouter(zoneInstance.shoulder.zone, zoneInstance.shoulder.proprioceptionRender());
+proprioceptionRouter(zoneInstance.elbow.zone, zoneInstance.elbow.proprioceptionRender()); 
+proprioceptionRouter(zoneInstance.wrist.zone, zoneInstance.wrist.proprioceptionRender()); 
+proprioceptionRouter(zoneInstance.rachis.zone, zoneInstance.rachis.proprioceptionRender()); 
+proprioceptionRouter(zoneInstance.basin.zone, zoneInstance.basin.proprioceptionRender()); 
+proprioceptionRouter(zoneInstance.knee.zone, zoneInstance.knee.proprioceptionRender()); 
+proprioceptionRouter(zoneInstance.ankle.zone, zoneInstance.ankle.proprioceptionRender());
 
-export default router;
+export { 
+    router as proprioRouter
+}

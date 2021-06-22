@@ -19,4 +19,11 @@ export default class ExercicesAPI {
         )
     };
 
+    reinforcementRender = () => {
+        return (
+        (_, res) => {
+            res.send(`this works FOR REINFORCEMENT ${this.zone}`);
+        }
+        )
+    };
 }
