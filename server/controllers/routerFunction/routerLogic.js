@@ -11,12 +11,12 @@ export const mobilityRouter = (zone, instance) => {
 
 export const proprioceptionRouter = (zone, instance) => {
     return (
-        router.get("/proprioception/" + zone, instance)
+        router.get("/proprio/" + zone, instance)
     );
 }
 
 export const reinforcementRouter = (zone, instance) => {
     return (
-        router.get("/reinforcement/" + zone, instance)
+        router.get("/renfo/" + zone, instance)
     );
 }
