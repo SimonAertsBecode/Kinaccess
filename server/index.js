@@ -5,28 +5,26 @@ import cors from "cors";
 import {} from "dotenv/config";
 
 // Routes for 
-import * as routes from './routes/index.API.js'
+import { crudRouter } from './routes/user.js'
 
 const app = express();
-
-//path url API
-app.use("/", routes.mobilityRouter, routes.proprioRouter, routes.reinforcementRouter);
-
 
 // Use json for request
 app.use(bodyParser.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json())
 app.use(cors());
 
-const PORT = process.env.PORT || 3000;
-
+//path url API
+app.use('/', crudRouter);
 
 //Database connection && server 
+const PORT = process.env.PORT || 5000;
+
 const CONNECTION_URL =
     "mongodb+srv://kinaccess:kinauthpwd@cluster0.1ysv7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
-mongoose
-    .connect(CONNECTION_URL, {
+mongoose.connect(CONNECTION_URL, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
