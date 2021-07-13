@@ -8,6 +8,7 @@ export const contactSaveForm = () => {
         firstName: req.body.firstName,
         email: req.body.email,
         age: req.body.age,
+        sex: req.body.sex,
         content: req.body.content
       })
       user.save()
