@@ -1,34 +1,42 @@
 import React, { useContext, useState } from 'react'
+import axios from 'axios'
 import { UserContext } from '../../context/UserContext'
 import TextField from '@material-ui/core/TextField'
 import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
+import Button from '@material-ui/core/Button'
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight'
 import { FormControl, FormControlLabel, FormLabel } from '@material-ui/core'
 
 const ContactForm = () => {
   
   const [initialValues, setValue] = useContext(UserContext)
+
+  const [responsePostMessage, setResponsePostMessage] = useState('')
   
   const [error, setError] = useState([
     {
-      nameError: false,
-      nameMessage: ''
+      nameError: false
     },
     {
       firstNameError: false,
-      firstNameMessage: ''
+      namesMessage: 'Vérifiez que vous avez bien mis votre Nom et Prénom'
     },
     {
       emailError: false,
-      emailMessage: ''
+      emailMessage: 'Vérifiez votre adresse e-mail est correct'
     },
     {
       ageError: false,
-      ageMessage: ''
+      ageMessage: 'Veuillez verifier votre date de naissance'
     },
     {
       sexError: false,
-      sexMessage: ''
+      sexMessage: 'veuillez sélectionner un genre'
+    },
+    {
+      contentError: false,
+      contentMessage: 'Veuillez écrire votre message'
     }
   ])
 
@@ -38,9 +46,8 @@ const ContactForm = () => {
       let yearArray = value.split('-')
       let year = yearArray[0]
       let d = new Date()
-      if(yearArray.length === 3 && 1920 < yearArray[0] < d.getFullYear() ) {
+      if(yearArray.length === 3 && 1920 < yearArray[0] < d.getFullYear()) {
         let result = d.getFullYear() - year
-  
         if(result > 0 && result < 100) {
           setValue(prevState => ({
           ...prevState,
@@ -65,41 +72,68 @@ const ContactForm = () => {
     }
   }
 
+  console.log(initialValues)
+  
   const checkValues = (e) => {
     e.preventDefault()
     if(initialValues.name && initialValues.firstName){
-      let regexForEmailValidation = /^[ ]*([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})[ ]*$/i
-      if(regexForEmailValidation.test(initialValues.email)) {
+       setError(prevState => ({
+         ...prevState,
+         nameError : false,
+         firstNameError: false
+       }))
+      let regexEmailValidation = /^[ ]*([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})[ ]*$/i
+      if(regexEmailValidation.test(initialValues.email)) {
          setError(prevState => ({
             ...prevState,
-            emailError : false,
+            emailError : false
           }))
+          if(error.ageError === false) {
+            if(initialValues.sex) {
+              if(initialValues.content){
+                  axios.post('/contact-me', initialValues)
+                .then(response => {
+                  setResponsePostMessage(response.data.message)
+                })
+                .catch(error => {
+                  setResponsePostMessage(error.data.message)
+                })
+              } else {
+                setError(prevState => ({
+                  ...prevState,
+                  contentError : true
+                }))
+              }
+            } else {
+              setError(prevState => ({
+                ...prevState,
+                sexError : true
+              }))
+            }
+          }
       } else {
         setError(prevState => ({
             ...prevState,
-            emailError : true,
-            emailMessage: 'Vérifiez votre adresse e-mail est au bon format'
+            emailError : true
           }))
       }
     } else {
       setError(prevState => ({
             ...prevState,
             nameError : true,
-            nameMessage: 'Vérifiez que vous avez bien mis votre Nom et Prénom',
-            firstNameError: true,
-            firstNameMessage: 'Vérifiez que vous avez bien mis votre Nom et Prénom'
+            firstNameError: true
           }))
     }
   }
 
     return ( 
       <>
-        <form noValidate autoComplete='off' method='POST' action='/contact-me' className='contactForm'>
+        <form noValidate autoComplete='off' className='contactForm' onSubmit={checkValues}>
           <TextField 
             className='field'
             name='name'
             value={initialValues.name} 
-            label='nom'
+            label='Nom'
             variant='outlined'
             required
             fullWidth
@@ -117,6 +151,7 @@ const ContactForm = () => {
             onChange={handleChange}
             error={error.firstNameError}
           />
+          <strong>{error.nameError || error.firstNameError ? error[1].namesMessage : ''}</strong>
           <TextField 
             className='field'
             name='email'
@@ -128,16 +163,19 @@ const ContactForm = () => {
             onChange={handleChange}
             error={error.emailError}
           />
-           <TextField
+          <strong>{error.emailError ? error[2].emailMessage : ''}</strong>
+          <TextField
             className='field'
             name='age'
             label="Date de naissance"
             type="date"
-            className='field'
+            required
             onChange={handleChange}
             error={error.ageError}
+            InputLabelProps={{ shrink: true }}
           />
-          <FormControl className='field'>
+          <strong>{error.ageError ? error[3].ageMessage : ''}</strong>
+          <FormControl className='radio' required>
             <FormLabel> Sexe </FormLabel>
               <RadioGroup>
                 <FormControlLabel name='sex' value="female" control={<Radio />} label="Female" onChange={handleChange}/>
@@ -145,6 +183,7 @@ const ContactForm = () => {
                 <FormControlLabel name='sex' value="other" control={<Radio />} label="Other" onChange={handleChange}/>
               </RadioGroup>
             </FormControl>
+          <strong>{error.sexError ? error[4].sexMessage : ''}</strong>  
           <TextField 
             className='field'
             name='content'
@@ -152,13 +191,26 @@ const ContactForm = () => {
             label='Message'
             variant='outlined'
             multiline={true}
-            rows={10}
+            rows={7}
             required
             fullWidth
             onChange={handleChange}
+            error={error.contentError}
           />
-          <button type='submit' onSubmit={checkValues}>envoyé</button>
+          <strong>{error.contentError ? error[5].contentMessage : ''}</strong>
+          <Button 
+            className='btn-submit'
+            type='submit'
+            color='rgba(0,61,217)'
+            variant='contained'
+            endIcon={<KeyboardArrowRightIcon />}
+          >
+            Submit
+          </Button>
         </form>
+        <section>
+          {responsePostMessage}
+        </section>
       </>
      );
 }
