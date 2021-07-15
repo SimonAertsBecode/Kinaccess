@@ -7,6 +7,7 @@ import RadioGroup from '@material-ui/core/RadioGroup'
 import Button from '@material-ui/core/Button'
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight'
 import { FormControl, FormControlLabel, FormLabel } from '@material-ui/core'
+import * as EmailValidator from 'email-validator'
 
 const ContactForm = () => {
   
@@ -48,7 +49,7 @@ const ContactForm = () => {
       let d = new Date()
       if(yearArray.length === 3 && 1920 < yearArray[0] < d.getFullYear()) {
         let result = d.getFullYear() - year
-        if(result > 0 && result < 100) {
+         if(result > 0 && result < 100) {
           setValue(prevState => ({
           ...prevState,
           age: result
@@ -63,8 +64,13 @@ const ContactForm = () => {
             ageError : true
           }))
         }
-      }
-    } else {
+      } else {
+        setError(prevState => ({
+            ...prevState,
+            ageError : true
+          }))
+        }
+      } else {
       setValue(prevState => ({
           ...prevState,
           [name]: value
@@ -72,7 +78,6 @@ const ContactForm = () => {
     }
   }
 
-  console.log(initialValues)
   
   const checkValues = (e) => {
     e.preventDefault()
@@ -82,22 +87,29 @@ const ContactForm = () => {
          nameError : false,
          firstNameError: false
        }))
-      let regexEmailValidation = /^[ ]*([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})[ ]*$/i
-      if(regexEmailValidation.test(initialValues.email)) {
+      if(EmailValidator.validate(initialValues.email)) {
          setError(prevState => ({
             ...prevState,
             emailError : false
           }))
           if(error.ageError === false) {
             if(initialValues.sex) {
+               setError(prevState => ({
+                 ...prevState,
+                 sexError : false
+              }))
               if(initialValues.content){
-                  axios.post('/contact-me', initialValues)
-                .then(response => {
-                  setResponsePostMessage(response.data.message)
-                })
-                .catch(error => {
-                  setResponsePostMessage(error.data.message)
-                })
+                setError(prevState => ({
+                   ...prevState,
+                   emailError : false
+                  }))
+                axios.post('/contact-me', initialValues)
+                  .then(response => {
+                    setResponsePostMessage(response.data.message)
+                  })
+                  .catch(error => {
+                    setResponsePostMessage(error.data.message)
+                  }) 
               } else {
                 setError(prevState => ({
                   ...prevState,
@@ -110,6 +122,11 @@ const ContactForm = () => {
                 sexError : true
               }))
             }
+          } else {
+             setError(prevState => ({
+              ...prevState,
+              ageError : true
+            }))
           }
       } else {
         setError(prevState => ({
@@ -125,6 +142,69 @@ const ContactForm = () => {
           }))
     }
   }
+  console.log(initialValues.age)
+
+//   const checkValues = (e) => {
+//   e.preventDefault()
+//   switch (initialValues){
+//     case initialValues.name === undefined : 
+//       setError(prevState => ({
+//          ...prevState,
+//          nameError : true
+//        }))
+//        break;
+//     case initialValues.firstName === undefined :
+//       setError(prevState => ({
+//          ...prevState,
+//          firstNameError: true
+//        }))
+//        break;
+//     case initialValues.email :
+//       let regexEmailValidation = /^[ ]*([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})[ ]*$/i
+//       if(!initialValues.email || !regexEmailValidation.test(initialValues.email)){
+//         setError(prevState => ({
+//          ...prevState,
+//          emailError: true
+//        }))
+//       }
+//       break;
+//     case initialValues.age :
+//       if(!initialValues.age || 0 > initialValues.age > 100){
+//         setError(prevState => ({
+//          ...prevState,
+//          ageError: true
+//        }))
+//       }
+//       break;
+//     case initialValues.sex === undefined :
+//       setError(prevState => ({
+//          ...prevState,
+//          sexError: true
+//        }))
+//     case initialValues.content === undefined :
+//       setError(prevState => ({
+//          ...prevState,
+//          contentError: true
+//        }))
+//        break;
+//     default : 
+//        setError({
+//          nameError: false,
+//          firstNameError: false,
+//          emailError: false,
+//          ageError: false,
+//          sexError: false,
+//          contentError: false
+//        })
+//        axios.post('/contact-me', initialValues)
+//          .then(response => {
+//            setResponsePostMessage(response.data.message)
+//          })
+//          .catch(error => {
+//            setResponsePostMessage(error.data.message)
+//          })
+//   }
+// }
 
     return ( 
       <>
