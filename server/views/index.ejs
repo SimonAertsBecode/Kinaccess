@@ -1,0 +1,14 @@
+<h1>hello</h1>
+
+<% for(var i=0;i < users.length;i++){%>
+<tr>
+    <td><%= i + 1 %></td>
+    <td><%= users[i].name %></td>
+    <td><%= users[i].firstName %></td>
+    <td><%= users[i].email %></td>
+    <td><%= users[i].age %></td>
+    <td><%= users[i].sex %></td>
+    <td><%= users[i].content %></td>
+    <td><%= users[i].createdAt %></td>
+</tr>
+<%}%>

@@ -3,6 +3,10 @@ import { User } from "../models/schemas/UsersSchema.js"
 export const contactSaveForm = () => {
   return (
     (req, res) => {
+      if(!req.body){
+        res.status(400).send(`Le formulaire doit être complété`)
+      }
+
       let user = new User({
         name: req.body.name,
         firstName: req.body.firstName,
@@ -18,9 +22,8 @@ export const contactSaveForm = () => {
           })
         })
         .catch((err) => {
-          res.json({
-            err,
-            message: `something went wrong`
+          res.status(500).send({
+            message: err.message || `Une erreur s'est produite`
           })
         })
     }
@@ -31,8 +34,10 @@ export const findAllUsers = () => {
   return (
     (_,res) => {
       User.find()
+        .sort({ _id: -1 })
         .then(response => {
-          res.json({
+          res.status(200).send({
+            message : `Votre message bien été envoyé!`,
             response
           })
         })
@@ -59,7 +64,7 @@ export const findUserById = () => {
         })
         .catch(err => {
           res.json({
-            message: `Couldn't find the message`
+            message: `Couldn't find the user`
           })
         })
     }
@@ -99,7 +104,7 @@ export const deleteUser = () => {
     (req, res) => {
       let userID = req.body.userID
 
-      User.findByIdAndRemove(userID)
+      User.findByIdAndDelete(userID)
        .then(() => {
          res.json({
            message: `user: ${userID} has been removed`
