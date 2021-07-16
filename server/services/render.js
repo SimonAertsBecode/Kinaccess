@@ -5,7 +5,6 @@ export const homeRoutes = () => {
     (req, res) => {
       axios.get(`http://localhost:5000/API/back-office/show`)
         .then((response) => {
-          console.log(response)
           res.render('index', {users : response.data.response})
         })
         .catch((err)=>{
@@ -14,3 +13,26 @@ export const homeRoutes = () => {
     }
   )
 }
+
+export const checkedRoutes = () => {
+  return(
+    (req, res) => {
+      axios.get(`http://localhost:5000/API/back-office/show`, {params: { id : req.query.id }})
+        .then((userData) => {
+          res.render('checked', {user: userData.data})
+        })
+        .catch(err => {
+          res.send(err)
+        })
+    }
+  )
+}
+
+export const waitingRoutes = () => {
+  return(
+    (req, res) => {
+      res.render('waiting')
+    }
+  )
+}
+

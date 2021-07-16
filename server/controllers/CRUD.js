@@ -13,7 +13,8 @@ export const contactSaveForm = () => {
         email: req.body.email,
         age: req.body.age,
         sex: req.body.sex,
-        content: req.body.content
+        content: req.body.content,
+        status: ''
       })
       user.save()
         .then(() => {
@@ -35,6 +36,7 @@ export const findAllUsers = () => {
     (_,res) => {
       User.find()
         .sort({ _id: -1 })
+        .limit(50)
         .then(response => {
           res.status(200).send({
             message : `Votre message bien été envoyé!`,
@@ -74,14 +76,15 @@ export const findUserById = () => {
 export const updateUser = () => {
   return (
     (req, res) => {
-      let userID = req.body.userID
+      let userID = params._id
 
       let updateInfos = {
         name: req.body.name,
         firstName: req.body.firstName,
         email: req.body.email,
         age: req.body.age,
-        content: req.body.content
+        content: req.body.content,
+        status: 'Checked'
       }
     
       User.findByIdAndUpdate(userID, {$set: updateInfos})

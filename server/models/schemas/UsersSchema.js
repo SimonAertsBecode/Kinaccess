@@ -35,6 +35,9 @@ const UserSchema = new Schema({
     content: {
         type: String,
         require: true
+    },
+    status: {
+        type: String
     }
 }, {timestamps: true})
 
