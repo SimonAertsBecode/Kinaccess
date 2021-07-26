@@ -5,9 +5,11 @@ const messageCrud = {}
 //Save form controller ----------------
 messageCrud.contactSaveForm = async (req , res, next) => {
   if(!req.body){
-    res.status(400).send(`Le formulaire doit être complété`)
-  
-  let ContactForm = await new ContactFormModel({
+    res.status(400).send({
+      message: `Le formulaire doit être complété`
+      })
+  } else { 
+  let contactForm = await new ContactFormModel({
     name: req.body.name,
     firstName: req.body.firstName,
     email: req.body.email,
@@ -16,7 +18,7 @@ messageCrud.contactSaveForm = async (req , res, next) => {
     content: req.body.content,
     status: ''
   })
-  ContactForm.save()
+  contactForm.save()
     .then(() => {
       res.json({
         message: `Votre message bien été envoyé!`
@@ -27,8 +29,8 @@ messageCrud.contactSaveForm = async (req , res, next) => {
         message: err.message || `Une erreur s'est produite`
       })
     })
-  }
-}
+    }
+  } 
 
 /*----------------------------------------------*/
 
@@ -89,7 +91,7 @@ messageCrud.updateMessage = async (req, res, next) => {
 }
 
 messageCrud.deleteMessage = async (req, res, next) => {
-  let messageID = req.body.userI
+  let messageID = req.body._id
   await ContactFormModel.findByIdAndDelete(messageID)
    .then(() => {
      res.json({

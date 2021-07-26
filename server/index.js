@@ -1,13 +1,16 @@
 import express from 'express'
 import bodyParser from 'body-parser'
+import cookieParser from 'cookie-parser'
 import mongoose from 'mongoose'
 import cors from 'cors'
 import path from 'path'
 import dotenv from 'dotenv';
 
+import authMiddleware from './middleware/auth.middleware.js'
+
 // Routes for 
 import { messageCrudRoute } from './routes/contactForm.js'
-import { authRoute } from './routes/userAuth.js'
+import { authRoute, userRoute } from './routes/user.js'
 
 const app = express();
 
@@ -19,8 +22,15 @@ dotenv.config({ path: path.join(__dirname, 'config/.env') });
 app.use('/public', express.static(path.join(__dirname, '/public')))
 app.use(bodyParser.json({ extended: true }))
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(cookieParser())
 app.use(express.json())
 app.use(cors())
+
+//jwt
+app.get('*', authMiddleware.checkUser)
+app.get('/jwtid', authMiddleware.requireAuth, (req, res) => {
+    res.status(200).send(res.locals.user._id)
+})
 
 //config for EJS
 app.set('views', './views')
@@ -29,6 +39,7 @@ app.set('view engine', 'ejs')
 //path url API
 app.use('/', messageCrudRoute)
 app.use('/user', authRoute)
+app.use('/api/user', userRoute)
 
 //Database connection && server 
 const CONNECTION_URL =

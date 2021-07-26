@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt'
 
 const { Schema } = mongoose
 
-const UsersSchema = new Schema({
+const UserSchema = new Schema({
     name: {
         type: String,
         require: true,
@@ -35,11 +35,25 @@ const UsersSchema = new Schema({
 }, {timestamps: true})
 
 //script pwd before sending to DB
-UsersSchema.pre('save', async function(next) {
-    const salt = await bcrypt.genSalt()
-    this.password = await bcrypt.hash(this.password, salt)
-    next()
+UserSchema.pre('save', async function(next) {
+  const salt = await bcrypt.genSalt()
+  this.password = await bcrypt.hash(this.password, salt)
+  next()
 })
 
+// desalt password for login
+UserSchema.statics.login = async function(email, password) {
+  const user = await this.findOne({ email })
+    if(user){
+      const auth = await bcrypt.compare(password, user.password)
+      if(auth) {
+        return user
+      } else {
+        throw Error('Mot de passe incorrect')
+      }
+    } else {
+      throw Error('email incorrect')
+    }
+}
 
-export const UsersModel = mongoose.model('User', UsersSchema)
+export const UserModel = mongoose.model('User', UserSchema)
