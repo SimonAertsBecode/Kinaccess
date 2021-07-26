@@ -1,0 +1,44 @@
+<%- include('includes/head'); -%>
+<body>
+    <h1>hello</h1>
+    <section class='btn-page'>
+      <button><a href='/checked-user'>Checked</a></button>
+      <button><a href='/waiting-response'>Waiting for response</a></button>
+    </section>
+    <section class='table'>
+      <table>
+        <tr class='titles'>
+          <td></td>
+          <td></td>
+          <td>Name</td>
+          <td>Firtsname</td>
+          <td>Email</td>
+          <td>Age</td>
+          <td>Gender</td>
+          <td>Content</td>
+          <td>Date of creation</td>
+        </tr>
+        <% for(var i=0;i < userMessages.length;i++){%>
+        <tr>
+          <td>
+            <a href="/checked-messages?<%= usersMessages._id%>"><button class="btn-1"><i class="fas fa-check"></i></button></a>
+            <form method="PUT" action='/API/back-office/updatebyidChecked/<%= usersMessage._id%>'>
+              <button type='submit' class="btn-2"><i class="fas fa-times"></i></button>
+            </form>
+            <a href="/waiting-response?<%= userMessages._id%>"><button class="btn-3"><i class="fas fa-spinner"></i></button></a>
+          </td>
+          <td><%= i + 1 %></td>
+          <td><%= userMessages[i].name %></td>
+          <td><%= userMessages[i].firstName %></td>
+          <td><%= userMessages[i].email %></a></td>
+          <td><%= userMessages[i].age %></td>
+          <td><%= userMessages[i].sex %></td>
+          <td class='content'><%= userMessages[i].content %></td>
+          <td><%= userMessages[i].createdAt.split('T')[0] %></td>
+        </tr>
+        <%}%>
+      </table>
+    </section>
+</body>
+<script src="./public/js/index.js"></script>
+</html>

@@ -1,14 +1,19 @@
-import express from "express"
-import * as crud from '../controllers/crud.js'
+import express from 'express'
+import authController from '../controllers/authController.js'
+import userController from '../controllers/userController.js'
 
-const router = express.Router()
+const authRoute = express.Router()
+const userRoute = express.Router()
 
-router.get('/API/back-office/show', crud.findAllUsers())
-router.get('/API/back-office/findbyid', crud.findUserById())
-router.post('/contact-me', crud.contactSaveForm())
-router.post('/API/back-office/deleteuser', crud.deleteUser())
-router.post('/API/back-office/updatebyid', crud.updateUser())
+// auth
+authRoute.post('/register', (authController.signUp))
+authRoute.post('/login', (authController.signIn))
+authRoute.get('/logout', (authController.logout))
 
-export {
-    router as crudRouter
-}
+//user DB
+userRoute.get('/', (userController.getAllUsers))
+userRoute.get('/:id', (userController.userInfo))
+userRoute.put('/:id', (userController.updateUser))
+userRoute.delete('/:id', (userController.deleteUser))
+
+export { authRoute, userRoute }
