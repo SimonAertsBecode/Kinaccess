@@ -1,4 +1,5 @@
 import { UserModel } from "../models/schemas/UsersSchema.js"
+import authError from '../utils/errorManagement.js'
 import jwt from 'jsonwebtoken'
 
 const maxAge = 3 * 24 * 60 * 60 * 1000
@@ -19,7 +20,7 @@ authController.signUp = async (req, res, next) => {
     res.status(201).json({ user: newUser._id})
   } 
   catch(err) {
-    res.status(400).send({err})
+    res.status(400).send(authError.signUpError(err))
   }
 }
 
@@ -32,7 +33,7 @@ authController.signIn = async (req, res) => {
     res.cookie('jwt', token, { httpOnly: true, maxAge })
     res.status(200).json({user: user._id})
   } catch(err) {
-    res.status(400).json(`Something wrong happened ==> ${err}`)
+    res.status(400).send(err)
   }
 }
 

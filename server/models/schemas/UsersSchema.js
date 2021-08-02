@@ -7,29 +7,30 @@ const { Schema } = mongoose
 const UserSchema = new Schema({
     name: {
         type: String,
-        require: true,
-        minLength: 3,
-        maxLength: 25,
+        required: true,
+        minlength: 3,
+        maxlength: 25,
         trimp: true
     },
     firstName: {
         type: String,
-        require: true,
-        minLength: 3,
-        maxLength: 25,
+        required: true,
+        minlength: 3,
+        maxlength: 25,
         trimp: true
     },
     email: {
         type: String,
-        require: true,
+        required: true,
         validate: validator.isEmail,
         lowercase: true,
-        trimp: true
+        trimp: true,
+        unique: true
     },
     password: {
         type: String,
-        require: true,
-        minLength: 6,
+        required: true,
+        minlength: 6,
         trimp: true
     }
 }, {timestamps: true})
@@ -49,10 +50,10 @@ UserSchema.statics.login = async function(email, password) {
       if(auth) {
         return user
       } else {
-        throw Error('Mot de passe incorrect')
+        throw ({message: 'Mot de passe incorrect'})
       }
     } else {
-      throw Error('email incorrect')
+      throw ({message: 'email incorrect'})
     }
 }
 

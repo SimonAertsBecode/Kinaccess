@@ -28,8 +28,8 @@ app.use(cors())
 
 //jwt
 app.get('*', authMiddleware.checkUser)
-app.get('/jwtid', authMiddleware.requireAuth, (req, res) => {
-    res.status(200).send(res.locals.user._id)
+app.get('/jwtid', authMiddleware.requireAuth, (_, res) => {
+res.status(200).send(res.locals.user._id)
 })
 
 //config for EJS
