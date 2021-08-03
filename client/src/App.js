@@ -1,10 +1,11 @@
 import React from "react"
 import ContactForm from './components/forms/ContactForm'
-import Navigation from './components/main/Navigation'
-import About from './components/navigations/About'
+import Navigation from './components/navigations/Navigation'
+import About from './components/navigations/main/About'
 import MainLayout from './components/MainLayout'
 import { UserProvider } from './context/UserContext'
-import { BrowserRouter, Route} from 'react-router-dom'
+import { BrowserRouter, Redirect, Route, Switch} from 'react-router-dom'
+import UserAccount from "./components/navigations/main/UserAccount"
 
 
 const App = () => {
@@ -13,10 +14,13 @@ const App = () => {
       <UserProvider>
         <BrowserRouter>
             <Navigation />
-
-            <Route path='/' exact component={MainLayout} />
-            <Route path='/about' exact component={About} />
-            <Route path='/Contact-me' exact component={ContactForm} />
+            <Switch>
+              <Route path='/' exact component={MainLayout} />
+              <Route path='/about' exact component={About} />
+              <Route path='/contact-me' exact component={ContactForm} />
+              <Route path='/user-profil' exact component={UserAccount} />
+              <Redirect to='/' />
+            </Switch>
         </BrowserRouter>
       </UserProvider>
     </>

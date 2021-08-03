@@ -12,8 +12,19 @@ export const UserProvider = props => {
     content: ''
   })
 
+  const [signInFormValues, setSignInFormValues] = useState({
+    name: '',
+    firstName: '',
+    email: '',
+    password: '',
+    password2: '',
+  })
+
   return(
-    <UserContext.Provider value={[initialValues, setValue]}>
+    <UserContext.Provider value={
+      [initialValues, setValue],
+      [signInFormValues, setSignInFormValues]
+      }>
       {props.children}
     </UserContext.Provider>
   )
