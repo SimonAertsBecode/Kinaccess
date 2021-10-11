@@ -1,42 +1,42 @@
-import jwt from 'jsonwebtoken'
-import { UserModel } from "../models/schemas/UsersSchema.js"
+import jwt from 'jsonwebtoken';
+import { UserModel } from '../models/schemas/UsersSchema.js';
 
-const authMiddleware = {}
+const authMiddleware = {};
 
 //check at each navigation in the site if the user has the right for it (jwt)
 authMiddleware.checkUser = async (req, res, next) => {
-  const token = req.cookies.jwt
-  if(token){
-    jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedToken) => {
-      if(err){
-        res.locals.user = null
-        res.cookie('jwt', '', { maxAge: 1 })
-        next()
-      } else {
-        let user = await UserModel.findById(decodedToken.id)
-        res.locals.user = user
-        next()
-      }
-    })
-  } else {
-    res.locals.user = null
-    next()
-  }
-}
+   const token = req.cookies.jwt;
+   if (token) {
+      jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedToken) => {
+         if (err) {
+            res.locals.user = null;
+            res.cookie('jwt', '', { maxAge: 1 });
+            next();
+         } else {
+            let user = await UserModel.findById(decodedToken.id);
+            res.locals.user = user;
+            next();
+         }
+      });
+   } else {
+      res.locals.user = null;
+      next();
+   }
+};
 
 authMiddleware.requireAuth = async (req, res, next) => {
-  const token = req.cookies.jwt
-  if(token){
-    jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedToken) => {
-      if(err){
-        console.log(err)
-      } else {
-        console.log(decodedToken.id)
-        next()
-      }
-    })
-  } else {
-    console.log('no token')
-  }
-}
-export default authMiddleware
+   const token = req.cookies.jwt;
+   if (token) {
+      jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedToken) => {
+         if (err) {
+            console.log(err);
+         } else {
+            console.log(decodedToken.id);
+            next();
+         }
+      });
+   } else {
+      console.log('no token');
+   }
+};
+export default authMiddleware;
