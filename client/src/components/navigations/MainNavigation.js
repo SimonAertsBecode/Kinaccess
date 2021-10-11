@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-const Navigation = () => {
+const MainNavigation = () => {
    return (
       <>
          <div className='navigation'>
@@ -23,4 +23,4 @@ const Navigation = () => {
    );
 };
 
-export default Navigation;
+export default MainNavigation;

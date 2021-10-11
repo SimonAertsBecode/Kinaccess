@@ -1,13 +1,7 @@
 import express from 'express';
 import messageCrud from '../controllers/contactFormController.js';
-import render from '../services/render.js';
 
 const messageCrudRoute = express.Router();
-
-//ejs render
-messageCrudRoute.get('/getAll-messages', render.homeRoutes);
-messageCrudRoute.get('/checked-messages', render.checkedRoutes);
-messageCrudRoute.get('/waiting-response', render.waitingRoutes);
 
 //api routes
 messageCrudRoute.get('/API/messages/show', messageCrud.findAllMessages);

@@ -9,6 +9,7 @@ import dotenv from 'dotenv';
 import authMiddleware from './middleware/auth.middleware.js';
 
 // Routes for
+import { backOfficeRoutes } from './backOffice/routes/backOfficeRoutes.js';
 import { messageCrudRoute } from './routes/contactForm.js';
 import { authRoute, userRoute } from './routes/user.js';
 
@@ -42,11 +43,12 @@ app.get('/jwtid', authMiddleware.requireAuth, (_, res) => {
 });
 
 //config for EJS
-app.set('views', './views');
+app.set('views', './backOffice/views');
 app.set('view engine', 'ejs');
 
 //path url API
 app.use('/', messageCrudRoute);
+app.use('/back-office', backOfficeRoutes);
 app.use('/user', authRoute);
 app.use('/api/user', userRoute);
 

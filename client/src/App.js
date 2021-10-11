@@ -1,18 +1,18 @@
 import React from 'react';
 import ContactForm from './components/forms/ContactForm';
-import Navigation from './components/navigations/Navigation';
-import About from './components/navigations/main/About';
+import MainNavigation from './components/navigations/MainNavigation';
+import About from './components/navigations/navComponents/About';
 import MainLayout from './components/MainLayout';
 import { UserProvider } from './context/UserContext';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
-import UserAccount from './components/navigations/main/UserAccount';
+import UserAccount from './components/navigations/navComponents/UserAccount';
 
 const App = () => {
    return (
       <>
          <UserProvider>
             <BrowserRouter>
-               <Navigation />
+               <MainNavigation />
                <Switch>
                   <Route path='/' exact component={MainLayout} />
                   <Route path='/about' exact component={About} />
