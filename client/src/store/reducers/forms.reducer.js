@@ -1,7 +1,7 @@
 import * as Actions from '../actions/index';
 
 const initialState = {
-   contactForm: false,
+   contactForm: 'coucou',
 };
 
 const formReducer = (state = initialState, action) => {
