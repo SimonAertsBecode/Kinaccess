@@ -12,7 +12,7 @@ const createToken = (id) => {
 
 const authController = {};
 
-authController.signUp = async (req, res, next) => {
+authController.signUp = async (req, res) => {
    const { name, firstName, email, password } = req.body;
 
    try {

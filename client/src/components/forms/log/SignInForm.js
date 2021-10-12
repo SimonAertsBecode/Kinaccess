@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 import { UserContext } from '../../../context/UserContext';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -18,22 +18,24 @@ const SignInForm = () => {
       }));
    };
 
-   //  const submitForm = () => {
-   //     e.preventDefault();
-   //     if (signInFormValues.password !== signInFormValues.password2) {
-   //        setPasswordError(true);
-   //     } else {
-   //        setPasswordError(false);
-   //        axios
-   //           .post('/register', signInFormValues)
-   //           .then((res) => {
-   //              console.log(res);
-   //           })
-   //           .catch((err) => {
-   //              console.log(err);
-   //           });
-   //     }
-   //  };
+   console.log(signInFormValues);
+
+   // const submitForm = (e) => {
+   //    e.preventDefault();
+   //    if (signInFormValues.password !== signInFormValues.password2) {
+   //       setPasswordError(true);
+   //    } else {
+   //       setPasswordError(false);
+   //       axios
+   //          .post('/register', signInFormValues)
+   //          .then((res) => {
+   //             console.log(res);
+   //          })
+   //          .catch((err) => {
+   //             console.log(err);
+   //          });
+   //    }
+   // };
 
    return (
       <div className='sigIn-Form'>
@@ -85,6 +87,7 @@ const SignInForm = () => {
             <strong></strong>
             <TextField
                className='field'
+               name='password2'
                value={signInFormValues.password2}
                label='Mot de passe'
                variant='outlined'
@@ -96,7 +99,7 @@ const SignInForm = () => {
             <strong>{passwordError ? 'Vos deux mots de passe ne correspondent pas' : ''}</strong>
             <Button
                className='btn-submit'
-               // onClick={submitForm}
+               //onClick={submitForm}
                type='submit'
                color='rgba(0,61,217)'
                variant='contained'

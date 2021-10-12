@@ -4,6 +4,7 @@ const messageCrud = {};
 
 //Save form controller ----------------
 messageCrud.contactSaveForm = async (req, res, next) => {
+   console.log(req.body);
    if (!req.body) {
       res.status(400).send({
          message: `Le formulaire doit être complété`,
@@ -26,8 +27,9 @@ messageCrud.contactSaveForm = async (req, res, next) => {
             });
          })
          .catch((err) => {
+            console.log(err);
             res.status(500).send({
-               message: err.message || `Une erreur s'est produite`,
+               message: err || `Une erreur s'est produite`,
             });
          });
    }
