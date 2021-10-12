@@ -11,10 +11,12 @@ import { FormControl, FormControlLabel, FormLabel } from '@material-ui/core';
 
 //* import files
 import { handleChange } from '../../hooks/useFormsHook';
-import * as Actions from '../../store/actions/index';
+import * as Actions from '../../store/actions';
 
 const ContactForm = () => {
-   const [formObject, setFormObject] = useState({
+   const dispatch = useDispatch();
+
+   const [contactObject, setcontactObject] = useState({
       name: '',
       firstName: '',
       email: '',
@@ -23,37 +25,9 @@ const ContactForm = () => {
       content: '',
    });
 
-   const dispatch = useDispatch();
-
-   const [error, setError] = useState([
-      {
-         nameError: false,
-      },
-      {
-         firstNameError: false,
-         namesMessage: 'Vérifiez que vous avez bien mis votre Nom et Prénom',
-      },
-      {
-         emailError: false,
-         emailMessage: 'Vérifiez votre adresse e-mail est correct',
-      },
-      {
-         ageError: false,
-         ageMessage: 'Veuillez verifier votre date de naissance',
-      },
-      {
-         sexError: false,
-         sexMessage: 'veuillez sélectionner un genre',
-      },
-      {
-         contentError: false,
-         contentMessage: 'Veuillez écrire votre message',
-      },
-   ]);
-
-   const checkValues = (e, formObject) => {
+   const checkValues = (e, contactObject) => {
       e.preventDefault();
-      dispatch(Actions.getContactInfos(formObject));
+      dispatch(Actions.getContactInfos(contactObject));
    };
 
    return (
@@ -63,50 +37,50 @@ const ContactForm = () => {
             autoComplete='off'
             className='contactForm'
             onSubmit={(e) => {
-               checkValues(e, formObject);
+               checkValues(e, contactObject);
             }}
          >
             <TextField
                className='field'
                name='name'
-               value={formObject.name}
+               value={contactObject.name}
                label='Nom'
                variant='outlined'
                required
                fullWidth
                onChange={(event) => {
-                  handleChange(event, setFormObject);
+                  handleChange(event, setcontactObject);
                }}
-               error={error.nameError}
+               // error={error.nameError}
             />
             <TextField
                className='field'
                name='firstName'
-               value={formObject.firstName}
+               value={contactObject.firstName}
                label='Prénom'
                variant='outlined'
                required
                fullWidth
                onChange={(event) => {
-                  handleChange(event, setFormObject);
+                  handleChange(event, setcontactObject);
                }}
-               error={error.firstNameError}
+               // error={error.firstNameError}
             />
-            <strong>{error.nameError || error.firstNameError ? error[1].namesMessage : ''}</strong>
+            {/* <strong>{error.nameError || error.firstNameError ? error[1].namesMessage : ''}</strong> */}
             <TextField
                className='field'
                name='email'
-               value={formObject.email}
+               value={contactObject.email}
                label='e-mail'
                variant='outlined'
                required
                fullWidth
                onChange={(event) => {
-                  handleChange(event, setFormObject);
+                  handleChange(event, setcontactObject);
                }}
-               error={error.emailError}
+               // error={error.emailError}
             />
-            <strong>{error.emailError ? error[2].emailMessage : ''}</strong>
+            {/* <strong>{error.emailError ? error[2].emailMessage : ''}</strong> */}
             <TextField
                className='field'
                name='age'
@@ -114,12 +88,12 @@ const ContactForm = () => {
                type='date'
                required
                onChange={(event) => {
-                  handleChange(event, setFormObject);
+                  handleChange(event, setcontactObject);
                }}
-               error={error.ageError}
+               // error={error.ageError}
                InputLabelProps={{ shrink: true }}
             />
-            <strong>{error.ageError ? error[3].ageMessage : ''}</strong>
+            {/* <strong>{error.ageError ? error[3].ageMessage : ''}</strong> */}
             <FormControl className='radio' required>
                <FormLabel> Sexe </FormLabel>
                <RadioGroup>
@@ -129,7 +103,7 @@ const ContactForm = () => {
                      control={<Radio />}
                      label='Female'
                      onChange={(event) => {
-                        handleChange(event, setFormObject);
+                        handleChange(event, setcontactObject);
                      }}
                   />
                   <FormControlLabel
@@ -138,7 +112,7 @@ const ContactForm = () => {
                      control={<Radio />}
                      label='Male'
                      onChange={(event) => {
-                        handleChange(event, setFormObject);
+                        handleChange(event, setcontactObject);
                      }}
                   />
                   <FormControlLabel
@@ -147,16 +121,16 @@ const ContactForm = () => {
                      control={<Radio />}
                      label='Other'
                      onChange={(event) => {
-                        handleChange(event, setFormObject);
+                        handleChange(event, setcontactObject);
                      }}
                   />
                </RadioGroup>
             </FormControl>
-            <strong>{error.sexError ? error[4].sexMessage : ''}</strong>
+            {/* <strong>{error.sexError ? error[4].sexMessage : ''}</strong> */}
             <TextField
                className='field'
                name='content'
-               value={formObject.content}
+               value={contactObject.content}
                label='Message'
                variant='outlined'
                multiline={true}
@@ -164,11 +138,11 @@ const ContactForm = () => {
                required
                fullWidth
                onChange={(event) => {
-                  handleChange(event, setFormObject);
+                  handleChange(event, setcontactObject);
                }}
-               error={error.contentError}
+               // error={error.contentError}
             />
-            <strong>{error.contentError ? error[5].contentMessage : ''}</strong>
+            {/* <strong>{error.contentError ? error[5].contentMessage : ''}</strong> */}
             <Button
                className='btn-submit'
                type='submit'

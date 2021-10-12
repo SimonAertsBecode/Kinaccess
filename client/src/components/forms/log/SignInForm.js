@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-import axios from 'axios';
 import { UserContext } from '../../../context/UserContext';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -8,7 +7,7 @@ import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 const SignInForm = () => {
    const [signInFormValues, setSignInFormValues] = useContext(UserContext);
 
-   const [passwordError, setPasswordError] = useState(false);
+   // const [passwordError, setPasswordError] = useState(false);
 
    const handleChange = (e) => {
       const { name, value } = e.target;
@@ -96,7 +95,7 @@ const SignInForm = () => {
                fullWidth
                onChange={handleChange}
             />
-            <strong>{passwordError ? 'Vos deux mots de passe ne correspondent pas' : ''}</strong>
+            {/* <strong>{passwordError ? 'Vos deux mots de passe ne correspondent pas' : ''}</strong> */}
             <Button
                className='btn-submit'
                //onClick={submitForm}
