@@ -7,30 +7,35 @@ const ContactForm = new Schema(
    {
       name: {
          type: String,
-         require: true,
+         required: true,
+         minlength: 3,
+         maxlength: 25,
+         trimp: true,
       },
       firstName: {
          type: String,
-         require: true,
+         required: true,
+         minlength: 3,
+         maxlength: 25,
+         trimp: true,
       },
       email: {
          type: String,
-         unique: true,
+         required: true,
          validate: validator.isEmail,
-         require: true,
+         lowercase: true,
+         trimp: true,
       },
       age: {
-         type: Number,
-         require: true,
+         type: String,
       },
       sex: {
          type: String,
-         require: true,
       },
       content: {
          type: String,
          maxLength: 1024,
-         require: true,
+         required: true,
       },
       status: {
          type: String,

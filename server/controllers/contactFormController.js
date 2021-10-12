@@ -1,37 +1,26 @@
 import { ContactFormModel } from '../models/schemas/ContactFormSchema.js';
+import formsError from '../utils/errorManagement.js';
 
 const messageCrud = {};
 
 //Save form controller ----------------
 messageCrud.contactSaveForm = async (req, res, next) => {
-   console.log(req.body);
    if (!req.body) {
-      res.status(400).send({
+      res.status(400).json({
          message: `Le formulaire doit être complété`,
       });
    } else {
-      let contactForm = await new ContactFormModel({
-         name: req.body.name,
-         firstName: req.body.firstName,
-         email: req.body.email,
-         age: req.body.age,
-         sex: req.body.sex,
-         content: req.body.content,
-         status: '',
-      });
-      contactForm
-         .save()
-         .then(() => {
-            res.json({
-               message: `Votre message bien été envoyé!`,
-            });
-         })
-         .catch((err) => {
-            console.log(err);
-            res.status(500).send({
-               message: err || `Une erreur s'est produite`,
-            });
+      console.log(req.body);
+      const { name, firstName, email, age, sex, content } = req.body;
+      try {
+         await ContactFormModel.create({ name, firstName, email, age, sex, content });
+         res.status(201).json({
+            message: `Votre message bien été envoyé!`,
          });
+      } catch (err) {
+         console.log(formsError.contactFormError(err));
+         res.status(500).json(formsError.contactFormError(err));
+      }
    }
 };
 

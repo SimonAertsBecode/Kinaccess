@@ -1,16 +1,28 @@
 import * as Actions from '../actions/index';
 
 const initialState = {
-   // contactForm: 'to avoid bug',
+   contactForm: {
+      success: '',
+      failed: '',
+   },
 };
 
 const formReducer = (state = initialState, action) => {
    switch (action.type) {
-      // case Actions.CONTACT_FORM:
-      //    return {
-      //       ...state,
-      //       contactForm: true,
-      //    };
+      case Actions.CONTACT_FORM_SUCCESS:
+         return {
+            ...state,
+            contactForm: {
+               success: action.payload,
+            },
+         };
+      case Actions.CONTACT_FORM_FAILED:
+         return {
+            ...state,
+            contactForm: {
+               failed: action.payload,
+            },
+         };
       default:
          return state;
    }

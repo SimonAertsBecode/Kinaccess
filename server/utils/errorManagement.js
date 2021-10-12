@@ -1,6 +1,6 @@
-const authError = {};
+const formsError = {};
 
-authError.signUpError = (err) => {
+formsError.signUpError = (err) => {
    let errorMessages = {
       name: '',
       firstName: '',
@@ -46,4 +46,42 @@ authError.signUpError = (err) => {
    return errorMessages;
 };
 
-export default authError;
+formsError.contactFormError = (err) => {
+   let errorMessages = {
+      name: '',
+      firstName: '',
+      email: '',
+      content: '',
+   };
+
+   switch (err.message !== undefined) {
+      case err.message.includes('name'):
+         if (err.message.includes('required')) {
+            errorMessages.name = 'Un nom est requis';
+         } else {
+            errorMessages.name = 'Votre nom doit faire au minimun 3 caractères';
+         }
+      case err.message.includes('firstName'):
+         if (err.message.includes('required')) {
+            errorMessages.firstName = 'Un prénom est requis';
+         } else {
+            errorMessages.firstName = 'Votre prénom doit faire au minimun 3 caractères';
+         }
+      case err.message.includes('email'):
+         errorMessages.email = "cet email n'est pas valide";
+      case err.message.includes('content'):
+         if (err.message.includes('required')) {
+            errorMessages.password = 'Un contenu est nécessaire';
+         }
+         break;
+      default:
+         errorMessages.name = '';
+         errorMessages.firstName = '';
+         errorMessages.email = '';
+         errorMessages.content = '';
+   }
+
+   return errorMessages;
+};
+
+export default formsError;

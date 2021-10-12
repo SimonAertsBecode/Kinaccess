@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-export const CONTACT_FORM = '[KINACCESS] CONTACT_FORM';
+export const CONTACT_FORM_SUCCESS = '[KINACCESS] CONTACT_FORM_SUCCESS';
+export const CONTACT_FORM_FAILED = '[KINACCESS] CONTACT_FORM_FAILED';
 
 export const getContactInfos = (params) => {
    const { name, firstName, email, age, sex, content } = params;
@@ -21,15 +22,19 @@ export const getContactInfos = (params) => {
 
       request.then((res) => {
          console.log(res);
+         const result = res;
+         dispatch({
+            type: CONTACT_FORM_SUCCESS,
+            payload: result,
+         });
       });
 
       request.catch((err) => {
          console.log(err);
-      });
-
-      request.finally(() => {
+         const result = err;
          dispatch({
-            type: CONTACT_FORM,
+            type: CONTACT_FORM_FAILED,
+            payload: result,
          });
       });
    };
