@@ -53,7 +53,7 @@ formsError.contactFormError = (err) => {
       email: '',
       content: '',
    };
-
+   console.log(err.message);
    switch (err.message !== undefined) {
       case err.message.includes('name'):
          if (err.message.includes('required')) {
@@ -61,17 +61,20 @@ formsError.contactFormError = (err) => {
          } else {
             errorMessages.name = 'Votre nom doit faire au minimun 3 caractères';
          }
+         break;
       case err.message.includes('firstName'):
          if (err.message.includes('required')) {
             errorMessages.firstName = 'Un prénom est requis';
          } else {
             errorMessages.firstName = 'Votre prénom doit faire au minimun 3 caractères';
          }
+         break;
       case err.message.includes('email'):
          errorMessages.email = "cet email n'est pas valide";
+         break;
       case err.message.includes('content'):
          if (err.message.includes('required')) {
-            errorMessages.password = 'Un contenu est nécessaire';
+            errorMessages.content = 'Un contenu est nécessaire';
          }
          break;
       default:

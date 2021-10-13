@@ -5,21 +5,20 @@ const messageCrud = {};
 
 //Save form controller ----------------
 messageCrud.contactSaveForm = async (req, res, next) => {
-   if (!req.body) {
-      res.status(400).json({
+   const { name, firstName, email, age, sex, content } = req.body;
+   console.log(req.body);
+   if (!name && !firstName && !email && !content) {
+      res.status(202).json({
          message: `Le formulaire doit être complété`,
       });
    } else {
-      console.log(req.body);
-      const { name, firstName, email, age, sex, content } = req.body;
       try {
          await ContactFormModel.create({ name, firstName, email, age, sex, content });
          res.status(201).json({
             message: `Votre message bien été envoyé!`,
          });
       } catch (err) {
-         console.log(formsError.contactFormError(err));
-         res.status(500).json(formsError.contactFormError(err));
+         res.status(206).json(formsError.contactFormError(err));
       }
    }
 };

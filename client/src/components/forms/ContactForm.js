@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 //* UI
 import TextField from '@material-ui/core/TextField';
@@ -15,6 +15,10 @@ import * as Actions from '../../store/actions';
 
 const ContactForm = () => {
    const dispatch = useDispatch();
+
+   const success = useSelector((kinaccess) => kinaccess.formsReducer.contactForm.success);
+   const uncompleted = useSelector((kinaccess) => kinaccess.formsReducer.contactForm.uncompleted);
+   const empty = useSelector((kinaccess) => kinaccess.formsReducer.contactForm.empty);
 
    const [contactObject, setcontactObject] = useState({
       name: '',
@@ -51,8 +55,9 @@ const ContactForm = () => {
                onChange={(event) => {
                   handleChange(event, setcontactObject);
                }}
-               // error={error.nameError}
+               error={uncompleted?.name && true}
             />
+            <strong>{uncompleted?.name && uncompleted.name}</strong>
             <TextField
                className='field'
                name='firstName'
@@ -64,9 +69,9 @@ const ContactForm = () => {
                onChange={(event) => {
                   handleChange(event, setcontactObject);
                }}
-               // error={error.firstNameError}
+               error={uncompleted?.firstName && true}
             />
-            {/* <strong>{error.nameError || error.firstNameError ? error[1].namesMessage : ''}</strong> */}
+            <strong>{uncompleted?.firstName && uncompleted.firstName}</strong>
             <TextField
                className='field'
                name='email'
@@ -78,15 +83,14 @@ const ContactForm = () => {
                onChange={(event) => {
                   handleChange(event, setcontactObject);
                }}
-               // error={error.emailError}
+               error={uncompleted?.email && true}
             />
-            {/* <strong>{error.emailError ? error[2].emailMessage : ''}</strong> */}
+            <strong>{uncompleted?.email && uncompleted.email}</strong>
             <TextField
                className='field'
                name='age'
                label='Date de naissance'
                type='date'
-               required
                onChange={(event) => {
                   handleChange(event, setcontactObject);
                }}
@@ -94,7 +98,7 @@ const ContactForm = () => {
                InputLabelProps={{ shrink: true }}
             />
             {/* <strong>{error.ageError ? error[3].ageMessage : ''}</strong> */}
-            <FormControl className='radio' required>
+            <FormControl className='radio'>
                <FormLabel> Sexe </FormLabel>
                <RadioGroup>
                   <FormControlLabel
@@ -126,7 +130,6 @@ const ContactForm = () => {
                   />
                </RadioGroup>
             </FormControl>
-            {/* <strong>{error.sexError ? error[4].sexMessage : ''}</strong> */}
             <TextField
                className='field'
                name='content'
@@ -140,9 +143,9 @@ const ContactForm = () => {
                onChange={(event) => {
                   handleChange(event, setcontactObject);
                }}
-               // error={error.contentError}
+               error={uncompleted?.content && true}
             />
-            {/* <strong>{error.contentError ? error[5].contentMessage : ''}</strong> */}
+            <strong>{uncompleted?.content && uncompleted.content}</strong>
             <Button
                className='btn-submit'
                type='submit'
@@ -153,7 +156,7 @@ const ContactForm = () => {
                Envoyer
             </Button>
          </form>
-         <section>{}</section>
+         <section>{success || empty}</section>
       </>
    );
 };

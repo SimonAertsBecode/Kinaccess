@@ -1,7 +1,5 @@
-import { useSelector } from 'react-redux';
 
 const MainLayout = () => {
-   const test = useSelector((kinaccess) => kinaccess.formsReducer.contactForm.success);
    return (
       <>
          <h1>bonjour</h1>
