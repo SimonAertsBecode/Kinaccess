@@ -22,19 +22,17 @@ export const getContactInfos = (params) => {
 
       request.then((res) => {
          console.log(res);
-         const result = res;
          dispatch({
             type: CONTACT_FORM_SUCCESS,
-            payload: result,
+            payload: res,
          });
       });
 
       request.catch((err) => {
          console.log(err);
-         const result = err;
          dispatch({
             type: CONTACT_FORM_FAILED,
-            payload: result,
+            payload: err,
          });
       });
    };

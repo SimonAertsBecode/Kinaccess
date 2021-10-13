@@ -7,12 +7,13 @@ const initialState = {
    },
 };
 
-const formReducer = (state = initialState, action) => {
+const formsReducer = (state = initialState, action) => {
    switch (action.type) {
       case Actions.CONTACT_FORM_SUCCESS:
          return {
             ...state,
             contactForm: {
+               ...state.contactForm,
                success: action.payload,
             },
          };
@@ -20,6 +21,7 @@ const formReducer = (state = initialState, action) => {
          return {
             ...state,
             contactForm: {
+               ...state.contactForm,
                failed: action.payload,
             },
          };
@@ -28,4 +30,4 @@ const formReducer = (state = initialState, action) => {
    }
 };
 
-export default formReducer;
+export default formsReducer;
