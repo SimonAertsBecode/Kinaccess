@@ -55,7 +55,7 @@ const ContactForm = () => {
                onChange={(event) => {
                   handleChange(event, setcontactObject);
                }}
-               error={uncompleted?.name && true}
+               error={uncompleted?.name ? true : false}
             />
             <strong>{uncompleted?.name && uncompleted.name}</strong>
             <TextField
@@ -69,7 +69,7 @@ const ContactForm = () => {
                onChange={(event) => {
                   handleChange(event, setcontactObject);
                }}
-               error={uncompleted?.firstName && true}
+               error={uncompleted?.firstName ? true : false}
             />
             <strong>{uncompleted?.firstName && uncompleted.firstName}</strong>
             <TextField
@@ -83,7 +83,7 @@ const ContactForm = () => {
                onChange={(event) => {
                   handleChange(event, setcontactObject);
                }}
-               error={uncompleted?.email && true}
+               error={uncompleted?.email ? true : false}
             />
             <strong>{uncompleted?.email && uncompleted.email}</strong>
             <TextField
@@ -143,7 +143,7 @@ const ContactForm = () => {
                onChange={(event) => {
                   handleChange(event, setcontactObject);
                }}
-               error={uncompleted?.content && true}
+               error={uncompleted?.content ? true : false}
             />
             <strong>{uncompleted?.content && uncompleted.content}</strong>
             <Button
