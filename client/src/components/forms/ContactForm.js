@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 //* UI
@@ -29,9 +29,22 @@ const ContactForm = () => {
       content: '',
    });
 
-   const checkValues = (e, contactObject) => {
+   const [ageConfirmed, setAgeConfirmed] = useState(true);
+
+   useEffect(() => {
+      const date = new Date();
+      const year = date.getFullYear();
+      const age = contactObject.age;
+      const ageSplit = age.split('-');
+      if (ageSplit.length === 3) {
+         if (year - ageSplit[0] > 100 || year - ageSplit[0] < 10) return setAgeConfirmed(false);
+         return setAgeConfirmed(true);
+      }
+   }, [contactObject.age]);
+
+   const checkValues = (e) => {
       e.preventDefault();
-      dispatch(Actions.getContactInfos(contactObject));
+      if (ageConfirmed) dispatch(Actions.getContactInfos(contactObject));
    };
 
    return (
@@ -41,7 +54,7 @@ const ContactForm = () => {
             autoComplete='off'
             className='contactForm'
             onSubmit={(e) => {
-               checkValues(e, contactObject);
+               checkValues(e);
             }}
          >
             <TextField
@@ -94,7 +107,7 @@ const ContactForm = () => {
                onChange={(event) => {
                   handleChange(event, setcontactObject);
                }}
-               // error={error.ageError}
+               error={!ageConfirmed ? true : false}
                InputLabelProps={{ shrink: true }}
             />
             {/* <strong>{error.ageError ? error[3].ageMessage : ''}</strong> */}

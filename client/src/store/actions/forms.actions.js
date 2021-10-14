@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+//** CONTACT FORM */
 export const CONTACT_FORM_SUCCESS = '[KINACCESS] CONTACT_FORM_SUCCESS';
 export const CONTACT_FORM_UNCOMPLETED = '[KINACCESS] CONTACT_FORM_UNCOMPLETED';
 export const CONTACT_FORM_EMPTY = '[KINACCESS] CONTACT_FORM_EMPTY';
@@ -15,6 +16,8 @@ export const getContactInfos = (params) => {
       sex,
       content,
    };
+
+   console.log(data);
 
    return (dispatch) => {
       const request = axios.post('/contact-me', data);

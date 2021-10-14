@@ -34,7 +34,6 @@ const ContactForm = new Schema(
       },
       content: {
          type: String,
-         maxLength: 1024,
          required: true,
       },
       status: {

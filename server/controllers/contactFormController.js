@@ -13,7 +13,7 @@ messageCrud.contactSaveForm = async (req, res, next) => {
       });
    } else {
       try {
-         await ContactFormModel.create({ name, firstName, email, age, sex, content });
+         await ContactFormModel.create({ name, firstName, email, age, sex, content, status: false });
          res.status(201).json({
             message: `Votre message bien été envoyé!`,
          });
