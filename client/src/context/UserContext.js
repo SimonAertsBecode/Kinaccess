@@ -1,28 +1,9 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext } from 'react';
 
 export const UserContext = createContext();
 
 export const UserProvider = (props) => {
-   const [contactFormValues, setContactFormValue] = useState({
-      name: '',
-      firstName: '',
-      email: '',
-      age: '',
-      sex: '',
-      content: '',
-   });
+   // put var here if context is needed
 
-   const [signInFormValues, setSignInFormValues] = useState({
-      name: '',
-      firstName: '',
-      email: '',
-      password: '',
-      password2: '',
-   });
-
-   return (
-      <UserContext.Provider value={([contactFormValues, setContactFormValue], [signInFormValues, setSignInFormValues])}>
-         {props.children}
-      </UserContext.Provider>
-   );
+   return <UserContext.Provider /* value={var and functions} if needed*/>{props.children}</UserContext.Provider>;
 };

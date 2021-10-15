@@ -1,5 +1,8 @@
 import axios from 'axios';
 
+//**config var */
+import globalConfig from '../../configuration/globalConfig';
+
 //** CONTACT FORM */
 export const CONTACT_FORM_SUCCESS = '[KINACCESS] CONTACT_FORM_SUCCESS';
 export const CONTACT_FORM_UNCOMPLETED = '[KINACCESS] CONTACT_FORM_UNCOMPLETED';
@@ -19,7 +22,7 @@ export const getContactInfos = (params, ageConfirmed) => {
    };
 
    return (dispatch) => {
-      const request = axios.post('/contact-me', data);
+      const request = axios.post(globalConfig.CONTACT_FORM, data);
 
       request.then((res) => {
          console.log(res);
