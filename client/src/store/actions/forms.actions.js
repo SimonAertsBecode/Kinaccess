@@ -5,7 +5,7 @@ export const CONTACT_FORM_SUCCESS = '[KINACCESS] CONTACT_FORM_SUCCESS';
 export const CONTACT_FORM_UNCOMPLETED = '[KINACCESS] CONTACT_FORM_UNCOMPLETED';
 export const CONTACT_FORM_EMPTY = '[KINACCESS] CONTACT_FORM_EMPTY';
 
-export const getContactInfos = (params) => {
+export const getContactInfos = (params, ageConfirmed) => {
    const { name, firstName, email, age, sex, content } = params;
 
    const data = {
@@ -15,9 +15,8 @@ export const getContactInfos = (params) => {
       age,
       sex,
       content,
+      ageConfirmed,
    };
-
-   console.log(data);
 
    return (dispatch) => {
       const request = axios.post('/contact-me', data);
@@ -45,4 +44,3 @@ export const getContactInfos = (params) => {
       });
    };
 };
-console.error(`An unexpected error occured in contact form action`);

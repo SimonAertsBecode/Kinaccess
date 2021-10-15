@@ -51,9 +51,10 @@ formsError.contactFormError = (err) => {
       name: '',
       firstName: '',
       email: '',
+      age: '',
       content: '',
    };
-   console.log(err.message);
+
    switch (err.message !== undefined) {
       case err.message.includes('name'):
          if (err.message.includes('required')) {
@@ -71,6 +72,9 @@ formsError.contactFormError = (err) => {
          break;
       case err.message.includes('email'):
          errorMessages.email = "cet email n'est pas valide";
+         break;
+      case err.message.includes('Birth'):
+         errorMessages.age = "La date de naissance que vous avez sélectionnée n'est pas valide";
          break;
       case err.message.includes('content'):
          if (err.message.includes('required')) {

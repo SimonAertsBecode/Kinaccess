@@ -4,16 +4,15 @@ import formsError from '../utils/errorManagement.js';
 const messageCrud = {};
 
 //Save form controller ----------------
-messageCrud.contactSaveForm = async (req, res, next) => {
-   const { name, firstName, email, age, sex, content } = req.body;
-   console.log(req.body);
+messageCrud.contactSaveForm = async (req, res) => {
+   const { name, firstName, email, age, sex, content, ageConfirmed } = req.body;
    if (!name && !firstName && !email && !content) {
       res.status(202).json({
          message: `Le formulaire doit être complété`,
       });
    } else {
       try {
-         await ContactFormModel.create({ name, firstName, email, age, sex, content, status: false });
+         await ContactFormModel.create({ name, firstName, email, age, sex, content, ageConfirmed });
          res.status(201).json({
             message: `Votre message bien été envoyé!`,
          });

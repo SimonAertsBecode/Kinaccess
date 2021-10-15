@@ -44,7 +44,7 @@ const ContactForm = () => {
 
    const checkValues = (e) => {
       e.preventDefault();
-      if (ageConfirmed) dispatch(Actions.getContactInfos(contactObject));
+      dispatch(Actions.getContactInfos(contactObject, ageConfirmed));
    };
 
    return (
@@ -107,10 +107,10 @@ const ContactForm = () => {
                onChange={(event) => {
                   handleChange(event, setcontactObject);
                }}
-               error={!ageConfirmed ? true : false}
+               error={uncompleted?.age ? true : false}
                InputLabelProps={{ shrink: true }}
             />
-            {/* <strong>{error.ageError ? error[3].ageMessage : ''}</strong> */}
+            <strong>{uncompleted?.age && uncompleted.age}</strong>
             <FormControl className='radio'>
                <FormLabel> Sexe </FormLabel>
                <RadioGroup>
