@@ -15,6 +15,12 @@ const authController = {};
 authController.signUp = async (req, res) => {
    const { name, firstName, email, password } = req.body;
 
+   if (!name && !firstName && !email && !password) {
+      res.status(202).json({
+         message: `Le formulaire doit être complété`,
+      });
+   }
+
    try {
       const newUser = await UserModel.create({ name, firstName, email, password });
       res.status(201).json({ user: newUser._id });

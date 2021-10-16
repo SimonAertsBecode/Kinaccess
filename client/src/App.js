@@ -10,18 +10,16 @@ import UserAccount from './components/navigations/navComponents/UserAccount';
 const App = () => {
    return (
       <>
-         <UserProvider>
-            <BrowserRouter>
-               <MainNavigation />
-               <Switch>
-                  <Route path='/' exact component={MainLayout} />
-                  <Route path='/about' exact component={About} />
-                  <Route path='/contact-me' exact component={ContactForm} />
-                  <Route path='/user-profil' exact component={UserAccount} />
-                  <Redirect to='/' />
-               </Switch>
-            </BrowserRouter>
-         </UserProvider>
+         <BrowserRouter>
+            <MainNavigation />
+            <Switch>
+               <Route path='/' exact component={MainLayout} />
+               <Route path='/about' exact component={About} />
+               <Route path='/contact-me' exact component={ContactForm} />
+               <Route path='/user-profil' exact component={UserAccount} />
+               <Redirect to='/' />
+            </Switch>
+         </BrowserRouter>
       </>
    );
 };

@@ -25,7 +25,6 @@ export const getContactInfos = (params, ageConfirmed) => {
       const request = axios.post(globalConfig.CONTACT_FORM, data);
 
       request.then((res) => {
-         console.log(res);
          const { message } = res.data;
          if (res.status === 201) {
             dispatch({
@@ -41,6 +40,47 @@ export const getContactInfos = (params, ageConfirmed) => {
          } else if (res.status === 202) {
             dispatch({
                type: CONTACT_FORM_EMPTY,
+               payload: message,
+            });
+         }
+      });
+   };
+};
+
+//**SIGN UP FORM */
+export const SIGN_UP_SUCCESS = '[KINACCESS] SIGN_UP_SUCCESS';
+export const SIGN_UP_UNCOMPLETED = '[KINACCESS] SIGN_UP_UNCOMPLETED';
+export const SIGN_UP_EMPTY = '[KINACCESS] SIGN_UP_EMPTY';
+
+export const signUpForm = (params) => {
+   const { name, firstName, email, password } = params;
+
+   const data = {
+      name,
+      firstName,
+      email,
+      password,
+   };
+
+   return (dispatch) => {
+      const request = axios.post(globalConfig.SIGN_UP_FORM, data);
+
+      request.then((res) => {
+         const { message } = res.data;
+         if (res.status === 201) {
+            dispatch({
+               type: SIGN_UP_SUCCESS,
+               payload: message,
+            });
+         } else if (res.status === 400) {
+            const response = res.data;
+            dispatch({
+               type: SIGN_UP_UNCOMPLETED,
+               payload: response,
+            });
+         } else if (res.status === 202) {
+            dispatch({
+               type: SIGN_UP_EMPTY,
                payload: message,
             });
          }

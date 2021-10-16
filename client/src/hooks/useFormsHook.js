@@ -1,8 +1,21 @@
-export const handleChange = (event, setValueFunction) => {
-   const { name, value } = event.target;
+// export const handleChange = (event, setValueFunction) => {
+//    const { name, value } = event.target;
 
-   return setValueFunction((prevState) => ({
-      ...prevState,
-      [name]: value,
-   }));
-};
+//    return setValueFunction((prevState) => ({
+//       ...prevState,
+//       [name]: value,
+//    }));
+// };
+
+class useFormsHook {
+   static handleChange(event, setValueFunction) {
+      const { name, value } = event.target;
+
+      return setValueFunction((prevState) => ({
+         ...prevState,
+         [name]: value,
+      }));
+   }
+}
+
+export default useFormsHook;

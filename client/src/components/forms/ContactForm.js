@@ -10,7 +10,7 @@ import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import { FormControl, FormControlLabel, FormLabel } from '@material-ui/core';
 
 //* import files
-import { handleChange } from '../../hooks/useFormsHook';
+import useFormsHook from '../../hooks/useFormsHook';
 import * as Actions from '../../store/actions';
 
 const ContactForm = () => {
@@ -47,6 +47,8 @@ const ContactForm = () => {
       dispatch(Actions.getContactInfos(contactObject, ageConfirmed));
    };
 
+   console.log(contactObject);
+
    return (
       <>
          <form
@@ -66,7 +68,7 @@ const ContactForm = () => {
                required
                fullWidth
                onChange={(event) => {
-                  handleChange(event, setcontactObject);
+                  useFormsHook.handleChange(event, setcontactObject);
                }}
                error={uncompleted?.name ? true : false}
             />
@@ -80,7 +82,7 @@ const ContactForm = () => {
                required
                fullWidth
                onChange={(event) => {
-                  handleChange(event, setcontactObject);
+                  useFormsHook.handleChange(event, setcontactObject);
                }}
                error={uncompleted?.firstName ? true : false}
             />
@@ -94,7 +96,7 @@ const ContactForm = () => {
                required
                fullWidth
                onChange={(event) => {
-                  handleChange(event, setcontactObject);
+                  useFormsHook.handleChange(event, setcontactObject);
                }}
                error={uncompleted?.email ? true : false}
             />
@@ -105,7 +107,7 @@ const ContactForm = () => {
                label='Date de naissance'
                type='date'
                onChange={(event) => {
-                  handleChange(event, setcontactObject);
+                  useFormsHook.handleChange(event, setcontactObject);
                }}
                error={uncompleted?.age ? true : false}
                InputLabelProps={{ shrink: true }}
@@ -120,7 +122,7 @@ const ContactForm = () => {
                      control={<Radio />}
                      label='Female'
                      onChange={(event) => {
-                        handleChange(event, setcontactObject);
+                        useFormsHook.handleChange(event, setcontactObject);
                      }}
                   />
                   <FormControlLabel
@@ -129,7 +131,7 @@ const ContactForm = () => {
                      control={<Radio />}
                      label='Male'
                      onChange={(event) => {
-                        handleChange(event, setcontactObject);
+                        useFormsHook.handleChange(event, setcontactObject);
                      }}
                   />
                   <FormControlLabel
@@ -138,7 +140,7 @@ const ContactForm = () => {
                      control={<Radio />}
                      label='Other'
                      onChange={(event) => {
-                        handleChange(event, setcontactObject);
+                        useFormsHook.handleChange(event, setcontactObject);
                      }}
                   />
                </RadioGroup>
@@ -154,7 +156,7 @@ const ContactForm = () => {
                required
                fullWidth
                onChange={(event) => {
-                  handleChange(event, setcontactObject);
+                  useFormsHook.handleChange(event, setcontactObject);
                }}
                error={uncompleted?.content ? true : false}
             />

@@ -6,6 +6,11 @@ const initialState = {
       uncompleted: null,
       empty: null,
    },
+   signUpForm: {
+      success: null,
+      uncompleted: null,
+      empty: null,
+   },
 };
 
 const formsReducer = (state = initialState, action) => {
@@ -32,6 +37,33 @@ const formsReducer = (state = initialState, action) => {
          return {
             ...state,
             contactForm: {
+               success: null,
+               uncompleted: null,
+               empty: action.payload,
+            },
+         };
+      case Actions.SIGN_UP_SUCCESS:
+         return {
+            ...state,
+            signUpForm: {
+               success: action.payload,
+               uncompleted: null,
+               empty: null,
+            },
+         };
+      case Actions.SIGN_UP_UNCOMPLETED:
+         return {
+            ...state,
+            signUpForm: {
+               success: null,
+               uncompleted: action.payload,
+               empty: null,
+            },
+         };
+      case Actions.SIGN_UP_EMPTY:
+         return {
+            ...state,
+            signUpForm: {
                success: null,
                uncompleted: null,
                empty: action.payload,
