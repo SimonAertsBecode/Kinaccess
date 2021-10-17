@@ -38,7 +38,7 @@ const SignUpForm = () => {
    };
 
    return (
-      <div className='sigIn-Form'>
+      <section className='log-form'>
          <form>
             <TextField
                className='field'
@@ -124,7 +124,7 @@ const SignUpForm = () => {
             </Button>
          </form>
          <section className='formResult signUp'>{success || empty}</section>
-      </div>
+      </section>
    );
 };
 

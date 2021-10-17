@@ -41,6 +41,7 @@ authController.signIn = async (req, res) => {
       res.cookie('jwt', token, { httpOnly: true, maxAge });
       res.status(200).json({ user: user._id });
    } catch (err) {
+      console.log(err);
       res.status(400).send(err);
    }
 };
