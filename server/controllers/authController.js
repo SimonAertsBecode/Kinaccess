@@ -23,9 +23,12 @@ authController.signUp = async (req, res) => {
 
    try {
       const newUser = await UserModel.create({ name, firstName, email, password });
-      res.status(201).json({ user: newUser._id });
+      res.status(201).json({
+         user: newUser._id,
+         message: `Vous êtes enregistré(e)`,
+      });
    } catch (err) {
-      res.status(400).send(formsError.signUpError(err));
+      res.status(206).send(formsError.signUpError(err));
    }
 };
 

@@ -66,13 +66,16 @@ export const signUpForm = (params) => {
       const request = axios.post(globalConfig.SIGN_UP_FORM, data);
 
       request.then((res) => {
-         const { message } = res.data;
+         const { message, user } = res.data;
          if (res.status === 201) {
             dispatch({
                type: SIGN_UP_SUCCESS,
-               payload: message,
+               payload: {
+                  message,
+                  user,
+               },
             });
-         } else if (res.status === 400) {
+         } else if (res.status === 206) {
             const response = res.data;
             dispatch({
                type: SIGN_UP_UNCOMPLETED,

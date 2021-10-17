@@ -15,7 +15,7 @@ const UserAccount = () => {
             <h3 onClick={toggleLogForms}>Se connecter</h3>
             <h3 onClick={toggleLogForms}>S'inscrire</h3>
          </div>
-         <div className='logForms'>{logModal ? <SignInForm /> : <SignUpForm />}</div>
+         <div className='logForms'>{logModal ? <SignUpForm /> : <SignInForm />}</div>
       </div>
    );
 };

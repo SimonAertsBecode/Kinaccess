@@ -42,12 +42,10 @@ const ContactForm = () => {
       }
    }, [contactObject.age]);
 
-   const checkValues = (e) => {
+   const submitForm = (e) => {
       e.preventDefault();
       dispatch(Actions.getContactInfos(contactObject, ageConfirmed));
    };
-
-   console.log(contactObject);
 
    return (
       <>
@@ -56,7 +54,7 @@ const ContactForm = () => {
             autoComplete='off'
             className='contactForm'
             onSubmit={(e) => {
-               checkValues(e);
+               submitForm(e);
             }}
          >
             <TextField
@@ -171,7 +169,7 @@ const ContactForm = () => {
                Envoyer
             </Button>
          </form>
-         <section>{success || empty}</section>
+         <section className='formResult contact'>{success || empty}</section>
       </>
    );
 };

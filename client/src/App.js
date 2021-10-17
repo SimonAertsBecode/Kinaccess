@@ -3,7 +3,7 @@ import ContactForm from './components/forms/ContactForm';
 import MainNavigation from './components/navigations/MainNavigation';
 import About from './components/navigations/navComponents/About';
 import MainLayout from './components/MainLayout';
-import { UserProvider } from './context/UserContext';
+// import { UserProvider } from './context/UserContext';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import UserAccount from './components/navigations/navComponents/UserAccount';
 

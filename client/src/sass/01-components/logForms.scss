@@ -1,36 +1,47 @@
-.forms{
-    width: 50%;
-    margin-left: 50%;
-    margin-top: 100px;
-    transform: translateX(-50%);
-    background-color: $color-blue-primary-opacity;
-    border-radius: 10px;
-    display: grid;
-    grid-template-columns: auto auto;
-    grid-template-areas: 
-    'title forms';
+.forms {
+   width: 50%;
+   margin-left: 50%;
+   margin-top: 100px;
+   transform: translateX(-50%);
+   background-color: $color-blue-primary-opacity;
+   border-radius: 10px;
+   display: grid;
+   grid-template-columns: auto auto;
+   grid-template-areas: 'title forms';
 
-    .title-forms{
+   .title-forms {
       grid-area: title;
       text-align: center;
-    }
+   }
 
-    .logForms{
+   .logForms {
       grid-area: forms;
       display: flex;
       justify-content: center;
       align-items: center;
 
-      .sigIn-Form{
-        width: 70%;
+      .sigIn-Form {
+         width: 70%;
 
-        form{
-          padding: 20px 0px;
+         form {
+            padding: 20px 0px;
 
-          .field{
-            padding: 10px;
-          }
-        }
+            .field {
+               margin: 5px 0px 10px 0px;
+               background-color: transparent;
+            }
+         }
+
+         .btn-submit {
+            background-color: rgba(0, 61, 217, 0.8);
+            color: beige;
+            margin: 120px 0 30px 50%;
+            transform: translateX(-50%);
+         }
+
+         strong {
+            opacity: 0.4;
+         }
       }
-    }
+   }
 }

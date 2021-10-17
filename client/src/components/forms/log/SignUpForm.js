@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 //* UI
@@ -13,6 +13,10 @@ import * as Actions from '../../../store/actions';
 const SignUpForm = () => {
    const dispatch = useDispatch();
 
+   const success = useSelector((kinaccess) => kinaccess.formsReducer.signUpForm.success?.message);
+   const uncompleted = useSelector((kinaccess) => kinaccess.formsReducer.signUpForm.uncompleted);
+   const empty = useSelector((kinaccess) => kinaccess.formsReducer.signUpForm.empty);
+
    const [signUpValues, setsignUpValues] = useState({
       name: '',
       firstName: '',
@@ -21,8 +25,16 @@ const SignUpForm = () => {
       password2: '',
    });
 
-   const submitForm = () => {
-      dispatch(Actions.signUpForm(signUpValues));
+   const [passwordsMatch, setPasswordsMatch] = useState(true);
+
+   useEffect(() => {
+      setPasswordsMatch(true);
+      if (signUpValues.password !== signUpValues.password2) return setPasswordsMatch(false);
+   }, [signUpValues.password, signUpValues.password2]);
+
+   const submitForm = (e) => {
+      e.preventDefault();
+      if (passwordsMatch) dispatch(Actions.signUpForm(signUpValues));
    };
 
    return (
@@ -36,11 +48,12 @@ const SignUpForm = () => {
                variant='outlined'
                required
                fullWidth
+               error={uncompleted?.name ? true : false}
                onChange={(e) => {
                   useFormsHook.handleChange(e, setsignUpValues);
                }}
             />
-            <strong></strong>
+            <strong>{uncompleted?.name && uncompleted.name}</strong>
             <TextField
                className='field'
                name='firstName'
@@ -49,11 +62,12 @@ const SignUpForm = () => {
                variant='outlined'
                required
                fullWidth
+               error={uncompleted?.firstName ? true : false}
                onChange={(e) => {
                   useFormsHook.handleChange(e, setsignUpValues);
                }}
             />
-            <strong></strong>
+            <strong>{uncompleted?.firstName && uncompleted.firstName}</strong>
             <TextField
                className='field'
                name='email'
@@ -62,11 +76,12 @@ const SignUpForm = () => {
                variant='outlined'
                required
                fullWidth
+               error={uncompleted?.email ? true : false}
                onChange={(e) => {
                   useFormsHook.handleChange(e, setsignUpValues);
                }}
             />
-            <strong></strong>
+            <strong>{uncompleted?.email && uncompleted.email}</strong>
             <TextField
                className='field'
                name='password'
@@ -76,25 +91,27 @@ const SignUpForm = () => {
                type='password'
                required
                fullWidth
+               error={uncompleted?.password ? true : false}
                onChange={(e) => {
                   useFormsHook.handleChange(e, setsignUpValues);
                }}
             />
-            <strong></strong>
+            <strong>{uncompleted?.password && uncompleted.password}</strong>
             <TextField
                className='field'
                name='password2'
                value={signUpValues.password2}
-               label='Mot de passe'
+               label='Confirmez votre mot de passe'
                variant='outlined'
                type='password'
                required
                fullWidth
+               error={!passwordsMatch ? true : false}
                onChange={(e) => {
                   useFormsHook.handleChange(e, setsignUpValues);
                }}
             />
-            {/* <strong>{passwordError ? 'Vos deux mots de passe ne correspondent pas' : ''}</strong> */}
+            <strong>{!passwordsMatch && 'Vos mots de passe ne correspondent pas'}</strong>
             <Button
                className='btn-submit'
                onClick={submitForm}
@@ -106,6 +123,7 @@ const SignUpForm = () => {
                Enregistrez-vous
             </Button>
          </form>
+         <section className='formResult signUp'>{success || empty}</section>
       </div>
    );
 };
