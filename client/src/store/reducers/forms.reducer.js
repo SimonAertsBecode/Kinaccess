@@ -11,6 +11,13 @@ const initialState = {
       uncompleted: null,
       empty: null,
    },
+   signInForm: {
+      success: {
+         loggedIn: false,
+         user: null,
+      },
+      failed: null,
+   },
 };
 
 const formsReducer = (state = initialState, action) => {
@@ -67,6 +74,26 @@ const formsReducer = (state = initialState, action) => {
                success: null,
                uncompleted: null,
                empty: action.payload,
+            },
+         };
+      case Actions.SIGN_IN_SUCCESS:
+         return {
+            ...state,
+            signInForm: {
+               ...state.signInForm,
+               success: {
+                  loggedIn: true,
+                  user: action.payload,
+               },
+               failed: null,
+            },
+         };
+      case Actions.SIGN_IN_FAILED:
+         return {
+            ...state,
+            signInForm: {
+               ...state.signInForm,
+               failed: action.payload,
             },
          };
       default:

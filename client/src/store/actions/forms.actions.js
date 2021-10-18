@@ -93,8 +93,7 @@ export const signUpForm = (params) => {
 
 //**SIGN IN FORM*/
 export const SIGN_IN_SUCCESS = '[KINACCESS] SIGN_IN_SUCCESS';
-export const SIGN_IN_UNCOMPLETED = '[KINACCESS] SIGN_IN_UNCOMPLETED';
-export const SIGN_IN_EMPTY = '[KINACCESS] SIGN_IN_EMPTY';
+export const SIGN_IN_FAILED = '[KINACCESS] SIGN_IN_FAILED';
 
 export const signInForm = (params) => {
    const { email, password } = params;
@@ -104,32 +103,24 @@ export const signInForm = (params) => {
       password,
    };
 
+   console.log(data);
+
    return (dispatch) => {
-      const request = axios.post(globalConfig.SIGN__IN_FORM, data);
+      const request = axios.post(globalConfig.SIGN_IN_FORM, data, { withCredentials: true });
 
       request.then((res) => {
-         // const { message, user } = res.data;
-         // if (res.status === 201) {
-         //    dispatch({
-         //       type: SIGN_UP_SUCCESS,
-         //       payload: {
-         //          message,
-         //          user,
-         //       },
-         //    });
-         // } else if (res.status === 206) {
-         //    const response = res.data;
-         //    dispatch({
-         //       type: SIGN_UP_UNCOMPLETED,
-         //       payload: response,
-         //    });
-         // } else if (res.status === 202) {
-         //    dispatch({
-         //       type: SIGN_UP_EMPTY,
-         //       payload: message,
-         //    });
-         // }
-         console.log(res);
+         if (res.status === 200) {
+            window.location = '/';
+            dispatch({
+               type: SIGN_IN_SUCCESS,
+               payload: res.data.user,
+            });
+         } else {
+            dispatch({
+               type: SIGN_IN_FAILED,
+               payload: res.data.message,
+            });
+         }
       });
    };
 };

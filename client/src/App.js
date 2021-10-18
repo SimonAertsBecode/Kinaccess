@@ -5,12 +5,14 @@ import About from './components/navigations/navComponents/About';
 import MainLayout from './components/MainLayout';
 // import { UserProvider } from './context/UserContext';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 import UserAccount from './components/navigations/navComponents/UserAccount';
 
 const App = () => {
+   const history = createBrowserHistory();
    return (
       <>
-         <BrowserRouter>
+         <BrowserRouter history={history}>
             <MainNavigation />
             <Switch>
                <Route path='/' exact component={MainLayout} />

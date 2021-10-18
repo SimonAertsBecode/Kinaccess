@@ -10,6 +10,9 @@ import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import useFormsHook from '../../../hooks/useFormsHook';
 import * as Actions from '../../../store/actions';
 
+//* Import components
+import SignInForm from './SignInForm';
+
 const SignUpForm = () => {
    const dispatch = useDispatch();
 
@@ -39,91 +42,100 @@ const SignUpForm = () => {
 
    return (
       <section className='log-form'>
-         <form>
-            <TextField
-               className='field'
-               name='name'
-               value={signUpValues.name}
-               label='Nom'
-               variant='outlined'
-               required
-               fullWidth
-               error={uncompleted?.name ? true : false}
-               onChange={(e) => {
-                  useFormsHook.handleChange(e, setsignUpValues);
-               }}
-            />
-            <strong>{uncompleted?.name && uncompleted.name}</strong>
-            <TextField
-               className='field'
-               name='firstName'
-               value={signUpValues.firstName}
-               label='Prénom'
-               variant='outlined'
-               required
-               fullWidth
-               error={uncompleted?.firstName ? true : false}
-               onChange={(e) => {
-                  useFormsHook.handleChange(e, setsignUpValues);
-               }}
-            />
-            <strong>{uncompleted?.firstName && uncompleted.firstName}</strong>
-            <TextField
-               className='field'
-               name='email'
-               value={signUpValues.email}
-               label='email'
-               variant='outlined'
-               required
-               fullWidth
-               error={uncompleted?.email ? true : false}
-               onChange={(e) => {
-                  useFormsHook.handleChange(e, setsignUpValues);
-               }}
-            />
-            <strong>{uncompleted?.email && uncompleted.email}</strong>
-            <TextField
-               className='field'
-               name='password'
-               value={signUpValues.password}
-               label='Mot de passe'
-               variant='outlined'
-               type='password'
-               required
-               fullWidth
-               error={uncompleted?.password ? true : false}
-               onChange={(e) => {
-                  useFormsHook.handleChange(e, setsignUpValues);
-               }}
-            />
-            <strong>{uncompleted?.password && uncompleted.password}</strong>
-            <TextField
-               className='field'
-               name='password2'
-               value={signUpValues.password2}
-               label='Confirmez votre mot de passe'
-               variant='outlined'
-               type='password'
-               required
-               fullWidth
-               error={!passwordsMatch ? true : false}
-               onChange={(e) => {
-                  useFormsHook.handleChange(e, setsignUpValues);
-               }}
-            />
-            <strong>{!passwordsMatch && 'Vos mots de passe ne correspondent pas'}</strong>
-            <Button
-               className='btn-submit'
-               onClick={submitForm}
-               type='submit'
-               // color='rgba(0,61,217)'
-               variant='contained'
-               endIcon={<KeyboardArrowRightIcon />}
-            >
-               Enregistrez-vous
-            </Button>
-         </form>
-         <section className='formResult signUp'>{success || empty}</section>
+         {success ? (
+            <>
+               <SignInForm />
+               <section className='formResult success'>{success}. Vous pouvez vous connecter</section>
+            </>
+         ) : (
+            <>
+               <form>
+                  <TextField
+                     className='field'
+                     name='name'
+                     value={signUpValues.name}
+                     label='Nom'
+                     variant='outlined'
+                     required
+                     fullWidth
+                     error={uncompleted?.name ? true : false}
+                     onChange={(e) => {
+                        useFormsHook.handleChange(e, setsignUpValues);
+                     }}
+                  />
+                  <strong>{uncompleted?.name && uncompleted.name}</strong>
+                  <TextField
+                     className='field'
+                     name='firstName'
+                     value={signUpValues.firstName}
+                     label='Prénom'
+                     variant='outlined'
+                     required
+                     fullWidth
+                     error={uncompleted?.firstName ? true : false}
+                     onChange={(e) => {
+                        useFormsHook.handleChange(e, setsignUpValues);
+                     }}
+                  />
+                  <strong>{uncompleted?.firstName && uncompleted.firstName}</strong>
+                  <TextField
+                     className='field'
+                     name='email'
+                     value={signUpValues.email}
+                     label='email'
+                     variant='outlined'
+                     required
+                     fullWidth
+                     error={uncompleted?.email ? true : false}
+                     onChange={(e) => {
+                        useFormsHook.handleChange(e, setsignUpValues);
+                     }}
+                  />
+                  <strong>{uncompleted?.email && uncompleted.email}</strong>
+                  <TextField
+                     className='field'
+                     name='password'
+                     value={signUpValues.password}
+                     label='Mot de passe'
+                     variant='outlined'
+                     type='password'
+                     required
+                     fullWidth
+                     error={uncompleted?.password ? true : false}
+                     onChange={(e) => {
+                        useFormsHook.handleChange(e, setsignUpValues);
+                     }}
+                  />
+                  <strong>{uncompleted?.password && uncompleted.password}</strong>
+                  <TextField
+                     className='field'
+                     name='password2'
+                     value={signUpValues.password2}
+                     label='Confirmez votre mot de passe'
+                     variant='outlined'
+                     type='password'
+                     required
+                     fullWidth
+                     error={!passwordsMatch ? true : false}
+                     onChange={(e) => {
+                        useFormsHook.handleChange(e, setsignUpValues);
+                     }}
+                  />
+                  <strong>{!passwordsMatch && 'Vos mots de passe ne correspondent pas'}</strong>
+                  <Button
+                     className='btn-submit'
+                     onClick={submitForm}
+                     type='submit'
+                     // color='rgba(0,61,217)'
+                     variant='contained'
+                     endIcon={<KeyboardArrowRightIcon />}
+                  >
+                     Enregistrez-vous
+                  </Button>
+               </form>
+               {empty && <section className='formResult failed'>{empty}</section>}
+            </>
+         )}
       </section>
    );
 };
