@@ -1,5 +1,8 @@
 import * as Actions from '../actions/index';
 
+const localStorageLoggedIn = localStorage.getItem('loggedIn');
+const localStorageUser = JSON.parse(localStorage.getItem('profile'));
+
 const initialState = {
    contactForm: {
       success: null,
@@ -13,11 +16,12 @@ const initialState = {
    },
    signInForm: {
       success: {
-         loggedIn: false,
-         user: null,
+         loggedIn: localStorageLoggedIn ? localStorageLoggedIn : false,
+         user: localStorageUser ? localStorageUser : null,
       },
       failed: null,
    },
+   googleAuth: null,
 };
 
 const formsReducer = (state = initialState, action) => {
@@ -77,11 +81,14 @@ const formsReducer = (state = initialState, action) => {
             },
          };
       case Actions.SIGN_IN_SUCCESS:
+         localStorage.setItem('profile', JSON.stringify({ ...action.payload }));
+         localStorage.setItem('loggedIn', true);
          return {
             ...state,
             signInForm: {
                ...state.signInForm,
                success: {
+                  ...state.success,
                   loggedIn: true,
                   user: action.payload,
                },
@@ -95,6 +102,20 @@ const formsReducer = (state = initialState, action) => {
                ...state.signInForm,
                failed: action.payload,
             },
+         };
+      case Actions.GOOGLE_AUTH:
+         localStorage.setItem('profile', JSON.stringify({ ...action.payload }));
+         localStorage.setItem('loggedIn', true);
+         return {
+            ...state,
+            signInForm: {
+               ...state.signInForm,
+               success: {
+                  ...state.success,
+                  loggedIn: true,
+               },
+            },
+            googleAuth: action.payload,
          };
       default:
          return state;

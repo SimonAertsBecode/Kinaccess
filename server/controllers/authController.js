@@ -39,10 +39,9 @@ authController.signIn = async (req, res) => {
       const user = await UserModel.login(email, password);
       const token = createToken(user._id);
       res.cookie('jwt', token, { httpOnly: true, maxAge });
-      res.status(200).json({ user: user._id });
+      res.status(200).json({ user: user });
    } catch (err) {
-      console.log(err);
-      res.status(400).send(err);
+      res.status(206).send(err);
    }
 };
 

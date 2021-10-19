@@ -1,33 +1,15 @@
 import React, { useState } from 'react';
-import SignInForm from '../../forms/log/SignInForm';
-import SignUpForm from '../../forms/log/SignUpForm';
+import LogForm from '../../forms/log/LogForm';
 
 const UserAccount = () => {
-   const [logModal, setLogModal] = useState(true);
+   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
 
-   const toggleLogForms = (value) => {
-      setLogModal(value);
-   };
+   const [loggedIn, setloggedIn] = useState(localStorage.getItem('loggedIn'));
 
    return (
-      <div className='forms'>
-         <div className='title-forms'>
-            <h3
-               onClick={() => {
-                  toggleLogForms(true);
-               }}
-            >
-               S'inscrire
-            </h3>
-            <h3
-               onClick={() => {
-                  toggleLogForms(false);
-               }}
-            >
-               Se connecter
-            </h3>
-         </div>
-         <div className='logForms'>{logModal ? <SignUpForm /> : <SignInForm />}</div>
+      <div>
+         {loggedIn ? <h3>Hello {user.result?.givenName}</h3> : <LogForm />}
+         {/* <p>{test} de nous</p> */}
       </div>
    );
 };

@@ -13,7 +13,6 @@ userController.userInfo = async (req, res) => {
    if (!objectId.isValidObjectId(req.params.id)) {
       return res.status(400).send(`ID unknown : ${req.params.id} `);
    } else {
-      //docs === data/response
       await UserModel.findById(req.params.id)
          .select('-password')
          .then((docs) => {

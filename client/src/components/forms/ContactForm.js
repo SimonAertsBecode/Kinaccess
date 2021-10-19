@@ -44,7 +44,7 @@ const ContactForm = () => {
 
    const submitForm = (e) => {
       e.preventDefault();
-      dispatch(Actions.getContactInfos(contactObject, ageConfirmed));
+      dispatch(Actions.getContactInfosAction(contactObject, ageConfirmed));
    };
 
    return (

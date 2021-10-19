@@ -1,17 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 //* UI
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
+import { AiFillGoogleCircle } from 'react-icons/ai';
 
 //* Import files
 import useFormsHook from '../../../hooks/useFormsHook';
 import * as Actions from '../../../store/actions';
+import globalConfig from '../../../configuration/globalConfig';
+
+//* Google
+import { GoogleLogin } from 'react-google-login';
 
 const SignInForm = () => {
    const dispatch = useDispatch();
+   const history = useHistory();
+
+   const uncompleted = useSelector((kinaccess) => kinaccess.formsReducer.signInForm.failed);
 
    const [signInValues, setSignInValues] = useState({
       email: '',
@@ -20,7 +29,23 @@ const SignInForm = () => {
 
    const submitForm = (e) => {
       e.preventDefault();
-      dispatch(Actions.signInForm(signInValues));
+      dispatch(Actions.signInFormAction(signInValues));
+   };
+
+   const googleSuccess = async (res) => {
+      const result = res?.profileObj;
+      const token = res?.tokenId;
+
+      try {
+         dispatch(Actions.googleAuthAction({ result, token }));
+         history.push('/');
+      } catch (err) {
+         console.log(err);
+      }
+   };
+
+   const googleFailure = () => {
+      console.log('google failed');
    };
 
    return (
@@ -34,12 +59,12 @@ const SignInForm = () => {
                variant='outlined'
                required
                fullWidth
-               //error={}
+               error={uncompleted?.email ? true : false}
                onChange={(e) => {
                   useFormsHook.handleChange(e, setSignInValues);
                }}
             />
-            <strong>{}</strong>
+            <strong>{uncompleted?.email}</strong>
             <TextField
                className='field'
                name='password'
@@ -49,12 +74,12 @@ const SignInForm = () => {
                type='password'
                required
                fullWidth
-               //error={}
+               error={uncompleted?.password ? true : false}
                onChange={(e) => {
                   useFormsHook.handleChange(e, setSignInValues);
                }}
             />
-            <strong>{}</strong>
+            <strong>{uncompleted?.password}</strong>
             <Button
                className='btn-submit'
                onClick={submitForm}
@@ -65,6 +90,23 @@ const SignInForm = () => {
             >
                Connectez-vous
             </Button>
+            <GoogleLogin
+               clientId={globalConfig.GOOGLE_ID}
+               render={(renderProps) => (
+                  <Button
+                     className='google-button'
+                     onClick={renderProps.onClick}
+                     disabled={renderProps.disabled}
+                     startIcon={<AiFillGoogleCircle />}
+                     variant='contained'
+                  >
+                     Continuer avec google
+                  </Button>
+               )}
+               onSuccess={googleSuccess}
+               onFailure={googleFailure}
+               cookiePolicy='single_host_origin'
+            />
          </form>
       </section>
    );

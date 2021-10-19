@@ -37,8 +37,10 @@ const SignUpForm = () => {
 
    const submitForm = (e) => {
       e.preventDefault();
-      if (passwordsMatch) dispatch(Actions.signUpForm(signUpValues));
+      if (passwordsMatch) dispatch(Actions.signUpFormAction(signUpValues));
    };
+
+  
 
    return (
       <section className='log-form'>
