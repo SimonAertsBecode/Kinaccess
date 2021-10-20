@@ -110,7 +110,7 @@ export const signInFormAction = (params) => {
          if (res.status === 200) {
             dispatch({
                type: SIGN_IN_SUCCESS,
-               payload: res.data,
+               payload: res.data.user,
             });
          } else {
             dispatch({

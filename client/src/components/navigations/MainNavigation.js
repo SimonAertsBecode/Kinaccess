@@ -5,18 +5,20 @@ const MainNavigation = () => {
       <>
          <div className='navigation'>
             <ul>
-               <Link to='/'>
-                  <li>Home</li>
-               </Link>
-               <Link to='/contact-me'>
-                  <li>Contact</li>
-               </Link>
-               <Link to='/about'>
-                  <li>A propos</li>
-               </Link>
-               <Link to='/user-profil'>
-                  <li>Votre compte</li>
-               </Link>
+               <li>
+                  <Link to='/'>Home</Link>
+               </li>
+               <li>
+                  <Link to='/contact'>Contact</Link>
+               </li>
+
+               <li>
+                  <Link to='/about'>A propos</Link>
+               </li>
+
+               <li>
+                  <Link to='/user-profile'>Votre compte</Link>
+               </li>
             </ul>
          </div>
       </>

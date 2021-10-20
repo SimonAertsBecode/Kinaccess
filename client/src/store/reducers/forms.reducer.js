@@ -88,7 +88,6 @@ const formsReducer = (state = initialState, action) => {
             signInForm: {
                ...state.signInForm,
                success: {
-                  ...state.success,
                   loggedIn: true,
                   user: action.payload,
                },

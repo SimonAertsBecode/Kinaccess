@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
+import history from '../../../hooks/useHistory';
 
 //* UI
 import TextField from '@material-ui/core/TextField';
@@ -18,7 +19,7 @@ import { GoogleLogin } from 'react-google-login';
 
 const SignInForm = () => {
    const dispatch = useDispatch();
-   const history = useHistory();
+   // const history = useHistory();
 
    const uncompleted = useSelector((kinaccess) => kinaccess.formsReducer.signInForm.failed);
 
@@ -30,6 +31,7 @@ const SignInForm = () => {
    const submitForm = (e) => {
       e.preventDefault();
       dispatch(Actions.signInFormAction(signInValues));
+      history.push('/');
    };
 
    const googleSuccess = async (res) => {
@@ -44,8 +46,13 @@ const SignInForm = () => {
       }
    };
 
+   // const goBack = () => {
+   //    history.push('/');
+   //    console.log(history);
+   // };
+
    const googleFailure = () => {
-      console.log('google failed');
+      console.log('google auth failed');
    };
 
    return (
@@ -108,6 +115,7 @@ const SignInForm = () => {
                cookiePolicy='single_host_origin'
             />
          </form>
+         {/* <Button onClick={goBack}>go back home</Button> */}
       </section>
    );
 };

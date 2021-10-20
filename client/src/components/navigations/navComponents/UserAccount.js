@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import LogForm from '../../forms/log/LogForm';
+import UserProfile from '../../mainComponents/userProfile/UserProfile';
 
 const UserAccount = () => {
    const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
@@ -8,7 +9,7 @@ const UserAccount = () => {
 
    return (
       <div>
-         {loggedIn ? <h3>Hello {user.result?.givenName}</h3> : <LogForm />}
+         {loggedIn ? <UserProfile /> : <LogForm />}
          {/* <p>{test} de nous</p> */}
       </div>
    );

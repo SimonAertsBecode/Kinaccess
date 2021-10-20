@@ -91,4 +91,25 @@ formsError.contactFormError = (err) => {
    return errorMessages;
 };
 
+formsError.signInError = (err) => {
+   let errorMessages = {
+      email: '',
+      password: '',
+   };
+
+   switch (err.message !== undefined) {
+      case err.message.includes('email'):
+         errorMessages.email = err.message;
+         break;
+      case err.message.includes('passe'):
+         errorMessages.password = err.message;
+         break;
+      default:
+         errorMessages.email = '';
+         errorMessages.password = '';
+   }
+
+   return errorMessages;
+};
+
 export default formsError;

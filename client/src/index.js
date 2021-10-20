@@ -8,6 +8,8 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import logger from 'redux-logger';
+// import history from './hooks/useHistory';
+// import { Router } from 'react-router';
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk, logger)));
 
