@@ -2,17 +2,17 @@ import React from 'react';
 
 //**Import files */
 import MainNavigation from './components/navigations/MainNavigation';
-import Routes from './components/navigations/routes/Routes';
+import Routes from './routes/Routes';
 
 //** Import router */
-import { BrowserRouter, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import { Router } from 'react-router';
 
-import history from './hooks/useHistory';
+import { myHistory } from './hooks/useHistory';
 
 const App = () => {
    return (
-      <Router history={history}>
+      <Router history={myHistory}>
          <MainNavigation />
          <Switch>
             <Routes />

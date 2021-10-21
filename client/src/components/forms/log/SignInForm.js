@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import { useHistory } from 'react-router-dom';
-import history from '../../../hooks/useHistory';
 
 //* UI
 import TextField from '@material-ui/core/TextField';
@@ -13,6 +11,7 @@ import { AiFillGoogleCircle } from 'react-icons/ai';
 import useFormsHook from '../../../hooks/useFormsHook';
 import * as Actions from '../../../store/actions';
 import globalConfig from '../../../configuration/globalConfig';
+import { myHistory } from '../../../hooks/useHistory';
 
 //* Google
 import { GoogleLogin } from 'react-google-login';
@@ -31,7 +30,6 @@ const SignInForm = () => {
    const submitForm = (e) => {
       e.preventDefault();
       dispatch(Actions.signInFormAction(signInValues));
-      history.push('/');
    };
 
    const googleSuccess = async (res) => {
@@ -40,16 +38,17 @@ const SignInForm = () => {
 
       try {
          dispatch(Actions.googleAuthAction({ result, token }));
-         history.push('/');
+         myHistory.push('/');
+         console.log(myHistory);
       } catch (err) {
          console.log(err);
       }
    };
 
-   // const goBack = () => {
-   //    history.push('/');
-   //    console.log(history);
-   // };
+   const goBack = () => {
+      myHistory.push('/contact');
+      console.log(myHistory);
+   };
 
    const googleFailure = () => {
       console.log('google auth failed');
@@ -115,7 +114,7 @@ const SignInForm = () => {
                cookiePolicy='single_host_origin'
             />
          </form>
-         {/* <Button onClick={goBack}>go back home</Button> */}
+         <Button onClick={goBack}>go back home</Button>
       </section>
    );
 };

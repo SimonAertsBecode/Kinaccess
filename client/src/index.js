@@ -10,12 +10,15 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import logger from 'redux-logger';
 // import history from './hooks/useHistory';
 // import { Router } from 'react-router';
+import { BrowserRouter } from 'react-router-dom';
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk, logger)));
 
 ReactDOM.render(
    <Provider store={store}>
-      <App />
+      <BrowserRouter>
+         <App />
+      </BrowserRouter>
    </Provider>,
    document.getElementById('root')
 );
