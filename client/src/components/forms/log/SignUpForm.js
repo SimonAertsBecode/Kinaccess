@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 
 //* Import files
-import useFormsHook from '../../../hooks/useFormsHook';
+import useFormsHook from '../../../utils/formsHook';
 import * as Actions from '../../../store/actions';
 
 //* Import components

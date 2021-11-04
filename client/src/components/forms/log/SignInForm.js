@@ -8,10 +8,10 @@ import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import { AiFillGoogleCircle } from 'react-icons/ai';
 
 //* Import files
-import useFormsHook from '../../../hooks/useFormsHook';
+import useFormsHook from '../../../utils/formsHook';
 import * as Actions from '../../../store/actions';
 import globalConfig from '../../../configuration/globalConfig';
-import { myHistory } from '../../../hooks/useHistory';
+import myHistory from '../../../utils/history';
 
 //* Google
 import { GoogleLogin } from 'react-google-login';

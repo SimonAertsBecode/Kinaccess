@@ -5,18 +5,15 @@ import MainNavigation from './components/navigations/MainNavigation';
 import Routes from './routes/Routes';
 
 //** Import router */
-import { Switch } from 'react-router-dom';
-import { Router } from 'react-router';
+import { Router } from 'react-router-dom';
 
-import { myHistory } from './hooks/useHistory';
+import myHistory from './utils/history';
 
 const App = () => {
    return (
       <Router history={myHistory}>
          <MainNavigation />
-         <Switch>
-            <Routes />
-         </Switch>
+         <Routes />
       </Router>
    );
 };
