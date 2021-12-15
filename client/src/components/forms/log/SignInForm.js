@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 //* UI
 import TextField from '@material-ui/core/TextField';
@@ -18,7 +19,7 @@ import { GoogleLogin } from 'react-google-login';
 
 const SignInForm = () => {
    const dispatch = useDispatch();
-   // const history = useHistory();
+   const navigate = useNavigate();
 
    const uncompleted = useSelector((kinaccess) => kinaccess.formsReducer.signInForm.failed);
 
@@ -47,7 +48,10 @@ const SignInForm = () => {
 
    const goBack = () => {
       myHistory.push('/contact');
-      console.log(myHistory);
+      // console.log(myHistory);
+      //* exemple of history.push with react-router v6
+      // navigate('/');
+      // console.log(navigate);
    };
 
    const googleFailure = () => {

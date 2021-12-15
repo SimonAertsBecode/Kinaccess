@@ -9,18 +9,18 @@ import Error404 from '../components/navigations/navComponents/Error404';
 import myHistory from '../utils/history';
 
 //** Import routers */
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Route, Routes as Routing } from 'react-router-dom';
 
 const Routes = () => {
    return (
-      <Switch>
-         <Route exact path='/' component={Home} />
-         <Route exact path='/about' component={About} />
-         <Route exact path='/contact' component={ContactForm} />
-         <Route exact path='/user-profile' component={UserAccount} />
+      <Routing>
+         <Route path='/' element={<Home />} />
+         <Route path='/about' element={<About />} />
+         <Route path='/contact' element={<ContactForm />} />
+         <Route path='/user-profile' element={<UserAccount />} />
          {/* <Route path='*' component={Error404} /> */}
-         {/* <Redirect to='/' /> */}
-      </Switch>
+         {/* <Navigate to='/' /> */}
+      </Routing>
    );
 };
 

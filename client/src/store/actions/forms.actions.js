@@ -3,6 +3,8 @@ import axios from 'axios';
 //**config var */
 import globalConfig from '../../configuration/globalConfig';
 
+import myHistory from '../../utils/history';
+
 //** CONTACT FORM */
 export const CONTACT_FORM_SUCCESS = '[KINACCESS] CONTACT_FORM_SUCCESS';
 export const CONTACT_FORM_UNCOMPLETED = '[KINACCESS] CONTACT_FORM_UNCOMPLETED';
