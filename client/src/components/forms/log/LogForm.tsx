@@ -5,7 +5,7 @@ import SignUpForm from './SignUpForm';
 const LogForm = () => {
    const [logModal, setLogModal] = useState(true);
 
-   const toggleLogForms = (value) => {
+   const toggleLogForms = (value: boolean) => {
       setLogModal(value);
    };
 

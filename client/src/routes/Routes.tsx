@@ -9,7 +9,7 @@ import Error404 from '../components/navigations/navComponents/Error404';
 import myHistory from '../utils/history';
 
 //** Import routers */
-import { Route, Routes as Routing } from 'react-router-dom';
+import { Route, Routes as Routing } from 'react-router';
 
 const Routes = () => {
    return (

@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, MouseEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 
 //* UI
 import TextField from '@material-ui/core/TextField';
@@ -17,30 +16,34 @@ import myHistory from '../../../utils/history';
 //* Google
 import { GoogleLogin } from 'react-google-login';
 
+interface googleAuthInt {
+   profileObj: object;
+   tokenId: string;
+}
+
 const SignInForm = () => {
    const dispatch = useDispatch();
-   const navigate = useNavigate();
+   // const navigate = useNavigate();
 
-   const uncompleted = useSelector((kinaccess) => kinaccess.formsReducer.signInForm.failed);
+   const uncompleted = useSelector((kinaccess: any) => kinaccess.formsReducer.signInForm.failed);
 
    const [signInValues, setSignInValues] = useState({
       email: '',
       password: '',
    });
 
-   const submitForm = (e) => {
+   const submitForm = (e: MouseEvent) => {
       e.preventDefault();
       dispatch(Actions.signInFormAction(signInValues));
    };
 
-   const googleSuccess = async (res) => {
-      const result = res?.profileObj;
-      const token = res?.tokenId;
+   const googleSuccess = async (response: googleAuthInt): Promise<void> => {
+      const result = response?.profileObj;
+      const token = response?.tokenId;
 
       try {
          dispatch(Actions.googleAuthAction({ result, token }));
          myHistory.push('/');
-         console.log(myHistory);
       } catch (err) {
          console.log(err);
       }
@@ -92,7 +95,9 @@ const SignInForm = () => {
             <strong>{uncompleted?.password}</strong>
             <Button
                className='btn-submit'
-               onClick={submitForm}
+               onClick={(e) => {
+                  submitForm(e);
+               }}
                type='submit'
                // color='rgba(0,61,217)'
                variant='contained'
@@ -103,18 +108,12 @@ const SignInForm = () => {
             <GoogleLogin
                clientId={globalConfig.GOOGLE_ID}
                render={(renderProps) => (
-                  <Button
-                     className='google-button'
-                     onClick={renderProps.onClick}
-                     disabled={renderProps.disabled}
-                     startIcon={<AiFillGoogleCircle />}
-                     variant='contained'
-                  >
+                  <Button className='google-button' onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<AiFillGoogleCircle />} variant='contained'>
                      Continuer avec google
                   </Button>
                )}
-               onSuccess={googleSuccess}
-               onFailure={googleFailure}
+               // onSuccess={googleSuccess}
+               // onFailure={googleFailure}
                cookiePolicy='single_host_origin'
             />
          </form>

@@ -23,7 +23,7 @@ const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk
 
 ReactDOM.render(
    <Provider store={store}>
-      <Router location={myHistory.location} history={myHistory}>
+      <Router navigator={myHistory} location={myHistory.location}>
          <App />
       </Router>
    </Provider>,

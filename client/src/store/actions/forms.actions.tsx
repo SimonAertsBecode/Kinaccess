@@ -5,13 +5,23 @@ import globalConfig from '../../configuration/globalConfig';
 
 import myHistory from '../../utils/history';
 
+interface parameters {
+   name: string;
+   firstName: string;
+   email: string;
+   age: string;
+   sex: string;
+   content: string;
+}
+
 //** CONTACT FORM */
 export const CONTACT_FORM_SUCCESS = '[KINACCESS] CONTACT_FORM_SUCCESS';
 export const CONTACT_FORM_UNCOMPLETED = '[KINACCESS] CONTACT_FORM_UNCOMPLETED';
 export const CONTACT_FORM_EMPTY = '[KINACCESS] CONTACT_FORM_EMPTY';
 
-export const getContactInfosAction = (params, ageConfirmed) => {
+export const getContactInfosAction = (params: parameters, ageConfirmed: boolean) => {
    const { name, firstName, email, age, sex, content } = params;
+   console.log(typeof age);
 
    const data = {
       name,
@@ -23,7 +33,7 @@ export const getContactInfosAction = (params, ageConfirmed) => {
       ageConfirmed,
    };
 
-   return (dispatch) => {
+   return (dispatch: any) => {
       const request = axios.post(globalConfig.CONTACT_FORM, data);
 
       request.then((res) => {
@@ -54,7 +64,14 @@ export const SIGN_UP_SUCCESS = '[KINACCESS] SIGN_UP_SUCCESS';
 export const SIGN_UP_UNCOMPLETED = '[KINACCESS] SIGN_UP_UNCOMPLETED';
 export const SIGN_UP_EMPTY = '[KINACCESS] SIGN_UP_EMPTY';
 
-export const signUpFormAction = (params) => {
+interface signUp {
+   name: string;
+   firstName: string;
+   email: string;
+   password: string;
+}
+
+export const signUpFormAction = (params: signUp) => {
    const { name, firstName, email, password } = params;
 
    const data = {
@@ -64,7 +81,7 @@ export const signUpFormAction = (params) => {
       password,
    };
 
-   return (dispatch) => {
+   return (dispatch: any) => {
       const request = axios.post(globalConfig.SIGN_UP_FORM, data);
 
       request.then((res) => {
@@ -97,7 +114,12 @@ export const signUpFormAction = (params) => {
 export const SIGN_IN_SUCCESS = '[KINACCESS] SIGN_IN_SUCCESS';
 export const SIGN_IN_FAILED = '[KINACCESS] SIGN_IN_FAILED';
 
-export const signInFormAction = (params) => {
+interface signIn {
+   email: string;
+   password: string;
+}
+
+export const signInFormAction = (params: signIn) => {
    const { email, password } = params;
 
    const data = {
@@ -105,7 +127,7 @@ export const signInFormAction = (params) => {
       password,
    };
 
-   return (dispatch) => {
+   return (dispatch: any) => {
       const request = axios.post(globalConfig.SIGN_IN_FORM, data, { withCredentials: true });
 
       request.then((res) => {
@@ -127,7 +149,12 @@ export const signInFormAction = (params) => {
 //*GOOGLE AUTH*/
 export const GOOGLE_AUTH = '[KINACCESS] GOOGLE_AUTH';
 
-export const googleAuthAction = (params) => {
+interface googleAuth {
+   result: Object;
+   token: string;
+}
+
+export const googleAuthAction = (params: googleAuth) => {
    const { result, token } = params;
 
    const data = {
@@ -135,7 +162,7 @@ export const googleAuthAction = (params) => {
       token,
    };
 
-   return (dispatch) => {
+   return (dispatch: any) => {
       dispatch({
          type: GOOGLE_AUTH,
          payload: data,

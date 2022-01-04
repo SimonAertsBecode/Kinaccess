@@ -1,7 +1,7 @@
 import * as Actions from '../actions/index';
 
 const localStorageLoggedIn = localStorage.getItem('loggedIn');
-const localStorageUser = JSON.parse(localStorage.getItem('profile'));
+const localStorageUser = localStorage.getItem('profile');
 
 const initialState = {
    contactForm: {
@@ -24,7 +24,7 @@ const initialState = {
    googleAuth: null,
 };
 
-const formsReducer = (state = initialState, action) => {
+const formsReducer = (state = initialState, action: any) => {
    switch (action.type) {
       case Actions.CONTACT_FORM_SUCCESS:
          return {
@@ -82,7 +82,7 @@ const formsReducer = (state = initialState, action) => {
          };
       case Actions.SIGN_IN_SUCCESS:
          localStorage.setItem('profile', JSON.stringify({ ...action.payload }));
-         localStorage.setItem('loggedIn', true);
+         localStorage.setItem('loggedIn', 'true');
          return {
             ...state,
             signInForm: {
@@ -104,13 +104,13 @@ const formsReducer = (state = initialState, action) => {
          };
       case Actions.GOOGLE_AUTH:
          localStorage.setItem('profile', JSON.stringify({ ...action.payload }));
-         localStorage.setItem('loggedIn', true);
+         localStorage.setItem('loggedIn', 'true');
          return {
             ...state,
             signInForm: {
                ...state.signInForm,
                success: {
-                  ...state.success,
+                  ...state.signInForm.success,
                   loggedIn: true,
                },
             },

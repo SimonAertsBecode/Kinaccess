@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, MouseEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 //* UI
@@ -16,9 +16,9 @@ import * as Actions from '../../../store/actions';
 const ContactForm = () => {
    const dispatch = useDispatch();
 
-   const success = useSelector((kinaccess) => kinaccess.formsReducer.contactForm.success);
-   const uncompleted = useSelector((kinaccess) => kinaccess.formsReducer.contactForm.uncompleted);
-   const empty = useSelector((kinaccess) => kinaccess.formsReducer.contactForm.empty);
+   const success = useSelector((kinaccess: any) => kinaccess.formsReducer.contactForm.success);
+   const uncompleted = useSelector((kinaccess: any) => kinaccess.formsReducer.contactForm.uncompleted);
+   const empty = useSelector((kinaccess: any) => kinaccess.formsReducer.contactForm.empty);
 
    const [contactObject, setcontactObject] = useState({
       name: '',
@@ -37,26 +37,19 @@ const ContactForm = () => {
       const age = contactObject.age;
       const ageSplit = age.split('-');
       if (ageSplit.length === 3) {
-         if (year - ageSplit[0] > 100 || year - ageSplit[0] < 10) return setAgeConfirmed(false);
+         if (year - parseInt(ageSplit[0]) > 100 || year - parseInt(ageSplit[0]) < 10) return setAgeConfirmed(false);
          return setAgeConfirmed(true);
       }
    }, [contactObject.age]);
 
-   const submitForm = (e) => {
+   const submitForm = (e: React.FormEvent): void => {
       e.preventDefault();
       dispatch(Actions.getContactInfosAction(contactObject, ageConfirmed));
    };
 
    return (
       <>
-         <form
-            noValidate
-            autoComplete='off'
-            className='contactForm'
-            onSubmit={(e) => {
-               submitForm(e);
-            }}
-         >
+         <form noValidate autoComplete='off' className='contactForm' onSubmit={submitForm}>
             <TextField
                className='field'
                name='name'
