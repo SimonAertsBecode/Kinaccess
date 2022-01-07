@@ -1,9 +1,16 @@
 import axios from 'axios';
 
+//**Import enum action types */
+import { FormActionType } from '../actionTypes/formActionType';
+
 //**config var */
 import globalConfig from '../../configuration/globalConfig';
 
+//**Custom history object */
 import myHistory from '../../utils/history';
+
+//**Import from redux */
+import { Dispatch } from 'redux';
 
 interface parameters {
    name: string;
@@ -15,13 +22,8 @@ interface parameters {
 }
 
 //** CONTACT FORM */
-export const CONTACT_FORM_SUCCESS = '[KINACCESS] CONTACT_FORM_SUCCESS';
-export const CONTACT_FORM_UNCOMPLETED = '[KINACCESS] CONTACT_FORM_UNCOMPLETED';
-export const CONTACT_FORM_EMPTY = '[KINACCESS] CONTACT_FORM_EMPTY';
-
 export const getContactInfosAction = (params: parameters, ageConfirmed: boolean) => {
    const { name, firstName, email, age, sex, content } = params;
-   console.log(typeof age);
 
    const data = {
       name,
@@ -33,25 +35,25 @@ export const getContactInfosAction = (params: parameters, ageConfirmed: boolean)
       ageConfirmed,
    };
 
-   return (dispatch: any) => {
+   return (dispatch: Dispatch) => {
       const request = axios.post(globalConfig.CONTACT_FORM, data);
 
       request.then((res) => {
          const { message } = res.data;
          if (res.status === 201) {
             dispatch({
-               type: CONTACT_FORM_SUCCESS,
+               type: FormActionType.CONTACT_FORM_SUCCESS,
                payload: message,
             });
          } else if (res.status === 206) {
             const response = res.data;
             dispatch({
-               type: CONTACT_FORM_UNCOMPLETED,
+               type: FormActionType.CONTACT_FORM_UNCOMPLETED,
                payload: response,
             });
          } else if (res.status === 202) {
             dispatch({
-               type: CONTACT_FORM_EMPTY,
+               type: FormActionType.CONTACT_FORM_EMPTY,
                payload: message,
             });
          }
@@ -60,9 +62,6 @@ export const getContactInfosAction = (params: parameters, ageConfirmed: boolean)
 };
 
 //**SIGN UP FORM */
-export const SIGN_UP_SUCCESS = '[KINACCESS] SIGN_UP_SUCCESS';
-export const SIGN_UP_UNCOMPLETED = '[KINACCESS] SIGN_UP_UNCOMPLETED';
-export const SIGN_UP_EMPTY = '[KINACCESS] SIGN_UP_EMPTY';
 
 interface signUp {
    name: string;
@@ -81,14 +80,14 @@ export const signUpFormAction = (params: signUp) => {
       password,
    };
 
-   return (dispatch: any) => {
+   return (dispatch: Dispatch) => {
       const request = axios.post(globalConfig.SIGN_UP_FORM, data);
 
       request.then((res) => {
          const { message, user } = res.data;
          if (res.status === 201) {
             dispatch({
-               type: SIGN_UP_SUCCESS,
+               type: FormActionType.SIGN_UP_SUCCESS,
                payload: {
                   message,
                   user,
@@ -97,12 +96,12 @@ export const signUpFormAction = (params: signUp) => {
          } else if (res.status === 206) {
             const response = res.data;
             dispatch({
-               type: SIGN_UP_UNCOMPLETED,
+               type: FormActionType.SIGN_UP_UNCOMPLETED,
                payload: response,
             });
          } else if (res.status === 202) {
             dispatch({
-               type: SIGN_UP_EMPTY,
+               type: FormActionType.SIGN_UP_EMPTY,
                payload: message,
             });
          }
@@ -111,8 +110,6 @@ export const signUpFormAction = (params: signUp) => {
 };
 
 //**SIGN IN FORM*/
-export const SIGN_IN_SUCCESS = '[KINACCESS] SIGN_IN_SUCCESS';
-export const SIGN_IN_FAILED = '[KINACCESS] SIGN_IN_FAILED';
 
 interface signIn {
    email: string;
@@ -127,18 +124,19 @@ export const signInFormAction = (params: signIn) => {
       password,
    };
 
-   return (dispatch: any) => {
+   return (dispatch: Dispatch) => {
       const request = axios.post(globalConfig.SIGN_IN_FORM, data, { withCredentials: true });
 
       request.then((res) => {
          if (res.status === 200) {
             dispatch({
-               type: SIGN_IN_SUCCESS,
+               type: FormActionType.SIGN_IN_SUCCESS,
                payload: res.data.user,
             });
+            myHistory.push('/');
          } else {
             dispatch({
-               type: SIGN_IN_FAILED,
+               type: FormActionType.SIGN_IN_FAILED,
                payload: res.data,
             });
          }
@@ -147,8 +145,6 @@ export const signInFormAction = (params: signIn) => {
 };
 
 //*GOOGLE AUTH*/
-export const GOOGLE_AUTH = '[KINACCESS] GOOGLE_AUTH';
-
 interface googleAuth {
    result: Object;
    token: string;
@@ -162,9 +158,9 @@ export const googleAuthAction = (params: googleAuth) => {
       token,
    };
 
-   return (dispatch: any) => {
+   return (dispatch: Dispatch) => {
       dispatch({
-         type: GOOGLE_AUTH,
+         type: FormActionType.GOOGLE_AUTH,
          payload: data,
       });
    };

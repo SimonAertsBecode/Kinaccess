@@ -1,4 +1,6 @@
-import * as Actions from '../actions/index';
+import { ContactAction, SignUpAction, SignInAction, GoogleAuthAction } from './reducersInterfaces/formsInterfaces';
+
+import { FormActionType } from '../actionTypes/formActionType';
 
 const localStorageLoggedIn = localStorage.getItem('loggedIn');
 const localStorageUser = localStorage.getItem('profile');
@@ -24,9 +26,9 @@ const initialState = {
    googleAuth: null,
 };
 
-const formsReducer = (state = initialState, action: any) => {
+const formsReducer = (state = initialState, action: ContactAction | SignUpAction | SignInAction | GoogleAuthAction) => {
    switch (action.type) {
-      case Actions.CONTACT_FORM_SUCCESS:
+      case FormActionType.CONTACT_FORM_SUCCESS:
          return {
             ...state,
             contactForm: {
@@ -35,7 +37,7 @@ const formsReducer = (state = initialState, action: any) => {
                empty: null,
             },
          };
-      case Actions.CONTACT_FORM_UNCOMPLETED:
+      case FormActionType.CONTACT_FORM_UNCOMPLETED:
          return {
             ...state,
             contactForm: {
@@ -44,7 +46,7 @@ const formsReducer = (state = initialState, action: any) => {
                empty: null,
             },
          };
-      case Actions.CONTACT_FORM_EMPTY:
+      case FormActionType.CONTACT_FORM_EMPTY:
          return {
             ...state,
             contactForm: {
@@ -53,7 +55,7 @@ const formsReducer = (state = initialState, action: any) => {
                empty: action.payload,
             },
          };
-      case Actions.SIGN_UP_SUCCESS:
+      case FormActionType.SIGN_UP_SUCCESS:
          return {
             ...state,
             signUpForm: {
@@ -62,7 +64,7 @@ const formsReducer = (state = initialState, action: any) => {
                empty: null,
             },
          };
-      case Actions.SIGN_UP_UNCOMPLETED:
+      case FormActionType.SIGN_UP_UNCOMPLETED:
          return {
             ...state,
             signUpForm: {
@@ -71,7 +73,7 @@ const formsReducer = (state = initialState, action: any) => {
                empty: null,
             },
          };
-      case Actions.SIGN_UP_EMPTY:
+      case FormActionType.SIGN_UP_EMPTY:
          return {
             ...state,
             signUpForm: {
@@ -80,8 +82,8 @@ const formsReducer = (state = initialState, action: any) => {
                empty: action.payload,
             },
          };
-      case Actions.SIGN_IN_SUCCESS:
-         localStorage.setItem('profile', JSON.stringify({ ...action.payload }));
+      case FormActionType.SIGN_IN_SUCCESS:
+         localStorage.setItem('profile', JSON.stringify(action.payload));
          localStorage.setItem('loggedIn', 'true');
          return {
             ...state,
@@ -94,7 +96,7 @@ const formsReducer = (state = initialState, action: any) => {
                failed: null,
             },
          };
-      case Actions.SIGN_IN_FAILED:
+      case FormActionType.SIGN_IN_FAILED:
          return {
             ...state,
             signInForm: {
@@ -102,7 +104,7 @@ const formsReducer = (state = initialState, action: any) => {
                failed: action.payload,
             },
          };
-      case Actions.GOOGLE_AUTH:
+      case FormActionType.GOOGLE_AUTH:
          localStorage.setItem('profile', JSON.stringify({ ...action.payload }));
          localStorage.setItem('loggedIn', 'true');
          return {

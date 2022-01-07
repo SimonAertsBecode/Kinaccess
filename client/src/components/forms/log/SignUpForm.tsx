@@ -1,5 +1,5 @@
 import React, { MouseEvent, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
 
 //* UI
 import TextField from '@material-ui/core/TextField';
@@ -16,9 +16,9 @@ import SignInForm from './SignInForm';
 const SignUpForm = () => {
    const dispatch = useDispatch();
 
-   const success = useSelector((kinaccess: any) => kinaccess.formsReducer.signUpForm.success?.message);
-   const uncompleted = useSelector((kinaccess: any) => kinaccess.formsReducer.signUpForm.uncompleted);
-   const empty = useSelector((kinaccess: any) => kinaccess.formsReducer.signUpForm.empty);
+   const success = useSelector((kinaccess: RootStateOrAny) => kinaccess.formsReducer.signUpForm.success?.message);
+   const uncompleted = useSelector((kinaccess: RootStateOrAny) => kinaccess.formsReducer.signUpForm.uncompleted);
+   const empty = useSelector((kinaccess: RootStateOrAny) => kinaccess.formsReducer.signUpForm.empty);
 
    const [signUpValues, setsignUpValues] = useState({
       name: '',
@@ -125,13 +125,12 @@ const SignUpForm = () => {
                   <Button
                      className='btn-submit'
                      onClick={(e) => {
-                        submitForm(e)
+                        submitForm(e);
                      }}
                      type='submit'
                      // color='rgba(0,61,217)'
                      variant='contained'
                      endIcon={<KeyboardArrowRightIcon />}
-
                   >
                      Enregistrez-vous
                   </Button>

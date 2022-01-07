@@ -1,5 +1,5 @@
 import React, { useState, MouseEvent } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 
 //* UI
 import TextField from '@material-ui/core/TextField';
@@ -14,51 +14,41 @@ import globalConfig from '../../../configuration/globalConfig';
 import myHistory from '../../../utils/history';
 
 //* Google
-import { GoogleLogin } from 'react-google-login';
-
-interface googleAuthInt {
-   profileObj: object;
-   tokenId: string;
-}
+import { GoogleLogin, GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
 
 const SignInForm = () => {
    const dispatch = useDispatch();
-   // const navigate = useNavigate();
 
-   const uncompleted = useSelector((kinaccess: any) => kinaccess.formsReducer.signInForm.failed);
+   const uncompleted = useSelector((kinaccess: RootStateOrAny) => kinaccess.formsReducer.signInForm.failed);
 
    const [signInValues, setSignInValues] = useState({
       email: '',
       password: '',
    });
 
+   const [googleFailed, setGoogleFailed] = useState<boolean>(false)
+
    const submitForm = (e: MouseEvent) => {
       e.preventDefault();
       dispatch(Actions.signInFormAction(signInValues));
    };
 
-   const googleSuccess = async (response: googleAuthInt): Promise<void> => {
-      const result = response?.profileObj;
-      const token = response?.tokenId;
+   const googleSuccess = async (res: GoogleLoginResponseOffline | GoogleLoginResponse): Promise<void> => {
+      if (('profileObj' && 'tokenId') in res) {
+         const result = res?.profileObj;
+         const token = res?.tokenId;
 
-      try {
-         dispatch(Actions.googleAuthAction({ result, token }));
-         myHistory.push('/');
-      } catch (err) {
-         console.log(err);
+         try {
+            dispatch(Actions.googleAuthAction({ result, token }));
+            myHistory.push('/');
+         } catch (err) {
+            console.log(err);
+         }
       }
    };
 
-   const goBack = () => {
-      myHistory.push('/contact');
-      // console.log(myHistory);
-      //* exemple of history.push with react-router v6
-      // navigate('/');
-      // console.log(navigate);
-   };
-
    const googleFailure = () => {
-      console.log('google auth failed');
+      setGoogleFailed(true)
    };
 
    return (
@@ -99,7 +89,6 @@ const SignInForm = () => {
                   submitForm(e);
                }}
                type='submit'
-               // color='rgba(0,61,217)'
                variant='contained'
                endIcon={<KeyboardArrowRightIcon />}
             >
@@ -112,12 +101,12 @@ const SignInForm = () => {
                      Continuer avec google
                   </Button>
                )}
-               // onSuccess={googleSuccess}
-               // onFailure={googleFailure}
+               onSuccess={googleSuccess}
+               onFailure={googleFailure}
                cookiePolicy='single_host_origin'
             />
+            
          </form>
-         <Button onClick={goBack}>go back home</Button>
       </section>
    );
 };

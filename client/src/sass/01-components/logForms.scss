@@ -3,7 +3,7 @@
    margin-left: 50%;
    margin-top: 100px;
    transform: translateX(-50%);
-   background-color: $color-blue-primary-opacity;
+   background-color: transparent;
    border-radius: 10px;
    display: grid;
    grid-template-columns: auto auto;
@@ -11,7 +11,13 @@
 
    .title-forms {
       grid-area: title;
-      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: transparent;
+      padding-right: 20px;
+      border-right: solid 1px black;
    }
 
    .logForms {
@@ -21,7 +27,9 @@
       align-items: center;
 
       .log-form {
-         width: 70%;
+         width: 90%;
+         display: flex;
+         justify-content: center;
 
          form {
             padding: 20px 0px;
@@ -37,6 +45,9 @@
             color: beige;
             margin: 50px 0 30px 50%;
             transform: translateX(-50%);
+         }
+
+         .google-btn {
          }
 
          strong {

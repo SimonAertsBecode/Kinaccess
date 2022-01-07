@@ -7,8 +7,6 @@ import './sass/app.scss';
 import rootReducer from './store/reducers';
 import myHistory from './utils/history';
 
-import { createBrowserHistory } from 'history';
-
 //**Imports for redux */
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
@@ -17,15 +15,15 @@ import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 
 //**imports for Routing */
-import { Router } from 'react-router';
+import CustomRouter from './routes/CustomRouter';
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk, logger)));
 
 ReactDOM.render(
    <Provider store={store}>
-      <Router navigator={myHistory} location={myHistory.location}>
+      <CustomRouter history={myHistory}>
          <App />
-      </Router>
+      </CustomRouter>
    </Provider>,
    document.getElementById('root')
 );

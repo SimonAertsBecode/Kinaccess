@@ -1,5 +1,5 @@
-import React, { useEffect, useState, MouseEvent } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
 
 //* UI
 import TextField from '@material-ui/core/TextField';
@@ -16,9 +16,9 @@ import * as Actions from '../../../store/actions';
 const ContactForm = () => {
    const dispatch = useDispatch();
 
-   const success = useSelector((kinaccess: any) => kinaccess.formsReducer.contactForm.success);
-   const uncompleted = useSelector((kinaccess: any) => kinaccess.formsReducer.contactForm.uncompleted);
-   const empty = useSelector((kinaccess: any) => kinaccess.formsReducer.contactForm.empty);
+   const success = useSelector((kinaccess: RootStateOrAny) => kinaccess.formsReducer.contactForm.success);
+   const uncompleted = useSelector((kinaccess: RootStateOrAny) => kinaccess.formsReducer.contactForm.uncompleted);
+   const empty = useSelector((kinaccess: RootStateOrAny) => kinaccess.formsReducer.contactForm.empty);
 
    const [contactObject, setcontactObject] = useState({
       name: '',

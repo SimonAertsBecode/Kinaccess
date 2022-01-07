@@ -1,10 +1,10 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, RootStateOrAny } from 'react-redux';
 
 const UserProfile = () => {
-   const userId = useSelector((kinaccess: any) => kinaccess.formsReducer.signInForm.success.user);
+   const userId = useSelector((kinaccess: RootStateOrAny) => kinaccess.formsReducer.signInForm.success.user);
 
-   return <div></div>;
+   return <div>coucou utilisateur numéro {userId}</div>;
 };
 
 export default UserProfile;
