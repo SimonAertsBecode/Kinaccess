@@ -26,7 +26,7 @@ const SignInForm = () => {
       password: '',
    });
 
-   const [googleFailed, setGoogleFailed] = useState<boolean>(false)
+   const [googleFailed, setGoogleFailed] = useState<boolean>(false);
 
    const submitForm = (e: MouseEvent) => {
       e.preventDefault();
@@ -48,7 +48,7 @@ const SignInForm = () => {
    };
 
    const googleFailure = () => {
-      setGoogleFailed(true)
+      setGoogleFailed(true);
    };
 
    return (
@@ -105,8 +105,8 @@ const SignInForm = () => {
                onFailure={googleFailure}
                cookiePolicy='single_host_origin'
             />
-            
          </form>
+         {googleFailed && <div>La connection avec google a échoué</div>}
       </section>
    );
 };
