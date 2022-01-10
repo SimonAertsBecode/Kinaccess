@@ -21,9 +21,7 @@ const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk
 
 ReactDOM.render(
    <Provider store={store}>
-      <CustomRouter history={myHistory}>
-         <App />
-      </CustomRouter>
+      <App />
    </Provider>,
    document.getElementById('root')
 );
