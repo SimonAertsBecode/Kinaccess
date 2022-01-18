@@ -16,7 +16,7 @@ import myHistory from '../../../utils/history';
 //* Google
 import { GoogleLogin, GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
 
-const SignInForm = () => {
+const SignInForm = (): JSX.Element => {
    const dispatch = useDispatch();
 
    const uncompleted = useSelector((kinaccess: RootStateOrAny) => kinaccess.formsReducer.signInForm.failed);
@@ -57,6 +57,7 @@ const SignInForm = () => {
             <TextField
                className='field'
                name='email'
+               id='email'
                value={signInValues.email}
                label='email'
                variant='outlined'
@@ -71,6 +72,7 @@ const SignInForm = () => {
             <TextField
                className='field'
                name='password'
+               id='password'
                value={signInValues.password}
                label='Mot de passe'
                variant='outlined'
