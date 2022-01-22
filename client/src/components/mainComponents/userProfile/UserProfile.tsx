@@ -1,11 +1,13 @@
 import { useSelector, RootStateOrAny } from 'react-redux';
 
-interface UserProfileProps {
-   userInfos: string | null;
+interface UserProfileProps<T> {
+   userInfos: T;
 }
 
-const UserProfile: React.FC<UserProfileProps> = (props) => {
+const UserProfile = <T extends object>({ userInfos }: UserProfileProps<T>) => {
    const userId = useSelector((kinaccess: RootStateOrAny) => kinaccess.formsReducer.signInForm.success.user);
+
+   console.log(userInfos);
 
    return (
       <div>

@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { useSelector, RootStateOrAny } from 'react-redux';
 
 const UserAccount = () => {
-   const [user] = useState(localStorage.getItem('profile') || null);
+   const [user] = useState(localStorage.getItem('profile'));
 
    const loggedIn = useSelector((kinaccess: RootStateOrAny) => kinaccess.formsReducer.signInForm.success.loggedIn);
 

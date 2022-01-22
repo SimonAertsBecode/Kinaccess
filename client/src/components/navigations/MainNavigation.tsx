@@ -8,7 +8,6 @@ import { useSelector, RootStateOrAny } from 'react-redux';
 
 const MainNavigation = () => {
    const loggedIn = useSelector((kinaccess: RootStateOrAny) => kinaccess.formsReducer.signInForm.success.loggedIn);
-   console.log(loggedIn);
    return (
       <nav className='navigation'>
          <ul>

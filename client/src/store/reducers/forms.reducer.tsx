@@ -124,6 +124,7 @@ const formsReducer = (state = initialState, action: ContactAction | SignUpAction
                   user: null,
                },
             },
+            googleAuth: null,
          };
       default:
          return state;
