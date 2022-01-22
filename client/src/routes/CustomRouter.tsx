@@ -1,5 +1,5 @@
 import { BrowserHistory } from 'history';
-import React, { useState, useLayoutEffect, ReactNode } from 'react';
+import { useState, useLayoutEffect, ReactNode } from 'react';
 import { Router } from 'react-router';
 
 const CustomRouter = ({ history, ...props }: { history: BrowserHistory; children: ReactNode }): JSX.Element => {

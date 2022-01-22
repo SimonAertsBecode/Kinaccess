@@ -129,6 +129,8 @@ export const signInFormAction = (params: signIn) => {
 
       request.then((res) => {
          if (res.status === 200) {
+            localStorage.setItem('profile', JSON.stringify(res.data.user));
+            localStorage.setItem('loggedIn', 'true');
             dispatch({
                type: FormActionType.SIGN_IN_SUCCESS,
                payload: res.data.user,
@@ -159,9 +161,20 @@ export const googleAuthAction = (params: googleAuth) => {
    };
 
    return (dispatch: Dispatch) => {
+       localStorage.setItem('profile', JSON.stringify({ data }));
+       localStorage.setItem('loggedIn', 'true');
       dispatch({
          type: FormActionType.GOOGLE_AUTH,
          payload: data,
+      });
+   };
+};
+
+//**LOGOUT */
+export const logoutAction = () => {
+   return (dispatch: Dispatch) => {
+      dispatch({
+         type: FormActionType.LOGOUT,
       });
    };
 };

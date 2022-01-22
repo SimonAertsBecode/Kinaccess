@@ -1,4 +1,4 @@
-import React, { useState, MouseEvent } from 'react';
+import { useState, MouseEvent } from 'react';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 
 //* UI
@@ -9,14 +9,14 @@ import { AiFillGoogleCircle } from 'react-icons/ai';
 
 //* Import files
 import useFormsHook from '../../../utils/formsHook';
-import * as Actions from '../../../store/actions';
+import * as Actions from '../../../store/actions/index';
 import globalConfig from '../../../configuration/globalConfig';
 import myHistory from '../../../utils/history';
 
 //* Google
 import { GoogleLogin, GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
 
-const SignInForm = (): JSX.Element => {
+const SignInForm = () => {
    const dispatch = useDispatch();
 
    const uncompleted = useSelector((kinaccess: RootStateOrAny) => kinaccess.formsReducer.signInForm.failed);

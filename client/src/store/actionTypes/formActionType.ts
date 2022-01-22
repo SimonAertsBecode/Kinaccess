@@ -15,4 +15,7 @@ export enum FormActionType {
 
    //*Google auth
    GOOGLE_AUTH = '[KINACCESS] GOOGLE_AUTH',
+
+   //*Logout
+   LOGOUT = '[KINACCESS] LOGOUT'
 }

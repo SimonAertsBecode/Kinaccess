@@ -1,4 +1,4 @@
-import { ContactAction, SignUpAction, SignInAction, GoogleAuthAction } from './reducersInterfaces/formsInterfaces';
+import { ContactAction, SignUpAction, SignInAction, GoogleAuthAction, LogoutACtion } from './reducersInterfaces/formsInterfaces';
 
 import { FormActionType } from '../actionTypes/formActionType';
 
@@ -23,10 +23,10 @@ const initialState = {
       },
       failed: null,
    },
-   googleAuth: null,
+   googleAuth: localStorageUser ? localStorageUser : null,
 };
 
-const formsReducer = (state = initialState, action: ContactAction | SignUpAction | SignInAction | GoogleAuthAction) => {
+const formsReducer = (state = initialState, action: ContactAction | SignUpAction | SignInAction | GoogleAuthAction | LogoutACtion) => {
    switch (action.type) {
       case FormActionType.CONTACT_FORM_SUCCESS:
          return {
@@ -83,8 +83,6 @@ const formsReducer = (state = initialState, action: ContactAction | SignUpAction
             },
          };
       case FormActionType.SIGN_IN_SUCCESS:
-         localStorage.setItem('profile', JSON.stringify(action.payload));
-         localStorage.setItem('loggedIn', 'true');
          return {
             ...state,
             signInForm: {
@@ -105,8 +103,6 @@ const formsReducer = (state = initialState, action: ContactAction | SignUpAction
             },
          };
       case FormActionType.GOOGLE_AUTH:
-         localStorage.setItem('profile', JSON.stringify({ ...action.payload }));
-         localStorage.setItem('loggedIn', 'true');
          return {
             ...state,
             signInForm: {
@@ -117,6 +113,17 @@ const formsReducer = (state = initialState, action: ContactAction | SignUpAction
                },
             },
             googleAuth: action.payload,
+         };
+      case FormActionType.LOGOUT:
+         return {
+            ...state,
+            signInForm: {
+               ...state.signInForm,
+               success: {
+                  loggedIn: false,
+                  user: null,
+               },
+            },
          };
       default:
          return state;

@@ -72,7 +72,13 @@ interface GoogleAuth {
    payload: {};
 }
 
+//*Logout
+interface Logout {
+   type: FormActionType.LOGOUT;
+}
+
 export type ContactAction = ContactForm['success'] | ContactForm['uncompleted'] | ContactForm['empty'];
 export type SignUpAction = SignUpForm['success'] | SignUpForm['uncompleted'] | SignUpForm['empty'];
 export type SignInAction = SignInForm['success'] | SignInForm['failed'];
 export type GoogleAuthAction = GoogleAuth;
+export type LogoutACtion = Logout;
