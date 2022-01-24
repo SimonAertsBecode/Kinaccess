@@ -10,6 +10,7 @@ const MainNavigation = () => {
    const loggedIn = useSelector((kinaccess: RootStateOrAny) => kinaccess.formsReducer.signInForm.success.loggedIn);
    return (
       <nav className='navigation'>
+         <h1>Kinaccess</h1>
          <ul>
             <li>
                <Link to='/'>Home</Link>
@@ -22,14 +23,7 @@ const MainNavigation = () => {
                <Link to='/about'>A propos</Link>
             </li>
 
-            <li>
-               <Link to='/user-profile'>Votre compte</Link>
-            </li>
-            {loggedIn && (
-               <li>
-                  <Logout />
-               </li>
-            )}
+            <li>{loggedIn ? <Logout /> : <Link to='/user-profile'>se connecter / s'enregistrer</Link>}</li>
          </ul>
       </nav>
    );
