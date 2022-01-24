@@ -11,7 +11,6 @@ import { AiFillGoogleCircle } from 'react-icons/ai';
 import useFormsHook from '../../../utils/formsHook';
 import * as Actions from '../../../store/actions/index';
 import globalConfig from '../../../configuration/globalConfig';
-import myHistory from '../../../utils/history';
 
 //* Google
 import { GoogleLogin, GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
@@ -40,7 +39,6 @@ const SignInForm = () => {
 
          try {
             dispatch(Actions.googleAuthAction({ result, token }));
-            myHistory.push('/');
          } catch (err) {
             console.log(err);
          }

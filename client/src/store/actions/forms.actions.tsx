@@ -135,7 +135,7 @@ export const signInFormAction = (params: signIn) => {
                type: FormActionType.SIGN_IN_SUCCESS,
                payload: res.data.user,
             });
-            myHistory.push('/');
+            myHistory.push('/user-profile');
          } else {
             dispatch({
                type: FormActionType.SIGN_IN_FAILED,
@@ -167,6 +167,7 @@ export const googleAuthAction = (params: googleAuth) => {
          type: FormActionType.GOOGLE_AUTH,
          payload: data,
       });
+      myHistory.push('/user-profile');
    };
 };
 
