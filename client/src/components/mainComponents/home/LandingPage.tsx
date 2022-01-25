@@ -15,10 +15,13 @@ const LandingPage = () => {
                <p>Prévention - Éducation - Réhabilitation pour les lombalgies communes</p>
                <section className='components-links'>
                   <button>
-                     <Link to='/why-us'>Why Kinaccess</Link>
+                     <Link to='/whatKin'>Qu'est-ce Kinaccess?</Link>
                   </button>
                   <button>
-                     <Link to='/what-is-it'>What is Kinaccess</Link>
+                     <Link to='/goalKin'>Quel est le but de Kinaccess?</Link>
+                  </button>
+                  <button>
+                     <Link to='/howKin'>Comment la plateforme fonctionne?</Link>
                   </button>
                </section>
             </Tilt>

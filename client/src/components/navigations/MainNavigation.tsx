@@ -1,13 +1,14 @@
 import Logout from '../forms/log/Logout';
 
 //*react-router-dom
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 //*Redux import
 import { useSelector, RootStateOrAny } from 'react-redux';
 
 const MainNavigation = () => {
    const loggedIn = useSelector((kinaccess: RootStateOrAny) => kinaccess.formsReducer.signInForm.success.loggedIn);
+
    return (
       <nav className='navigation'>
          <h1>
@@ -15,14 +16,15 @@ const MainNavigation = () => {
          </h1>
          <ul>
             <li>
-               <Link to='/'>Home</Link>
+               <Link to='/'>Page d'acceuil</Link>
             </li>
             <li>
                <Link to='/contact'>Contact</Link>
             </li>
 
             <li>
-               <Link to='/about'>A propos</Link>
+               <Link to='/globalInfo'>La lombalgie</Link>
+               <Link to='globalInfo/functionning'>La lombalgie</Link>
             </li>
 
             <li className='session-button'>{loggedIn ? <Logout /> : <Link to='/user-profile'>se connecter / s'enregistrer</Link>}</li>

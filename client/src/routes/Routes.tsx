@@ -1,11 +1,21 @@
 import React from 'react';
 
 //** Import components */
+//----------------------
 import Home from '../components/navigations/navComponents/Home';
-import WhyKinnaccess from '../components/mainComponents/home/subHomePages/WhyKinnaccess';
+import GoalOfKinaccess from '../components/mainComponents/home/subHomePages/GoalOfKinnaccess';
 import WhatIsKinaccess from '../components/mainComponents/home/subHomePages/WhatIsKinaccess';
-import About from '../components/navigations/navComponents/About';
+import HowWorksKinaccess from '../components/mainComponents/home/subHomePages/HowWorksKinaccess';
+
+//----------------------
+import GlobalInfo from '../components/mainComponents/education/GlobalInfo';
+import Functionning from '../components/mainComponents/education/Functionning';
+import Prevention from '../components/mainComponents/education/Prevention';
+
+//----------------------
 import ContactForm from '../components/navigations/navComponents/ContactForm';
+
+//----------------------
 import UserAccount from '../components/navigations/navComponents/UserAccount';
 
 //** Import routers */
@@ -15,9 +25,14 @@ const Routes = () => {
    return (
       <Routing>
          <Route index element={<Home />} />
-         <Route path='why-us' element={<WhyKinnaccess />} />
-         <Route path='what-is-it' element={<WhatIsKinaccess />} />
-         <Route path='about' element={<About />} />
+         <Route path='whatKin' element={<WhatIsKinaccess />} />
+         <Route path='goalKin' element={<GoalOfKinaccess />} />
+         <Route path='howKin' element={<HowWorksKinaccess />} />
+         <Route path='globalinfo' element={<GlobalInfo />}>
+            <Route index element={<GlobalInfo />} />
+            <Route path='functionning' element={<Functionning />} />
+            <Route path='prevention' element={<Prevention />} />
+         </Route>
          <Route path='contact' element={<ContactForm />} />
          <Route path='user-profile' element={<UserAccount />} />
          <Route path='*' element={<Navigate to='/' />} />
