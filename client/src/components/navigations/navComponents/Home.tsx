@@ -2,7 +2,7 @@ import LandingPage from '../../mainComponents/home/LandingPage';
 
 const Home = () => {
    return (
-      <>
+      <section className='home-page'>
          <div className='svg-landing-page'>
             <svg id='visual' viewBox='0 0 900 600' xmlns='http://www.w3.org/2000/svg' xmlnsXlink='http://www.w3.org/1999/xlink' version='1.1'>
                <rect x='0' y='0' width='900' height='600' fill='#f5f5f5'></rect>
@@ -29,7 +29,7 @@ const Home = () => {
             </svg>
          </div>
          <LandingPage />
-      </>
+      </section>
    );
 };
 

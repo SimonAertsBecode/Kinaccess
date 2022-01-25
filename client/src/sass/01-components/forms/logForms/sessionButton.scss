@@ -1,0 +1,18 @@
+.logout-button {
+   button {
+      border: none;
+      background-color: transparent;
+      font-size: 1.5rem;
+      cursor: pointer;
+   }
+}
+
+.session-button {
+   border-bottom: 1px solid tertiaryColor(0.6);
+   padding: 0.5rem;
+   transition: 2s;
+
+   a {
+      padding: 0.5rem;
+   }
+}

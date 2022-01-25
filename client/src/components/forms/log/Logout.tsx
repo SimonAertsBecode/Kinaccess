@@ -1,7 +1,7 @@
 import React from 'react';
 
-//*material UI
-import LogoutIcon from '@mui/icons-material/Logout';
+//*react icons
+import { GrLogout } from 'react-icons/gr';
 
 //*store
 import * as Actions from '../../../store/actions/index';
@@ -18,11 +18,11 @@ const Logout = () => {
    };
 
    return (
-      <div>
+      <section className='logout-button'>
          <button onClick={logoutUser}>
-            <LogoutIcon />
+            <GrLogout />
          </button>
-      </div>
+      </section>
    );
 };
 

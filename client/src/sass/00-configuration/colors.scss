@@ -3,5 +3,17 @@
 $color-blue-primary: rgba(0, 61, 217);
 $color-blue-primary-opacity: rgba(0, 61, 217, 0.4);
 $primary-font: 'Roboto', sans-serif;
-$background-color-primary:#f5f5f5;
-$background-color-secondary:#012A53
+
+//**function for color and dynamic opacity
+@function primaryColor($value) {
+   $result: rgba(245, 245, 245, $value);
+   @return $result;
+}
+@function secondaryColor($value) {
+   $result: rgba(1, 42, 83, $value);
+   @return $result;
+}
+@function tertiaryColor($value) {
+   $result: rgba(179, 130, 253, $value);
+   @return $result;
+}

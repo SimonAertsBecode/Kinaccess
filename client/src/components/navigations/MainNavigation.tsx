@@ -25,7 +25,7 @@ const MainNavigation = () => {
                <Link to='/about'>A propos</Link>
             </li>
 
-            <li>{loggedIn ? <Logout /> : <Link to='/user-profile'>se connecter / s'enregistrer</Link>}</li>
+            <li className='session-button'>{loggedIn ? <Logout /> : <Link to='/user-profile'>se connecter / s'enregistrer</Link>}</li>
          </ul>
       </nav>
    );
