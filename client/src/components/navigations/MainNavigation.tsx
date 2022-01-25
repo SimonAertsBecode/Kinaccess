@@ -10,7 +10,9 @@ const MainNavigation = () => {
    const loggedIn = useSelector((kinaccess: RootStateOrAny) => kinaccess.formsReducer.signInForm.success.loggedIn);
    return (
       <nav className='navigation'>
-         <h1>Kinaccess</h1>
+         <h1>
+            <Link to='/'>Kinaccess</Link>
+         </h1>
          <ul>
             <li>
                <Link to='/'>Home</Link>
