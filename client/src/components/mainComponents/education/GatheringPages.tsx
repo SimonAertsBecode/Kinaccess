@@ -1,13 +1,12 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 
-const GlobalInfo = () => {
+const GatheringPages = () => {
    return (
-      <>
-         <div>information globale</div>
+      <div>
          <Outlet />
-      </>
+      </div>
    );
 };
 
-export default GlobalInfo;
+export default GatheringPages;

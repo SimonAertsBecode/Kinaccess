@@ -1,7 +1,7 @@
 import Logout from '../forms/log/Logout';
 
 //*react-router-dom
-import { Link, useParams } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 
 //*Redux import
 import { useSelector, RootStateOrAny } from 'react-redux';
@@ -19,13 +19,17 @@ const MainNavigation = () => {
                <Link to='/'>Page d'acceuil</Link>
             </li>
             <li>
-               <Link to='/contact'>Contact</Link>
+               <Link to='contact'>Contact</Link>
             </li>
 
             <li>
-               <Link to='/globalInfo'>La lombalgie</Link>
-               <Link to='globalInfo/functionning'>La lombalgie</Link>
+               <Link to='globalInfo'>La lombalgie</Link>
             </li>
+            <li>
+               <Link to='globalInfo/functionning'>fonctionnement </Link>
+            </li>
+
+            <Outlet />
 
             <li className='session-button'>{loggedIn ? <Logout /> : <Link to='/user-profile'>se connecter / s'enregistrer</Link>}</li>
          </ul>

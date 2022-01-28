@@ -11,6 +11,7 @@ import HowWorksKinaccess from '../components/mainComponents/home/subHomePages/Ho
 import GlobalInfo from '../components/mainComponents/education/GlobalInfo';
 import Functionning from '../components/mainComponents/education/Functionning';
 import Prevention from '../components/mainComponents/education/Prevention';
+import GatheringPages from '../components/mainComponents/education/GatheringPages';
 
 //----------------------
 import ContactForm from '../components/navigations/navComponents/ContactForm';
@@ -28,7 +29,7 @@ const Routes = () => {
          <Route path='whatKin' element={<WhatIsKinaccess />} />
          <Route path='goalKin' element={<GoalOfKinaccess />} />
          <Route path='howKin' element={<HowWorksKinaccess />} />
-         <Route path='globalinfo' element={<GlobalInfo />}>
+         <Route path='globalinfo' element={<GatheringPages />}>
             <Route index element={<GlobalInfo />} />
             <Route path='functionning' element={<Functionning />} />
             <Route path='prevention' element={<Prevention />} />
