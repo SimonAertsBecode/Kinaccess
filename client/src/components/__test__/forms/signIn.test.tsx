@@ -1,6 +1,7 @@
 //* React testing library
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import '@testing-library/jest-dom';
 
 //* Components
 import SignInForm from '../../forms/log/SignInForm';
@@ -15,8 +16,8 @@ beforeEach(() => {
 describe('Sign in tests', () => {
    test('Sign in inputs should be initially ', () => {
       //**2) Query the elements
-      const emailInputElement = screen.getByRole('textbox');
-      const passwordInputElement = screen.getByLabelText(/Mot de passe/i);
+      const emailInputElement = screen.getByRole('textbox') as HTMLInputElement;
+      const passwordInputElement = screen.getByLabelText(/Mot de passe/i) as HTMLInputElement;
 
       //**3) Assertion
       expect(emailInputElement.value).toBe('');
@@ -26,13 +27,13 @@ describe('Sign in tests', () => {
    test('Type an email', () => {
       const emailInputElement = screen.getByRole('textbox', {
          name: /email/i,
-      });
+      }) as HTMLInputElement;
       userEvent.type(emailInputElement, 'simon.aerts@gmail.com');
       expect(emailInputElement.value).toBe('simon.aerts@gmail.com');
    });
 
-   test('Type a pasword', () => {
-      const passwordInputElement = screen.getByLabelText(/Mot de passe/i);
+   test('Type a password', () => {
+      const passwordInputElement = screen.getByLabelText(/Mot de passe/i) as HTMLInputElement;
       userEvent.type(passwordInputElement, 'motDePasse2303');
       expect(passwordInputElement.value).toBe('motDePasse2303');
    });
@@ -40,11 +41,11 @@ describe('Sign in tests', () => {
    test('Should display error message if email is not registered', () => {
       const emailInputElement = screen.getByRole('textbox', {
          name: /email/i,
-      });
+      }) as HTMLInputElement;
       const submitBtnElement = screen.getByText('Connectez-vous');
-      const emailErrorText = screen.getByText('email incorrect');
       userEvent.type(emailInputElement, 'simon.aertail.com');
       userEvent.click(submitBtnElement);
-      expect(emailErrorText).not.toBeInTheDocument();
+      const emailErrorText = screen.getByText('email incorrect');
+      expect(emailErrorText).toBeInTheDocument();
    });
 });
