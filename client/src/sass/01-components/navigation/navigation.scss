@@ -1,20 +1,26 @@
 .navigation {
    width: 100%;
-   display: grid;
-   grid-template-columns: 1fr 1fr;
+   display: flex;
    background-color: transparent;
+   justify-content: space-between;
    backdrop-filter: blur(50px);
    box-shadow: 3px 0 10px secondaryColor(0.3);
 
    h1 {
-      grid-column: 1/2;
-      transform: translateX(5%);
+      display: flex;
+      justify-content: flex-start;
+      transform: translateX(10%);
       letter-spacing: 0.2rem;
+
+      a {
+         text-decoration: none;
+         color: black;
+      }
    }
 
    ul {
-      grid-column: 2/3;
       display: flex;
+      transform: translateX(-10%);
       flex-direction: row;
       justify-content: flex-end;
       gap: 1.4rem;
@@ -23,12 +29,16 @@
 
       li {
          font-size: 1.2rem;
-      }
-   }
 
-   a {
-      text-decoration: none;
-      color: black;
-      font-weight: bold;
+         a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+
+            .active {
+               background-color: red;
+            }
+         }
+      }
    }
 }

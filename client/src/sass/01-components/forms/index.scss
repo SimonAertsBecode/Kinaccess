@@ -1,6 +1,6 @@
 //**Contact form
-@import './contactForm/contact';
+@import 'contact.scss';
 
 //**Log forms
-@import './logForms/logForms.scss';
-@import './logForms/sessionButton.scss';
+@import 'logForms.scss';
+@import 'sessionButton.scss';

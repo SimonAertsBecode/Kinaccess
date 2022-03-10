@@ -1,6 +1,6 @@
 //*Import components
 import LogForm from '../../forms/log/LogForm';
-import UserProfile from '../../mainComponents/userProfile/UserProfile';
+import UserProfile from '../../mainComponents/UserProfile';
 
 //*React related
 import { useEffect, useState } from 'react';

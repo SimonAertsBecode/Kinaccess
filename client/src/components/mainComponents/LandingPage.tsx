@@ -11,17 +11,13 @@ const LandingPage = () => {
       <div className='main'>
          <section className='infos'>
             <Tilt tiltMaxAngleX={15} tiltMaxAngleY={15}>
-               <h1>Kinaccess</h1>
-               <p>Prévention - Éducation - Réhabilitation pour les lombalgies communes</p>
+               <h1>Login system and contact form</h1>
                <section className='components-links'>
                   <button>
-                     <Link to='/whatKin'>Qu'est-ce Kinaccess?</Link>
+                     <Link to='/user-profile'>Check sign in - Sign up system</Link>
                   </button>
                   <button>
-                     <Link to='/goalKin'>Quel est le but de Kinaccess?</Link>
-                  </button>
-                  <button>
-                     <Link to='/howKin'>Comment la plateforme fonctionne?</Link>
+                     <Link to='/contact'>send me a message</Link>
                   </button>
                </section>
             </Tilt>
