@@ -1,4 +1,4 @@
-import { useState, MouseEvent } from 'react';
+import { useState, MouseEvent, useCallback } from 'react';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 
 //* UI
@@ -10,7 +10,6 @@ import { AiFillGoogleCircle } from 'react-icons/ai';
 //* Import files
 import useFormsHook from '../../../utils/formsHook';
 import * as Actions from '../../../store/actions/index';
-import globalConfig from '../../../configuration/globalConfig';
 
 //* Google
 import { GoogleLogin, GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
@@ -95,7 +94,7 @@ const SignInForm = () => {
                Connectez-vous
             </Button>
             <GoogleLogin
-               clientId={globalConfig.GOOGLE_ID}
+               clientId={'458697001268-dml15t87n2tk21c9n6ionesf92i64qoe.apps.googleusercontent.com'}
                render={(renderProps) => (
                   <Button className='google-button' onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<AiFillGoogleCircle />} variant='contained'>
                      Continuer avec google

@@ -1,13 +1,13 @@
-interface UserProfileProps<T> {
-   userInfos: T | null;
-}
+import { RootStateOrAny, useSelector } from 'react-redux';
 
-const UserProfile = <T extends object>({ userInfos }: UserProfileProps<T>) => {
+const UserProfile = () => {
+   const userData = useSelector((state: RootStateOrAny) => state.formsReducer.signInForm.success?.user);
 
+   const { name, firstName, email } = userData;
 
    return (
       <div>
-         <h3>coucou utilisateur numéro {}</h3>
+         <h3>Bonjour {firstName}</h3>
       </div>
    );
 };

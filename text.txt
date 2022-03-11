@@ -1,0 +1,4 @@
+set google login correctly
+set profile page nicely
+
+when sign up redirect correctly

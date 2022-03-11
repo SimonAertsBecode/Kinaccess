@@ -7,7 +7,7 @@ import UserAccount from '../components/navigations/navComponents/UserAccount';
 import Error404 from '../components/navigations/navComponents/Error404';
 
 //** Import routers */
-import { Route, Navigate, Routes as Routing } from 'react-router';
+import { Route, Routes as Routing } from 'react-router';
 
 const Routes = () => {
    return (

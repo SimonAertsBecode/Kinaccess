@@ -131,9 +131,10 @@ export const signInFormAction = (params: signIn) => {
          if (res.status === 200) {
             localStorage.setItem('profile', JSON.stringify(res.data));
             localStorage.setItem('loggedIn', 'true');
+            const { userData } = res.data;
             dispatch({
                type: FormActionType.SIGN_IN_SUCCESS,
-               payload: res.data.user,
+               payload: userData,
             });
             myHistory.push('/user-profile');
          } else {
@@ -174,6 +175,7 @@ export const googleAuthAction = (params: googleAuth) => {
 //**LOGOUT */
 export const logoutAction = () => {
    return (dispatch: Dispatch) => {
+      axios.get(globalConfig.LOG_OUT);
       dispatch({
          type: FormActionType.LOGOUT,
       });

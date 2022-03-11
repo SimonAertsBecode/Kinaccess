@@ -117,6 +117,10 @@ const formsReducer = (state = initialState, action: ContactAction | SignUpAction
       case FormActionType.LOGOUT:
          return {
             ...state,
+            signUpForm: {
+               ...state.signUpForm,
+               success: null,
+            },
             signInForm: {
                ...state.signInForm,
                success: {
