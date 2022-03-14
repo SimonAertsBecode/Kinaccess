@@ -14,7 +14,7 @@ const Routes = () => {
       <Routing>
          <Route index element={<Home />} />
          <Route path='contact' element={<ContactForm />} />
-         <Route path='user-profile' element={<UserAccount />} />
+         <Route path='profile' element={<UserAccount />} />
          <Route path='*' element={<Error404 />} />
       </Routing>
    );

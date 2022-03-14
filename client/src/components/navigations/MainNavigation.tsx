@@ -5,9 +5,17 @@ import { NavLink, Outlet } from 'react-router-dom';
 
 //*Redux import
 import { useSelector, RootStateOrAny } from 'react-redux';
+import { useEffect, useState } from 'react';
 
 const MainNavigation = () => {
-   const loggedIn = useSelector((kinaccess: RootStateOrAny) => kinaccess.formsReducer.signInForm.success.loggedIn);
+   const loggedInRedux = useSelector((kinaccess: RootStateOrAny) => kinaccess.formsReducer.signInForm.success.loggedIn);
+   const [loggedIn, setLoggedIn] = useState(false);
+
+   useEffect(() => {
+      const localStorageLoggedIn = localStorage.getItem('loggedIn');
+      if (!localStorageLoggedIn) return setLoggedIn(false);
+      setLoggedIn(true);
+   }, [loggedInRedux]);
 
    return (
       <nav className='navigation'>
@@ -19,9 +27,20 @@ const MainNavigation = () => {
                <NavLink to='contact'>Contact</NavLink>
             </li>
 
-            <Outlet />
-
-            <li>{loggedIn ? <Logout /> : <NavLink to='/user-profile'>sign in / sign up</NavLink>}</li>
+            {loggedIn ? (
+               <>
+                  <li>
+                     <NavLink to='profile'>Profile</NavLink>
+                  </li>
+                  <li>
+                     <Logout />
+                  </li>
+               </>
+            ) : (
+               <li>
+                  <NavLink to='profile'>sign in / sign up</NavLink>
+               </li>
+            )}
          </ul>
       </nav>
    );

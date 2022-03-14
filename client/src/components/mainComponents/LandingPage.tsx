@@ -14,7 +14,7 @@ const LandingPage = () => {
                <h1>Login system and contact form</h1>
                <section className='components-links'>
                   <button>
-                     <Link to='/user-profile'>Check sign in - Sign up system</Link>
+                     <Link to='/profile'>Check sign in - Sign up system</Link>
                   </button>
                   <button>
                      <Link to='/contact'>send me a message</Link>
