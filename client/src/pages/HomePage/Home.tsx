@@ -1,4 +1,4 @@
-import LandingPage from '../../components/MainComponents/LandingPage';
+import LandingPage from '../../components/mainComponents/LandingPage';
 
 const Home = () => {
    return (

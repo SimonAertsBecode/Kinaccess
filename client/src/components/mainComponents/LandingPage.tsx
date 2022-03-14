@@ -1,5 +1,3 @@
-import React from 'react';
-
 //** react router imports
 import { Link } from 'react-router-dom';
 

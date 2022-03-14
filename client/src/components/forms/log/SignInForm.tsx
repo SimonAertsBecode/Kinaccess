@@ -1,4 +1,4 @@
-import { useState, MouseEvent, useCallback } from 'react';
+import { useState, MouseEvent } from 'react';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 
 //* UI

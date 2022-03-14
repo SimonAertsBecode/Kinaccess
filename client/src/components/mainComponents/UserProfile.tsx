@@ -14,7 +14,7 @@ const UserProfile = () => {
 
    useEffect(() => {
       if (userId) Users.getUserInfo(userId, setUserInfo);
-   }, []);
+   }, [userId]);
 
    return (
       <section>

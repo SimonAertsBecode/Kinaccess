@@ -1,7 +1,7 @@
 import Logout from '../forms/Log/Logout';
 
 //*react-router-dom
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 //*Redux import
 import { useSelector, RootStateOrAny } from 'react-redux';
