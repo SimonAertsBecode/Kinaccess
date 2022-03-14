@@ -36,19 +36,19 @@ authController.signIn = async (req, res) => {
    const { email, password } = req.body;
 
    try {
-      const setFirstLetterUppercase = (string) => {
-         return string.charAt(0).toUpperCase() + string.slice(1);
-      };
+      // const setFirstLetterUppercase = (string) => {
+      //    return string.charAt(0).toUpperCase() + string.slice(1);
+      // };
 
       const user = await UserModel.login(email, password);
       const token = createToken(user._id);
-      const userData = {
-         email: user.email,
-         firstName: setFirstLetterUppercase(user.firstName),
-         name: setFirstLetterUppercase(user.name),
-      };
+      // const userData = {
+      //    email: user.email,
+      //    firstName: setFirstLetterUppercase(user.firstName),
+      //    name: setFirstLetterUppercase(user.name),
+      // };
       res.cookie('jwt', token, { httpOnly: true, maxAge });
-      res.status(200).json({ userData });
+      res.status(200).json(user._id);
    } catch (err) {
       res.status(206).send(formsError.signInError(err));
    }

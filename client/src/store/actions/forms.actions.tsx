@@ -129,7 +129,7 @@ export const signInFormAction = (params: signIn) => {
 
       request.then((res) => {
          if (res.status === 200) {
-            localStorage.setItem('profile', JSON.stringify(res.data));
+            localStorage.setItem('userId', JSON.stringify(res.data));
             localStorage.setItem('loggedIn', 'true');
             const { userData } = res.data;
             dispatch({

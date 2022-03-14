@@ -1,4 +1,4 @@
-const globalConfig = {
+const formsConstant = {
    CONTACT_FORM: '/contact-me',
    SIGN_UP_FORM: '/user/register',
    SIGN_IN_FORM: '/user/login',
@@ -6,4 +6,4 @@ const globalConfig = {
    GOOGLE_ID: '/user/getGoogle',
 };
 
-export default globalConfig;
+export default formsConstant;

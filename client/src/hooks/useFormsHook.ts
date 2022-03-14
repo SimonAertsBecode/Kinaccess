@@ -10,7 +10,7 @@ class useFormsHook {
       }));
    }
 
-   static submitForm(){}
+   // static submitForm(){}
 }
 
 export default useFormsHook;
