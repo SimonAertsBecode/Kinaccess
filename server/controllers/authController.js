@@ -36,13 +36,26 @@ authController.signIn = async (req, res) => {
    const { email, password } = req.body;
 
    try {
+      // const setFirstLetterUppercase = (string) => {
+      //    return string.charAt(0).toUpperCase() + string.slice(1);
+      // };
+
       const user = await UserModel.login(email, password);
       const token = createToken(user._id);
+      // const userData = {
+      //    email: user.email,
+      //    firstName: setFirstLetterUppercase(user.firstName),
+      //    name: setFirstLetterUppercase(user.name),
+      // };
       res.cookie('jwt', token, { httpOnly: true, maxAge });
-      res.status(200).json({ userId: user._id });
+      res.status(200).json(user._id);
    } catch (err) {
       res.status(206).send(formsError.signInError(err));
    }
+};
+
+authController.getGoogleAPI = async (req, res) => {
+   res.send(process.env.GOOGLE_ID);
 };
 
 authController.logout = async (req, res) => {

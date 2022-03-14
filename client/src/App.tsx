@@ -1,8 +1,8 @@
 //**Import files */
-import MainNavigation from './components/navigations/MainNavigation';
-import Routes from './routes/Routes';
-import CustomRouter from './routes/CustomRouter';
-import myHistory from './utils/history';
+import MainNavigation from './components/Navigations/MainNavigation';
+import Routes from './pages/routes/Routes';
+import CustomRouter from './hooks/useCustomRouter';
+import myHistory from './helpers/CustomHistory';
 
 const App = () => {
    return (

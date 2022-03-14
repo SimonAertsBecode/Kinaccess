@@ -1,4 +1,4 @@
-import { FormActionType } from '../../actionTypes/formActionType';
+import { FormActionType } from '../../actions/actionTypes/formActionType';
 
 //* ContactForm interface
 interface ContactForm {

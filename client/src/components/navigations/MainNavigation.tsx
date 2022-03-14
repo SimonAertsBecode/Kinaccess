@@ -1,37 +1,46 @@
-import Logout from '../forms/log/Logout';
+import Logout from '../forms/Log/Logout';
 
 //*react-router-dom
-import { Link, Outlet } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 
 //*Redux import
 import { useSelector, RootStateOrAny } from 'react-redux';
+import { useEffect, useState } from 'react';
 
 const MainNavigation = () => {
-   const loggedIn = useSelector((kinaccess: RootStateOrAny) => kinaccess.formsReducer.signInForm.success.loggedIn);
+   const loggedInRedux = useSelector((kinaccess: RootStateOrAny) => kinaccess.formsReducer.signInForm.success.loggedIn);
+   const [loggedIn, setLoggedIn] = useState(false);
+
+   useEffect(() => {
+      const localStorageLoggedIn = localStorage.getItem('loggedIn');
+      if (!localStorageLoggedIn) return setLoggedIn(false);
+      setLoggedIn(true);
+   }, [loggedInRedux]);
 
    return (
       <nav className='navigation'>
          <h1>
-            <Link to='/'>Kinaccess</Link>
+            <NavLink to='/'>Kinaccess</NavLink>
          </h1>
          <ul>
             <li>
-               <Link to='/'>Page d'acceuil</Link>
-            </li>
-            <li>
-               <Link to='contact'>Contact</Link>
+               <NavLink to='contact'>Contact</NavLink>
             </li>
 
-            <li>
-               <Link to='globalInfo'>La lombalgie</Link>
-            </li>
-            <li>
-               <Link to='globalInfo/functionning'>fonctionnement </Link>
-            </li>
-
-            <Outlet />
-
-            <li className='session-button'>{loggedIn ? <Logout /> : <Link to='/user-profile'>se connecter / s'enregistrer</Link>}</li>
+            {loggedIn ? (
+               <>
+                  <li>
+                     <NavLink to='profile'>Profile</NavLink>
+                  </li>
+                  <li>
+                     <Logout />
+                  </li>
+               </>
+            ) : (
+               <li>
+                  <NavLink to='profile'>sign in / sign up</NavLink>
+               </li>
+            )}
          </ul>
       </nav>
    );

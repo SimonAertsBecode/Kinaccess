@@ -1,5 +1,3 @@
-import React from 'react';
-
 //*react icons
 import { GrLogout } from 'react-icons/gr';
 

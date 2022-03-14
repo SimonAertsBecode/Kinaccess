@@ -9,6 +9,7 @@ const userRoute = express.Router();
 authRoute.post('/register', authController.signUp);
 authRoute.post('/login', authController.signIn);
 authRoute.get('/logout', authController.logout);
+authRoute.get('/getGoogle', authController.getGoogleAPI);
 
 //user DB
 userRoute.get('/', userController.getAllUsers);

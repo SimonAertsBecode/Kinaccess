@@ -19,7 +19,7 @@ const app = express();
 const __dirname = path.resolve();
 
 //consfig
-dotenv.config({ path: path.join(__dirname, 'config/.env') });
+dotenv.config({ path: path.join(__dirname, '/.env') });
 const corsOptions = {
    origin: process.env.CLIENT_URL,
    credentials: true,
@@ -53,10 +53,7 @@ app.use('/user', authRoute);
 app.use('/api/user', userRoute);
 
 //Database connection && server
-const CONNECTION_URL =
-   'mongodb+srv://' +
-   process.env.DB_USER_PASS +
-   '@cluster0.1ysv7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+const CONNECTION_URL = 'mongodb+srv://' + process.env.DB_USER_PASS + '@cluster0.1ysv7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
 mongoose
    .connect(CONNECTION_URL, {
@@ -66,4 +63,4 @@ mongoose
       useCreateIndex: true,
    })
    .then(() => app.listen(process.env.PORT, () => console.log(`server running on port: ${process.env.PORT}`)))
-   .catch((error) => console.log(error.message + 'hello'));
+   .catch((error) => console.log('error in index.js connection to database'));

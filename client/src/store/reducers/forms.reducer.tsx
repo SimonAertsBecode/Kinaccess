@@ -1,6 +1,6 @@
 import { ContactAction, SignUpAction, SignInAction, GoogleAuthAction, LogoutACtion } from './reducersInterfaces/formsInterfaces';
 
-import { FormActionType } from '../actionTypes/formActionType';
+import { FormActionType } from '../actions/actionTypes/formActionType';
 
 const localStorageLoggedIn = localStorage.getItem('loggedIn');
 const localStorageUser = localStorage.getItem('profile');
@@ -117,6 +117,10 @@ const formsReducer = (state = initialState, action: ContactAction | SignUpAction
       case FormActionType.LOGOUT:
          return {
             ...state,
+            signUpForm: {
+               ...state.signUpForm,
+               success: null,
+            },
             signInForm: {
                ...state.signInForm,
                success: {

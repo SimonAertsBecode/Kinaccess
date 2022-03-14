@@ -1,0 +1,31 @@
+.contactForm {
+   width: 50%;
+   height: 100vh;
+   margin-left: 50%;
+   transform: translateX(-50%);
+
+   .field {
+      margin: 10px 0;
+      min-height: 10%;
+   }
+
+   .radio {
+      display: block;
+   }
+
+   .btn-submit {
+      background-color: rgba(0, 61, 217, 0.8);
+      color: beige;
+      margin: 120px 0 30px 50%;
+      transform: translateX(-50%);
+   }
+
+   strong {
+      display: block;
+      opacity: 0.4;
+   }
+}
+
+// .field {
+
+// }

@@ -1,13 +1,13 @@
 import axios from 'axios';
 
 //**Import enum action types */
-import { FormActionType } from '../actionTypes/formActionType';
+import { FormActionType } from './actionTypes/formActionType';
 
 //**config var */
-import globalConfig from '../../configuration/globalConfig';
+import globalConfig from '../../constants/formsConstants';
 
 //**Custom history object */
-import myHistory from '../../utils/history';
+import myHistory from '../../helpers/CustomHistory';
 
 //**Import from redux */
 import { Dispatch } from 'redux';
@@ -129,13 +129,14 @@ export const signInFormAction = (params: signIn) => {
 
       request.then((res) => {
          if (res.status === 200) {
-            localStorage.setItem('profile', JSON.stringify(res.data));
+            localStorage.setItem('userId', JSON.stringify(res.data));
             localStorage.setItem('loggedIn', 'true');
+            const { userData } = res.data;
             dispatch({
                type: FormActionType.SIGN_IN_SUCCESS,
-               payload: res.data.user,
+               payload: userData,
             });
-            myHistory.push('/user-profile');
+            myHistory.push('/profile');
          } else {
             dispatch({
                type: FormActionType.SIGN_IN_FAILED,
@@ -167,13 +168,14 @@ export const googleAuthAction = (params: googleAuth) => {
          type: FormActionType.GOOGLE_AUTH,
          payload: data,
       });
-      myHistory.push('/user-profile');
+      myHistory.push('/profile');
    };
 };
 
 //**LOGOUT */
 export const logoutAction = () => {
    return (dispatch: Dispatch) => {
+      axios.get(globalConfig.LOG_OUT);
       dispatch({
          type: FormActionType.LOGOUT,
       });
