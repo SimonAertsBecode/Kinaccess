@@ -1,7 +1,7 @@
 //** Import components */
 import Home from '../HomePage/Home';
 import ContactForm from '../Contact/ContactForm';
-import UserAccount from '../Profile/UserAccount';
+import Profile from '../Profile/Profile';
 import Error404 from '../ErrorPages/Error404';
 
 //** Import routers */
@@ -12,7 +12,7 @@ const Routes = () => {
       <Routing>
          <Route index element={<Home />} />
          <Route path='contact' element={<ContactForm />} />
-         <Route path='profile' element={<UserAccount />} />
+         <Route path='profile' element={<Profile />} />
          <Route path='*' element={<Error404 />} />
       </Routing>
    );

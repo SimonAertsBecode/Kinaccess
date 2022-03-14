@@ -1,6 +1,6 @@
 import ContactForm from './Contact/ContactForm';
 import Home from './HomePage/Home';
-import UserAccount from './Profile/UserAccount';
+import profile from './Profile/Profile';
 import Error404 from './ErrorPages/Error404';
 
-export { ContactForm, Home, UserAccount, Error404 };
+export { ContactForm, Home, profile, Error404 };

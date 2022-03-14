@@ -5,10 +5,10 @@ import UserProfile from '../../components/mainComponents/UserProfile';
 //*React related
 import { useSelector, RootStateOrAny } from 'react-redux';
 
-const UserAccount = () => {
+const Profile = () => {
    const loggedIn = useSelector((kinaccess: RootStateOrAny) => kinaccess.formsReducer.signInForm.success.loggedIn);
 
    return <div>{loggedIn ? <UserProfile /> : <LogForm />}</div>;
 };
 
-export default UserAccount;
+export default Profile;
