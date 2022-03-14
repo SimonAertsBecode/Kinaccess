@@ -1,10 +1,10 @@
 import React from 'react';
 
 //** Import components */
-import Home from '../components/navigations/navComponents/Home';
-import ContactForm from '../components/navigations/navComponents/ContactForm';
-import UserAccount from '../components/navigations/navComponents/UserAccount';
-import Error404 from '../components/navigations/navComponents/Error404';
+import Home from '../HomePage/Home';
+import ContactForm from '../Contact/ContactForm';
+import UserAccount from '../Profile/UserAccount';
+import Error404 from '../ErrorPages/Error404';
 
 //** Import routers */
 import { Route, Routes as Routing } from 'react-router';

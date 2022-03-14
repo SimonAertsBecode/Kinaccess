@@ -9,6 +9,8 @@ class useFormsHook {
          [name]: value,
       }));
    }
+
+   static submitForm(){}
 }
 
 export default useFormsHook;

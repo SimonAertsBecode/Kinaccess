@@ -1,6 +1,6 @@
 //*Import components
-import LogForm from '../../forms/log/LogForm';
-import UserProfile from '../../mainComponents/UserProfile';
+import LogForm from '../../components/forms/Log/LogForm';
+import UserProfile from '../../components/MainComponents/UserProfile';
 
 //*React related
 import { useSelector, RootStateOrAny } from 'react-redux';

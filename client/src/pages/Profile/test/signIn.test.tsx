@@ -1,13 +1,13 @@
 //* React testing library
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 
-//* Components
-import SignInForm from '../../forms/log/SignInForm';
-
 //*Redux mock
-import RenderWithReduxMock from '../mocks/reduxStoreMock';
+import RenderWithReduxMock from '../../../helpers/test/ReduxStoreMock';
+
+//* Components
+import SignInForm from '../../../components/forms/Log/SignInForm';
 
 beforeEach(() => {
    RenderWithReduxMock(<SignInForm />);

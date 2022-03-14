@@ -1,6 +1,6 @@
 import { ContactAction, SignUpAction, SignInAction, GoogleAuthAction, LogoutACtion } from './reducersInterfaces/formsInterfaces';
 
-import { FormActionType } from '../actionTypes/formActionType';
+import { FormActionType } from '../actions/actionTypes/formActionType';
 
 const localStorageLoggedIn = localStorage.getItem('loggedIn');
 const localStorageUser = localStorage.getItem('profile');

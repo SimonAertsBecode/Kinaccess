@@ -10,8 +10,8 @@ import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import { FormControl, FormControlLabel, FormLabel } from '@material-ui/core';
 
 //* import files
-import useFormsHook from '../../../utils/formsHook';
-import * as Actions from '../../../store/actions';
+import useFormsHook from '../../hooks/useFormsHook';
+import * as Actions from '../../store/actions';
 
 const ContactForm = () => {
    const dispatch = useDispatch();

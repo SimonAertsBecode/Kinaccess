@@ -1,4 +1,4 @@
-import Logout from '../forms/log/Logout';
+import Logout from '../forms/Log/Logout';
 
 //*react-router-dom
 import { NavLink, Outlet } from 'react-router-dom';

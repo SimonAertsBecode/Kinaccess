@@ -1,13 +1,13 @@
 import axios from 'axios';
 
 //**Import enum action types */
-import { FormActionType } from '../actionTypes/formActionType';
+import { FormActionType } from './actionTypes/formActionType';
 
 //**config var */
-import globalConfig from '../../configuration/globalConfig';
+import globalConfig from '../../constants/formsConstants';
 
 //**Custom history object */
-import myHistory from '../../utils/history';
+import myHistory from '../../helpers/CustomHistory';
 
 //**Import from redux */
 import { Dispatch } from 'redux';

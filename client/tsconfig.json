@@ -16,5 +16,5 @@
       "noEmit": true,
       "jsx": "react-jsx"
    },
-   "include": ["src", "src/components/__test__"]
+   "include": ["src", "src/components/forms/__test__"]
 }

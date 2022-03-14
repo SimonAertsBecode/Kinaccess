@@ -8,7 +8,7 @@ import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import { AiFillGoogleCircle } from 'react-icons/ai';
 
 //* Import files
-import useFormsHook from '../../../utils/formsHook';
+import useFormsHook from '../../../hooks/useFormsHook';
 import * as Actions from '../../../store/actions/index';
 
 //* Google
