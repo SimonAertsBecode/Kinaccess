@@ -1,7 +1,6 @@
 import axios from 'axios';
 import usersConstant from '../constants/usersConstant';
 import { Dispatch, SetStateAction } from 'react';
-import { url } from 'inspector';
 
 class Users {
    static getUserInfo<T>(id: string, method: Dispatch<SetStateAction<T>>) {

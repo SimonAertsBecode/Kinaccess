@@ -1,5 +1,3 @@
-import React from 'react';
-
 //** Import components */
 import Home from '../HomePage/Home';
 import ContactForm from '../Contact/ContactForm';
