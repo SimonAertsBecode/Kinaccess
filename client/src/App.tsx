@@ -8,7 +8,9 @@ const App = () => {
    return (
       <CustomRouter history={myHistory}>
          <MainNavigation />
-         <Routes />
+         <main id='main'>
+            <Routes />
+         </main>
       </CustomRouter>
    );
 };

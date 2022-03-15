@@ -34,9 +34,11 @@
             text-decoration: none;
             color: black;
             font-weight: bold;
+            display: block;
+            transition: 0.5s;
 
-            .active {
-               background-color: red;
+            &.active {
+               transform: scale(1.1);
             }
          }
       }

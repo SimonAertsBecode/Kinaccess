@@ -1,4 +1,3 @@
 set google login correctly
+manage error with google loading
 set profile page nicely
-
-when sign up redirect correctly

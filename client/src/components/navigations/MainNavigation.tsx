@@ -38,7 +38,7 @@ const MainNavigation = () => {
                </>
             ) : (
                <li>
-                  <NavLink to='profile'>sign in / sign up</NavLink>
+                  <NavLink to='profile'>Login / Register</NavLink>
                </li>
             )}
          </ul>

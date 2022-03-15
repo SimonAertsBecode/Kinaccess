@@ -39,17 +39,17 @@ const LogForm = () => {
                            toggleLogForms(true);
                         }}
                      >
-                        S'inscrire
+                        Login
                      </h3>
                      <h3
                         onClick={() => {
                            toggleLogForms(false);
                         }}
                      >
-                        Se connecter
+                        Register
                      </h3>
                   </div>
-                  <div className='logForms'>{logModal ? <SignUpForm /> : <SignInForm />}</div>
+                  <div className='logForms'>{logModal ? <SignInForm /> : <SignUpForm />}</div>
                </>
             )}
          </div>

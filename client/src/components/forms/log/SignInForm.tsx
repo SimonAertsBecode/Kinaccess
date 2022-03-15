@@ -91,13 +91,13 @@ const SignInForm = () => {
                variant='contained'
                endIcon={<KeyboardArrowRightIcon />}
             >
-               Connectez-vous
+               Login
             </Button>
             <GoogleLogin
                clientId={'458697001268-dml15t87n2tk21c9n6ionesf92i64qoe.apps.googleusercontent.com'}
                render={(renderProps) => (
                   <Button className='google-button' onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<AiFillGoogleCircle />} variant='contained'>
-                     Continuer avec google
+                     Log with google
                   </Button>
                )}
                onSuccess={googleSuccess}

@@ -132,7 +132,7 @@ const SignUpForm = () => {
                      variant='contained'
                      endIcon={<KeyboardArrowRightIcon />}
                   >
-                     Enregistrez-vous
+                     Create an account
                   </Button>
                </form>
                {empty && <section className='formResult failed'>{empty}</section>}
