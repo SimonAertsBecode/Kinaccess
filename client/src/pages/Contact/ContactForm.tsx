@@ -159,7 +159,7 @@ const ContactForm = () => {
                variant='contained'
                endIcon={<KeyboardArrowRightIcon />}
             >
-               Envoyer
+               send
             </Button>
          </form>
          <section className='formResult contact'>{success || empty}</section>
