@@ -2,7 +2,8 @@ import { ContactAction, SignUpAction, SignInAction, GoogleAuthAction, LogoutACti
 
 import { FormActionType } from '../actions/actionTypes/formActionType';
 
-const jwtIsPresent = localStorage.getItem('loggedIn');
+const localStorageLoggedIn = localStorage.getItem('loggedIn');
+const localStorageUser = localStorage.getItem('profile');
 
 const initialState = {
    contactForm: {
@@ -13,12 +14,12 @@ const initialState = {
    signUpForm: {
       success: null,
       uncompleted: null,
-      
       empty: null,
    },
    signInForm: {
       success: {
-         loggedIn: jwtIsPresent ? true : false,
+         loggedIn: localStorageLoggedIn ? localStorageLoggedIn : false,
+         user: localStorageUser ? localStorageUser : null,
       },
       failed: null,
    },
