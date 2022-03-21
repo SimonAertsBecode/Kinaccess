@@ -10,9 +10,8 @@ import usersConstant from '../../constants/usersConstant';
 import { Dispatch } from 'redux';
 
 export const getUserInfo = (id: string | null) => {
-   console.log(id);
    if (id) {
-      let url = `${usersConstant.USER_API}${JSON.parse(id)}`;
+      let url = `${usersConstant.USER_API}${id}`;
 
       return async (dispatch: Dispatch) => {
          try {
@@ -21,6 +20,7 @@ export const getUserInfo = (id: string | null) => {
                type: userActionType.GET_USER_DATA_SUCCESS,
                payload: request.data,
             });
+            console.log('other request');
          } catch (error: any) {
             dispatch({
                type: userActionType.GET_USER_DATA_FAILED,

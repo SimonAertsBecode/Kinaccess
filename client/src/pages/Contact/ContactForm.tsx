@@ -47,15 +47,6 @@ const ContactForm = () => {
       dispatch(Actions.getContactInfosAction(contactObject, ageConfirmed));
    };
 
-   const getCookie = (name?: string) => {
-      var cookies = document.cookie.split(';');
-      console.log(cookies);
-   };
-
-   useEffect(() => {
-      getCookie();
-   });
-
    return (
       <>
          <form noValidate autoComplete='off' className='contactForm' onSubmit={submitForm}>

@@ -2,8 +2,8 @@ import { ContactAction, SignUpAction, SignInAction, GoogleAuthAction, LogoutACti
 
 import { FormActionType } from '../actions/actionTypes/formActionType';
 
-const localStorageLoggedIn = localStorage.getItem('loggedIn');
-const localStorageUser = localStorage.getItem('profile');
+// const localStorageLoggedIn = localStorage.getItem('loggedIn');
+const localStorageUser = localStorage.getItem('userId');
 
 const initialState = {
    contactForm: {
@@ -18,8 +18,7 @@ const initialState = {
    },
    signInForm: {
       success: {
-         loggedIn: localStorageLoggedIn ? localStorageLoggedIn : false,
-         user: localStorageUser ? localStorageUser : null,
+         userId: localStorageUser ? localStorageUser : null,
       },
       failed: null,
    },
@@ -88,8 +87,7 @@ const formsReducer = (state = initialState, action: ContactAction | SignUpAction
             signInForm: {
                ...state.signInForm,
                success: {
-                  loggedIn: true,
-                  user: action.payload,
+                  userId: action.payload,
                },
                failed: null,
             },
@@ -124,8 +122,7 @@ const formsReducer = (state = initialState, action: ContactAction | SignUpAction
             signInForm: {
                ...state.signInForm,
                success: {
-                  loggedIn: false,
-                  user: null,
+                  userId: localStorageUser,
                },
             },
             googleAuth: null,

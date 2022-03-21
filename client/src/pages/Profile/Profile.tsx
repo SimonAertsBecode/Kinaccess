@@ -1,30 +1,23 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 //*Import components
 import LogForm from '../../components/forms/Log/LogForm';
 import UserProfile from '../../components/mainComponents/UserProfile';
 
 //*Redux related
-import { useDispatch } from 'react-redux';
+import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
 import * as Action from '../../store/actions/index';
 
 const Profile = () => {
    const dispatch = useDispatch();
 
-   const [localstorageUserId, setlocalstorageUserId] = useState<string | null>(localStorage.getItem('userId') || null);
+   const userId = useSelector((kinaccess: RootStateOrAny) => kinaccess.formsReducer.signInForm.success.userId);
 
    useEffect(() => {
-      dispatch(Action.getUserInfo(localstorageUserId ? localstorageUserId.toString() : null));
-   }, [localstorageUserId]);
+      dispatch(Action.getUserInfo(userId));
+   }, [userId, dispatch]);
 
-   const storageEventHandler = () => {
-      setlocalstorageUserId(localStorage.getItem('userId') || null);
-      console.log('coucou');
-   };
-
-   window.addEventListener('storage', storageEventHandler, false);
-
-   return <div>{false ? <UserProfile /> : <LogForm />}</div>;
+   return <div>{userId ? <UserProfile /> : <LogForm />}</div>;
 };
 
 export default Profile;

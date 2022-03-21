@@ -1,20 +1,20 @@
-import React from 'react';
-import {useSelector, RootStateOrAny} from 'react-redux'
+import { useSelector, RootStateOrAny } from 'react-redux';
 
-const UserProfile = React.memo(() => {
+const UserProfile = () => {
+   const userInfo = useSelector((kinnacess: RootStateOrAny) => kinnacess.userReducer.user.success);
 
-    const userInfo = useSelector((kinaccess: RootStateOrAny) => kinaccess.userReducer.user.success);
+   if (!userInfo) return null;
 
    const { name, firstName, email } = userInfo;
 
    return (
       <section className='user-profile'>
-         <h1>
-            Bonjour {firstName} {name}
-         </h1>
-         <p>Votre adresse mail est toujours: {email} ?</p>
+         <h3>
+            Hello {firstName} {name}
+         </h3>
+         <p>Is your mail adress still {email}</p>
       </section>
    );
-});
+};
 
 export default UserProfile;

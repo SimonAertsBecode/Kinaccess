@@ -130,11 +130,10 @@ export const signInFormAction = (params: signIn) => {
       request.then((res) => {
          if (res.status === 200) {
             localStorage.setItem('userId', JSON.stringify(res.data));
-            localStorage.setItem('loggedIn', 'true');
-            const { userData } = res.data;
+            const userId = res.data;
             dispatch({
                type: FormActionType.SIGN_IN_SUCCESS,
-               payload: userData,
+               payload: userId,
             });
             myHistory.push('/profile');
          } else {
