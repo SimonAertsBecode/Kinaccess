@@ -155,17 +155,12 @@ interface googleAuth {
 export const googleAuthAction = (params: googleAuth) => {
    const { result, token } = params;
 
-   const data = {
-      result,
-      token,
-   };
-
    return (dispatch: Dispatch) => {
-      localStorage.setItem('profile', JSON.stringify({ data }));
-      localStorage.setItem('loggedIn', 'true');
+      localStorage.setItem('profile', JSON.stringify({ result }));
+      document.cookie = token;
       dispatch({
          type: FormActionType.GOOGLE_AUTH,
-         payload: data,
+         payload: result,
       });
       myHistory.push('/profile');
    };
