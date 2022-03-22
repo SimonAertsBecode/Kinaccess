@@ -12,10 +12,10 @@ const LandingPage = () => {
                <h1>Login system and contact form</h1>
                <section className='components-links'>
                   <button>
-                     <Link to='/profile'>Check sign in - Sign up system</Link>
+                     <Link to='/profile'>Check sign in - sign up system</Link>
                   </button>
                   <button>
-                     <Link to='/contact'>send me a message</Link>
+                     <Link to='/contact'>Send me a message</Link>
                   </button>
                </section>
             </Tilt>

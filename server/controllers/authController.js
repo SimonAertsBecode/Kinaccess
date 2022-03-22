@@ -1,5 +1,6 @@
 import { UserModel } from '../models/schemas/UsersSchema.js';
 import formsError from '../utils/errorManagement.js';
+import StringUtils from '../utils/stringUtils.js';
 import jwt from 'jsonwebtoken';
 
 const maxAge = 3 * 24 * 60 * 60 * 1000;
@@ -13,7 +14,10 @@ const createToken = (id) => {
 const authController = {};
 
 authController.signUp = async (req, res) => {
-   const { name, firstName, email, password } = req.body;
+   let { name, firstName, email, password } = req.body;
+
+   name = StringUtils.setFirstCharUppercase(name);
+   firstName = StringUtils.setFirstCharUppercase(firstName);
 
    if (!name && !firstName && !email && !password) {
       res.status(202).json({
@@ -36,17 +40,8 @@ authController.signIn = async (req, res) => {
    const { email, password } = req.body;
 
    try {
-      // const setFirstLetterUppercase = (string) => {
-      //    return string.charAt(0).toUpperCase() + string.slice(1);
-      // };
-
       const user = await UserModel.login(email, password);
       const token = createToken(user._id);
-      // const userData = {
-      //    email: user.email,
-      //    firstName: setFirstLetterUppercase(user.firstName),
-      //    name: setFirstLetterUppercase(user.name),
-      // };
       res.cookie('jwt', token, { httpOnly: true, maxAge });
       res.status(200).json(user._id);
    } catch (err) {

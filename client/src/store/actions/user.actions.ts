@@ -11,6 +11,7 @@ import { Dispatch } from 'redux';
 
 export const getUserInfo = (id: string | null) => {
    if (id) {
+      id = JSON.parse(id);
       let url = `${usersConstant.USER_API}${id}`;
 
       return async (dispatch: Dispatch) => {
@@ -20,7 +21,6 @@ export const getUserInfo = (id: string | null) => {
                type: userActionType.GET_USER_DATA_SUCCESS,
                payload: request.data,
             });
-            console.log('other request');
          } catch (error: any) {
             dispatch({
                type: userActionType.GET_USER_DATA_FAILED,

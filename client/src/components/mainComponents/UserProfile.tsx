@@ -1,7 +1,18 @@
-import { useSelector, RootStateOrAny } from 'react-redux';
+import { useEffect } from 'react';
+
+//*Redux imports related
+import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
+import * as Action from '../../store/actions/index';
 
 const UserProfile = () => {
+   const dispatch = useDispatch();
    const userInfo = useSelector((kinnacess: RootStateOrAny) => kinnacess.userReducer.user.success);
+
+   const userId = useSelector((kinaccess: RootStateOrAny) => kinaccess.formsReducer.signInForm.success.userId);
+
+   useEffect(() => {
+      dispatch(Action.getUserInfo(userId));
+   }, [userId, dispatch]);
 
    if (!userInfo) return null;
 

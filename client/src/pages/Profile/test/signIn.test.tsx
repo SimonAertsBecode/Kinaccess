@@ -42,7 +42,7 @@ describe('Sign in tests', () => {
       const emailInputElement = screen.getByRole('textbox', {
          name: /email/i,
       }) as HTMLInputElement;
-      const submitBtnElement = screen.getByText('Connectez-vous');
+      const submitBtnElement = screen.getByText('Login');
       userEvent.type(emailInputElement, 'simon.aertail.com');
       userEvent.click(submitBtnElement);
       const emailErrorText = screen.getByText('email incorrect');
