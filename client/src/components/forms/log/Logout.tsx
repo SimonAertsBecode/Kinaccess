@@ -11,8 +11,8 @@ const Logout = () => {
    const dispatch = useDispatch();
 
    const logoutUser = () => {
-      localStorage.clear();
       dispatch(Actions.logoutAction());
+      dispatch(Actions.clearUserInfoLogout());
    };
 
    return (

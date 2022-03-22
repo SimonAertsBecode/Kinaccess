@@ -9,9 +9,8 @@ import usersConstant from '../../constants/usersConstant';
 //**Import from redux */
 import { Dispatch } from 'redux';
 
-export const getUserInfo = (id: string | null) => {
+export const getUserInfo = (id: string) => {
    if (id) {
-      id = JSON.parse(id);
       let url = `${usersConstant.USER_API}${id}`;
 
       return async (dispatch: Dispatch) => {
@@ -28,12 +27,14 @@ export const getUserInfo = (id: string | null) => {
             });
          }
       };
-   } else {
-      return (dispatch: Dispatch) => {
-         dispatch({
-            type: userActionType.SET_USER_DATA_NULL,
-            payload: null,
-         });
-      };
    }
+};
+
+export const clearUserInfoLogout = () => {
+   return (dispatch: Dispatch) => {
+      dispatch({
+         type: userActionType.SET_USER_DATA_NULL,
+         payload: null,
+      });
+   };
 };

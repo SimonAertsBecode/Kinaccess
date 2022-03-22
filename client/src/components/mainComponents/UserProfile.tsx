@@ -14,7 +14,7 @@ const UserProfile = () => {
       dispatch(Action.getUserInfo(userId));
    }, [userId, dispatch]);
 
-   if (!userInfo) return null;
+   if (!userInfo) return <p>...loading</p>;
 
    const { name, firstName, email } = userInfo;
 
